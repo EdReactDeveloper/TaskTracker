@@ -7,6 +7,8 @@ import Register from '../containers/Register';
 import PrivateRoute from './PrivateRoute'; 
 import AuthRoute from './AuthRoute'; 
 import {connect} from 'react-redux'; 
+import Boards from '../containers/Boards'; 
+
 const Routes = ({loading}) => {
   return (
     <Router>
@@ -16,7 +18,7 @@ const Routes = ({loading}) => {
           <Route exact path="/" component={Home}/>
           <AuthRoute exact path="/login" component={Login}/>
           <Route exact path="/register" component={Register}/>
-          {/* <PrivateRoute exact path="/register" component={Profile}/> */}
+          <PrivateRoute exact path="/boards" component={Boards}/>
         </Switch>
       </Navigation>
       )}

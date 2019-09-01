@@ -7,9 +7,12 @@ router.get('/', async (req, res, next) => {
   console.log('board reached')
 
   console.log(req.session.user._id)
-  
-  const boards = await Board.find({userId: req.session.user._id})
-  console.log(boards)
+  try {
+    const boards = await Board.find({userId: req.session.user._id})
+    res.json(boards)    
+  } catch (error) {
+    res.status(404).json({msg: error})
+  }
 })
 
 
@@ -17,7 +20,7 @@ router.post('/create', async(req, res, next) => {
   
   const {boardTitle} = req.body
   console.log(boardTitle)
-  try {
+  try { 
 
     const user = await User.findById(req.session.user._id).select('-password')
 
