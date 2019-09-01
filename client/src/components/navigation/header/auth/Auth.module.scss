@@ -1,0 +1,10 @@
+.auth{
+  &__wrapper{
+    display: flex;
+  }
+  &__item{
+    &:not(:last-child){
+      margin-right: 1rem;
+    }
+  }
+}

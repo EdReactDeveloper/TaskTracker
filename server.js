@@ -1,0 +1,57 @@
+const express = require('express');
+const app = express();
+const connectDB = require('./config/db');
+const User = require('./models/User');
+
+// initializing the session
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+const config = require('config');
+const MONGODB_URI = config.get('mongoURI');
+
+// create session
+const store = new MongoDBStore({
+	uri: MONGODB_URI,
+	collection: 'sessions'
+});
+
+// initiate session
+app.use(
+	session({
+		secret: 'my secret',
+		resave: false,
+		saveUninitialized: false,
+		store
+	})
+);
+
+
+app.use((req, res, next) => {
+	if (!req.session.user) {
+		return next();
+	}
+	User.findById(req.session.user._id)
+		.then((user) => {
+			req.user = user;
+			next();
+		})
+		.catch((err) => console.log(err));
+});
+
+
+// -----------------------
+
+connectDB();
+
+app.use(express.json({ extended: false })); // allows to get request inside the body
+
+app.get('/', (req, res) => res.send('api is running'));
+
+app.use(express.json({ extended: false }));
+app.use('/api/user', require('./routes/api/user'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/board', require('./routes/api/board'));
+
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`this app is running at port ${PORT}`));
