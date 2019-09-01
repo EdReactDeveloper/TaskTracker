@@ -1,10 +1,14 @@
-import { FETCH_BOARDS_SUCCESS, FETCH_BOARDS_FAIL, CREATE_BOARDS_SUCCESS, CREATE_BOARDS_FALIL } from './types';
+import {
+	FETCH_BOARDS_SUCCESS,
+	FETCH_BOARDS_FAIL,
+	GET_BOARD
+} from './types';
 import axios from 'axios';
 
 export const fetchBoards = () => async (dispatch) => {
 	try {
 		const result = await axios.get('/api/board/');
-		console.log(result)
+		console.log('boards', result.data);
 		dispatch({
 			type: FETCH_BOARDS_SUCCESS,
 			payload: result.data
@@ -16,4 +20,12 @@ export const fetchBoards = () => async (dispatch) => {
 		});
 	}
 };
+
+export const getBoard = (id) => (dispatch) => {
+	dispatch({
+		type: GET_BOARD,
+		payload: id
+	});
+};
+
 

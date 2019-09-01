@@ -1,10 +1,10 @@
 import React from 'react';
-import Board from './Board';
 import style from './Boards.module.scss';
+import {Link} from 'react-router-dom'; 
 
 const Boards = ({ boards }) => {
-
-  const list = boards.map(board => <Board key={board._id} data={board} />)
+console.log(boards)
+  const list = boards.map(board => <Link key={board._id} to={`/boards/${board._id}`}>{board.boardTitle}</Link>)
   return (
     <div className={style.wrapper}>
       {list}

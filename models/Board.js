@@ -17,6 +17,7 @@ const Board = new Schema({
 		},
 		list:	[
 			{		
+				topicId: {type: Schema.Types.ObjectId, ref: 'List'},
 				title: {
 					type: String,
 					required: true
@@ -34,5 +35,25 @@ const Board = new Schema({
 ]
 });
 
+Board.methods.addTopic = function(title, list){
+	const topics = [...this.topics]
+	topics.push(title, list)
+}
+
 
 module.exports = mongoose.model('Board', Board)
+
+/*
+board - react
+ref-USER
+topics - [
+	{
+		title: lifecylce, 
+		REF:BOARD
+		list: [
+		{...}
+		]
+	}
+] 
+
+*/ 

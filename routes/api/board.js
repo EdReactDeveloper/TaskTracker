@@ -4,9 +4,7 @@ const Board = require('../../models/Board');
 const User = require('../../models/User');
 
 router.get('/', async (req, res, next) => {
-  console.log('board reached')
-
-  console.log(req.session.user._id)
+ 
   try {
     const boards = await Board.find({userId: req.session.user._id})
     res.json(boards)    
@@ -34,6 +32,7 @@ router.post('/create', async(req, res, next) => {
     res.json(board)
    
   } catch (error) {
+    res.status(404).json({msg: error})
     
   }
 })

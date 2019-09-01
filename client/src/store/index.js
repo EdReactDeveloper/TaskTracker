@@ -3,9 +3,10 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from './reducers/auth'; 
 import board from './reducers/board';
+import topic from './reducers/topic'; 
 
 const reducers = combineReducers({
-auth, board
+auth, board, topic
 })
 const middleware = [thunk]
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(...middleware)))

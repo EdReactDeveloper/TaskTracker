@@ -10,7 +10,12 @@ const User = new Schema({
   password: {
     type: String,
     require: true
-  }
+  },
+  boards: [
+    {
+      boardId: {type: Schema.Types.ObjectId, ref: 'Board'}
+    }
+  ]
 })
 
 module.exports = mongoose.model('User', User)

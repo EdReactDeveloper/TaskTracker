@@ -1,17 +1,19 @@
 import React from 'react';
-import Topic from './Topic'; 
+import Topics from '../Topics';
 
-const Board = ({data}) => {
-  const list = data.topics.map(topic=> <Topic key={topic} topic={topic} /> )
+const Board = ({data, submitHandler, topicTitle, fetchTopicTitle}) => {
 
-  return (
-    <div>
-      <h3>{data.boardTitle}</h3>
-      <ul>
-        {list}
-      </ul>
-    </div>
-  );
+  return <div>
+    <h3>{data.boardTitle}</h3>
+    <h4>{topicTitle}</h4>
+    <form onSubmit={submitHandler} >
+      <label htmlFor="title">
+        <input type="text" value={topicTitle}  name="title" onChange={(e)=> fetchTopicTitle(e.target.value)} />        
+      </label>
+      <button>add topic</button>
+    </form>
+    <Topics list={data.topics}/>
+  </div>
 };
 
 export default Board;
