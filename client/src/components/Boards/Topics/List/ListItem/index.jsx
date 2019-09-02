@@ -1,10 +1,11 @@
 import React from 'react';
+import style from './ListItem.module.scss'; 
 
-const ListItem = ({ item }) => {
+const ListItem = ({ item, checkListItem }) => {
   return (
-    <div>
+    <div className={item.done ? style.green : ''}>
       <label htmlFor="checkbox">
-        <input name="checkbox" type="checkbox" defaultChecked={item.done && 'checked'} />
+        <input name="checkbox" type="checkbox" defaultChecked={item.done && 'checked'} onClick={()=> checkListItem(item.topicId, item._id)}/>
         {item.title}
       </label>
       <div>{item.description}</div>

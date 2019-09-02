@@ -3,7 +3,12 @@ import {
   ADD_TOPIC_SUCCESS,
   ADD_TOPIC_FAIL,
   FETCH_TOPICS_SUCCESS,
-  FETCH_TOPICS_FAIL
+  FETCH_TOPICS_FAIL,
+  CHECK_LIST_SUCCESS,
+  CHECK_LIST_FAIL,
+  LISTITEM_FIELDS,
+  ADD_LISTITEM_SUCCESS,
+  ADD_LISTITEM_FAIL
 } from './types';
 import axios from 'axios';
 
@@ -15,9 +20,9 @@ export const getTopics = (id) => async disptch =>{
       payload: result.data
     })
   } catch (error) {
-    console.log(error)
     disptch({
-      type: FETCH_TOPICS_FAIL
+      type: FETCH_TOPICS_FAIL,
+      payload: error
     })
   }
 } 
@@ -43,23 +48,52 @@ export const addTopic = (title, id) => async (dispatch) => {
 };
 
 
-export const addListItem = (topicId, text, description) => async dispatch => {
-  
-  const config = {headers: {'Context-Type': 'application/json'}}
-  const body = JSON.stringify({text, description})
-
+export const addListItem = (topicId, title, description) => async dispatch => {
+  const config = {headers: {'Content-Type': 'application/json'}}
+  const body = JSON.stringify({title, description})
   try {
     const result = await axios.post(`/api/topics/list/add/${topicId}`, body, config)
-    console.log(result)
+    dispatch({
+      type: ADD_LISTITEM_SUCCESS,
+      payload: result.data
+    })
   } catch (error) {
-    
+    dispatch({
+      type: ADD_LISTITEM_FAIL,
+      payload: error
+    })
+  }
+}
+
+export const checkListItem = (topicId, listItemId) => async dispatch=>{
+  const config={headers: {'Content-Type': 'application/json'}}
+  const body = JSON.stringify({listItemId})
+  try {
+    const result = await axios.post(`/api/topics/list/update/${topicId}`, body, config)
+    dispatch({
+      type: CHECK_LIST_SUCCESS, 
+      payload: result.data
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: CHECK_LIST_FAIL,
+      payload: error
+    })
   }
 }
 
 
-export const fetchTopicTitle = (text) => async (dispatch) => {
+export const fetchTopicTitle = (text) => (dispatch) => {
   dispatch({
     type: FETCH_TOPIC_TITLE,
     payload: text
   });
 };
+
+export const addNewListData = (topicId, text, type) => dispatch=>{
+  dispatch({
+    type: LISTITEM_FIELDS,
+    payload: ({topicId, text, type})
+  });
+}

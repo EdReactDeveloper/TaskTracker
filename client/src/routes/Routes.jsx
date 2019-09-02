@@ -7,7 +7,7 @@ import Register from '../containers/Register';
 import PrivateRoute from './PrivateRoute'; 
 import AuthRoute from './AuthRoute'; 
 import {connect} from 'react-redux'; 
-import Board from '../containers/Board'; 
+import Board from '../containers/Board/Board'; 
 import Boards from '../containers/Boards'; 
 
 const Routes = ({loading}) => {

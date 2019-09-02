@@ -8,7 +8,6 @@ import axios from 'axios';
 export const fetchBoards = () => async (dispatch) => {
 	try {
 		const result = await axios.get('/api/board/');
-		console.log('boards', result.data);
 		dispatch({
 			type: FETCH_BOARDS_SUCCESS,
 			payload: result.data

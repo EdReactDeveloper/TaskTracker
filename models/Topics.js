@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const uuid = require('uuid')
 
 const Topic = new Schema({
 	boardId: { type: Schema.Types.ObjectId, ref: 'Board', required: true },
@@ -8,10 +7,6 @@ const Topic = new Schema({
 	list: [
 		{
 			topicId: { type: Schema.Types.ObjectId, ref: 'Topic' },
-			id: {
-				type: String, 
-				required: true
-			},
 			title: {
 				type: String,
 				required: true
@@ -27,13 +22,27 @@ const Topic = new Schema({
 	]
 });
 
-Topic.methods.addItem = function(title, description){
-	const list = [...this.list]
+Topic.methods.addItem = function(title, description) {
+	const list = [ ...this.list ];
 
-	list.push({topicId: this._id, id:uuid.v4(), title, description, done: false})
+	list.push({ topicId: this._id, title, description, done: false });
 
+	this.list = list;
+	return this.save();
+};
+
+Topic.methods.checkListItem = function(listItemId) {
+
+	const list = [ ...this.list ];
+	const index = list.findIndex((item) => item._id.toString() === listItemId.toString());
+	if(index < 0){
+		return 'item is not found'
+	}
+	const updatedItem = !list[index].done;
+	list[index].done = updatedItem;
 	this.list = list
-	return this.save()
-}
+	console.log(list)
+	return this.save();
+};
 
 module.exports = mongoose.model('Topic', Topic);

@@ -1,10 +1,11 @@
 import React from 'react';
-import Topic from './Topic'
+import Topic from '../../../containers/Board/Topic'
+import style from './Topics.module.scss'; 
 const Topics = ({topics}) => {
   
   const listOfTopics = topics.map(item => <Topic key={item._id} data={item} /> )
   return (
-    <div>
+    <div className={style.wrapper}>
       {listOfTopics}
     </div>
   );

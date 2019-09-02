@@ -1,11 +1,24 @@
 import React from 'react';
-import List from '../../../../containers/List'; 
+import List from '../../../../containers/Board/List';
+import style from './Topic.module.scss';
+import AddTopicMenu from './AddTopicMenu';
 
-const Topic = ({data}) => {
+const Topic = ({ data, submitHandler, addNewListData, type }) => {
+
+  
+ 
   return (
-    <div>
+    <div className={style.wrapper}>
       <h3>{data.title}</h3>
-      <List data={data.list}/>
+      <AddTopicMenu
+        listItemId={data._id}
+        topicId={data._id}
+        submitHandler={submitHandler}
+        addNewListData={addNewListData}
+        type={type}
+        data={data}
+      />
+      <List data={data.list} />
     </div>
   );
 };

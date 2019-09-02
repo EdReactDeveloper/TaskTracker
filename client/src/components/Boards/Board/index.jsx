@@ -1,5 +1,5 @@
 import React from 'react';
-import Topics from '../../../containers/Topics';
+import Topics from '../../../containers/Board/Topics';
 
 const Board = ({data, boardId, submitHandler, topicTitle, fetchTopicTitle}) => {
 
@@ -18,12 +18,3 @@ const Board = ({data, boardId, submitHandler, topicTitle, fetchTopicTitle}) => {
 
 export default Board;
 
-/*
-
-boardTitle: "firdst board"
-topics: []
-userId: "5d6a32ca45f4db459ca6bcd3"
-__v: 0
-_id: "5d6a93f175453323fc138e02"
-
-*/ 

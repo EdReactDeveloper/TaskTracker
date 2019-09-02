@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Board from '../components/Boards/Board';
+import Board from '../../components/Boards/Board';
 import {connect} from 'react-redux'; 
-import {getBoard, fetchBoards } from '../store/actions/board';
-import {addTopic, fetchTopicTitle} from '../store/actions/topic';
+import {getBoard, fetchBoards } from '../../store/actions/board';
+import {addTopic, fetchTopicTitle} from '../../store/actions/topic';
 
 class BoardContainer extends Component {
  

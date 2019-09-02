@@ -1,10 +1,12 @@
 import React from 'react';
 import ListItem from './ListItem'
-const List = ({list}) => {
+import style from './List.module.scss'; 
+
+const List = ({list, checkListItem}) => {
   
-  const renderList = list.map(item=> <ListItem key={item._id} item={item} /> ) 
+  const renderList = list.map(item=> <ListItem key={item._id} item={item} checkListItem={checkListItem} /> ) 
   return (
-    <div>
+    <div className={style.wrapper}>
       {renderList}
     </div>
   );

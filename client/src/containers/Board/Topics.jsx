@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Topics from '../components/Boards/Topics'
+import Topics from '../../components/Boards/Topics'
 import {connect} from 'react-redux'; 
-import {getTopics} from '../store/actions/topic';
+import {getTopics} from '../../store/actions/topic';
 
 class TopicsContainer extends Component {
 
