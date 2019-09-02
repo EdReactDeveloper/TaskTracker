@@ -42,6 +42,21 @@ export const addTopic = (title, id) => async (dispatch) => {
   }
 };
 
+
+export const addListItem = (topicId, text, description) => async dispatch => {
+  
+  const config = {headers: {'Context-Type': 'application/json'}}
+  const body = JSON.stringify({text, description})
+
+  try {
+    const result = await axios.post(`/api/topics/list/add/${topicId}`, body, config)
+    console.log(result)
+  } catch (error) {
+    
+  }
+}
+
+
 export const fetchTopicTitle = (text) => async (dispatch) => {
   dispatch({
     type: FETCH_TOPIC_TITLE,

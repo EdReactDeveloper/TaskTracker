@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 import Board from '../components/Boards/Board';
 import {connect} from 'react-redux'; 
 import {getBoard, fetchBoards } from '../store/actions/board';
-import {addTopic, getTopics, fetchTopicTitle} from '../store/actions/topic';
+import {addTopic, fetchTopicTitle} from '../store/actions/topic';
 
 class BoardContainer extends Component {
  
   componentDidMount(){
     this.props.fetchBoards().then(() => {
       const id = this.props.match.params.id
-      this.props.getBoard(id)
-      this.props.getTopics(id)
-      
+      this.props.getBoard(id)      
     })
   }
 
@@ -26,6 +24,7 @@ class BoardContainer extends Component {
     const {board, fetchTopicTitle, topicTitle } = this.props
   return <>{board && <Board 
                       data={board} 
+                      boardId={this.props.match.params.id}
                       submitHandler={this.submitHandler}
                       fetchTopicTitle={fetchTopicTitle}
                       topicTitle={topicTitle}
@@ -43,4 +42,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, {getBoard, fetchBoards, fetchTopicTitle, addTopic, getTopics})(BoardContainer);
+export default connect(mapStateToProps, {getBoard, fetchBoards, fetchTopicTitle, addTopic})(BoardContainer);

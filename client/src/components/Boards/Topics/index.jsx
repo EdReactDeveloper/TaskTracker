@@ -1,12 +1,11 @@
 import React from 'react';
-
-const Topics = ({list}) => {
-
-  const topics = list.map(item => <div key={item._id}>{item.title}</div>)
-
+import Topic from './Topic'
+const Topics = ({topics}) => {
+  
+  const listOfTopics = topics.map(item => <Topic key={item._id} data={item} /> )
   return (
     <div>
-      {topics}
+      {listOfTopics}
     </div>
   );
 };

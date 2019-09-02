@@ -1,9 +1,9 @@
 import React from 'react';
-import Topics from '../Topics';
+import Topics from '../../../containers/Topics';
 
-const Board = ({data, submitHandler, topicTitle, fetchTopicTitle}) => {
+const Board = ({data, boardId, submitHandler, topicTitle, fetchTopicTitle}) => {
 
-  return <div>
+  return <div className="container">
     <h3>{data.boardTitle}</h3>
     <h4>{topicTitle}</h4>
     <form onSubmit={submitHandler} >
@@ -12,7 +12,7 @@ const Board = ({data, submitHandler, topicTitle, fetchTopicTitle}) => {
       </label>
       <button>add topic</button>
     </form>
-    <Topics list={data.topics}/>
+    <Topics boardId={boardId}/>
   </div>
 };
 

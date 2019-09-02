@@ -39,4 +39,19 @@ router.post('/create', [
   }
 });
 
+router.post('/list/add/:id', async (req, res, next) => {
+	console.log('topic list reached')
+
+	const {title, description} = req.body
+
+	try {
+		const topic = await Topic.findById(req.params.id)
+		const result = await topic.addItem(title, description)
+		return res.json(result)
+		
+	} catch (error) {
+		
+	}
+})
+
 module.exports = router;
