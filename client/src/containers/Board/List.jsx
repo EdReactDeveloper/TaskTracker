@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import List from '../../components/Boards/Topics/List'; 
 import {connect} from 'react-redux'; 
-import {checkListItem} from '../../store/actions/topic';
+import {updateListItem} from '../../store/actions/topic';
 
 class ListContainer extends Component {
 
@@ -10,10 +10,10 @@ class ListContainer extends Component {
   }
 
   render() {
-    const {data, checkListItem} = this.props
+    const {data, updateListItem} = this.props
     return <List 
               list={data}
-              checkListItem={checkListItem}
+              updateListItem={updateListItem}
               />
   }
 }
@@ -24,4 +24,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {checkListItem})(ListContainer);
+export default connect(mapStateToProps, {updateListItem})(ListContainer);

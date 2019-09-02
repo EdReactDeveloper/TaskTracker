@@ -8,7 +8,9 @@ import {
   CHECK_LIST_FAIL,
   LISTITEM_FIELDS,
   ADD_LISTITEM_SUCCESS,
-  ADD_LISTITEM_FAIL
+  ADD_LISTITEM_FAIL,
+  REMOVE_LISTITEM_SUCCESS,
+  REMOVE_LISTITEM_FAIL
 } from './types';
 import axios from 'axios';
 
@@ -65,11 +67,12 @@ export const addListItem = (topicId, title, description) => async dispatch => {
   }
 }
 
-export const checkListItem = (topicId, listItemId) => async dispatch=>{
+export const updateListItem = (topicId, listItemId, type) => async dispatch=>{
   const config={headers: {'Content-Type': 'application/json'}}
   const body = JSON.stringify({listItemId})
   try {
-    const result = await axios.post(`/api/topics/list/update/${topicId}`, body, config)
+    const result = await axios.post(`/api/topics/list/${type}/${topicId}`, body, config)
+    console.log(result)
     dispatch({
       type: CHECK_LIST_SUCCESS, 
       payload: result.data

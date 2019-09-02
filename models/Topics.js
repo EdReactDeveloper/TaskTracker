@@ -45,4 +45,15 @@ Topic.methods.checkListItem = function(listItemId) {
 	return this.save();
 };
 
+Topic.methods.removeItem = function(listItemId) {
+	const list = [...this.list]
+	const index = list.findIndex((item) => item._id.toString() === listItemId.toString());
+	if(index < 0){
+		return 'item is not found'
+	}
+	list.splice(index, 1)
+	this.list = list
+	return this.save()
+}
+
 module.exports = mongoose.model('Topic', Topic);

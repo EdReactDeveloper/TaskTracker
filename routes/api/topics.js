@@ -61,4 +61,15 @@ router.post('/list/update/:id', async (req, res, next) => {
 	}
 });
 
+router.post('/list/remove/:id', async(req, res, next)=>{
+	const {listItemId} = req.body
+	try {
+		const topic = await Topic.findById(req.params.id);
+		const result = await topic.removeItem(listItemId);
+		res.json(result)
+	} catch (error) {
+		res.status(404).json({ msg: error });		
+	}
+})
+
 module.exports = router;

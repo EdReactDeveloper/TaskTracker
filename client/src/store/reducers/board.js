@@ -14,7 +14,9 @@ import {
 	CHECK_LIST_FAIL,
 	LISTITEM_FIELDS,
 	ADD_LISTITEM_SUCCESS,
-	ADD_LISTITEM_FAIL
+	ADD_LISTITEM_FAIL,
+	REMOVE_LISTITEM_SUCCESS,
+	REMOVE_LISTITEM_FAIL
 } from '../actions/types';
 
 const initialState = {
@@ -29,7 +31,6 @@ const board = function(state = initialState, action) {
 	const { payload, type } = action;
 
 	switch (type) {
-
 		case LISTITEM_FIELDS: {
 			const topics = [ ...state.board.topics ];
 			const index = topics.findIndex((item) => item._id === payload.topicId);
@@ -74,7 +75,8 @@ const board = function(state = initialState, action) {
 				}
 			};
 
-		case CHECK_LIST_SUCCESS: {
+		case CHECK_LIST_SUCCESS:
+		case REMOVE_LISTITEM_SUCCESS: {
 			const topics = [ ...state.board.topics ];
 			const index = topics.findIndex((item) => item._id === payload._id);
 			topics[index] = payload;
@@ -87,13 +89,15 @@ const board = function(state = initialState, action) {
 			};
 		}
 
-		case FETCH_TOPICS_FAIL: 
+		case FETCH_TOPICS_FAIL:
 		case ADD_TOPIC_FAIL:
-		case ADD_LISTITEM_FAIL: 
-		case CHECK_LIST_FAIL: 
-		return {
-			...state, loading: false, error: payload
-		}
+		case ADD_LISTITEM_FAIL:
+		case CHECK_LIST_FAIL:
+			return {
+				...state,
+				loading: false,
+				error: payload
+			};
 
 		case FETCH_BOARDS_SUCCESS:
 			return { ...state, boards: payload, loading: false };
