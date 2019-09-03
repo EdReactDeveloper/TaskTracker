@@ -16,7 +16,8 @@ import {
 	ADD_LISTITEM_SUCCESS,
 	ADD_LISTITEM_FAIL,
 	REMOVE_LISTITEM_SUCCESS,
-	REMOVE_LISTITEM_FAIL
+	REMOVE_TOPIC_SUCCESS,
+	REMOVE_TOPIC_FAIL
 } from '../actions/types';
 
 const initialState = {
@@ -75,6 +76,21 @@ const board = function(state = initialState, action) {
 				}
 			};
 
+		case REMOVE_TOPIC_SUCCESS: {
+			const topics = [ ...state.board.topics ];
+			const index = topics.findIndex((item) => item._id === payload);
+			console.log(index)
+			topics.splice(index, 1);
+			console.log(topics);
+			return {
+				...state,
+				board: {
+					...state.board,
+					topics: topics
+				}
+			};
+		}
+
 		case CHECK_LIST_SUCCESS:
 		case REMOVE_LISTITEM_SUCCESS: {
 			const topics = [ ...state.board.topics ];
@@ -93,6 +109,7 @@ const board = function(state = initialState, action) {
 		case ADD_TOPIC_FAIL:
 		case ADD_LISTITEM_FAIL:
 		case CHECK_LIST_FAIL:
+		case REMOVE_TOPIC_FAIL:
 			return {
 				...state,
 				loading: false,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'; 
 import Topic from '../../components/Boards/Topics/Topic';
-import {addNewListData, addListItem} from '../../store/actions/topic'; 
+import {addNewListData, addListItem, removeTopic} from '../../store/actions/topic'; 
 
 class TopicContainer extends Component {
 
@@ -25,6 +25,7 @@ class TopicContainer extends Component {
     const {
       data, 
       addNewListData,
+      removeTopic
     } = this.props
 
     return <Topic 
@@ -32,6 +33,7 @@ class TopicContainer extends Component {
     submitHandler={this.submitHandler}
     addNewListData={addNewListData}
     type={this.state.type}
+    removeTopic={removeTopic}
     />
   }
 }
@@ -45,4 +47,4 @@ const mapStateToProps = state => {
 
 
 
-export default connect(mapStateToProps, {addNewListData, addListItem})(TopicContainer);
+export default connect(mapStateToProps, {addNewListData, addListItem, removeTopic})(TopicContainer);

@@ -72,4 +72,15 @@ router.post('/list/remove/:id', async(req, res, next)=>{
 	}
 })
 
+router.delete('/remove/:id', async(req, res, next) => {
+	const id = req.params.id
+	try {
+		const topic = await Topic.findById(id)
+		await topic.remove()	
+		return res.json(id)	
+	} catch (error) {
+		res.status(404).json({ msg: error });				
+	}
+})
+
 module.exports = router;

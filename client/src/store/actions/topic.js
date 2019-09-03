@@ -9,8 +9,8 @@ import {
   LISTITEM_FIELDS,
   ADD_LISTITEM_SUCCESS,
   ADD_LISTITEM_FAIL,
-  REMOVE_LISTITEM_SUCCESS,
-  REMOVE_LISTITEM_FAIL
+  REMOVE_TOPIC_SUCCESS,
+  REMOVE_TOPIC_FAIL  
 } from './types';
 import axios from 'axios';
 
@@ -48,6 +48,21 @@ export const addTopic = (title, id) => async (dispatch) => {
     })
   }
 };
+
+export const removeTopic = (id) => async dispatch => {
+  try {
+    const result = await axios.delete(`/api/topics/remove/${id}`)
+    dispatch({
+      type: REMOVE_TOPIC_SUCCESS,
+      payload: result.data
+    })
+  } catch (error) {
+    dispatch({
+      type: REMOVE_TOPIC_FAIL,
+      payload: error
+    })
+  }
+}
 
 
 export const addListItem = (topicId, title, description) => async dispatch => {
