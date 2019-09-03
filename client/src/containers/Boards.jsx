@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Boards from '../components/Boards';
 import { connect } from 'react-redux';
-import { fetchBoards } from '../store/actions/board';
+import { fetchBoards, addBoard } from '../store/actions/board';
+import { fetchBoardTitle } from '../store/actions/formData'
 
 class BoardsContainer extends Component {
 
@@ -9,10 +10,27 @@ class BoardsContainer extends Component {
     this.props.fetchBoards()
   }
 
+  sumbitHanlder = e => {
+    e.preventDefault()
+    const { boardTitle } = this.props
+    this.props.addBoard(boardTitle)
+  }
+
   render() {
-    const { boards, loading } = this.props
+    const {
+      boards,
+      loading,
+      addBoard,
+      fetchBoardTitle,
+      boardTitle } = this.props
     return <>
-      {boards && !loading ? <Boards boards={boards}/> : loading}
+      {boards && !loading ? <Boards
+        boards={boards}
+        addBoard={addBoard}
+        boardTitle={boardTitle}
+        fetchBoardTitle={fetchBoardTitle}
+        sumbitHanlder={this.sumbitHanlder}
+      /> : loading}
     </>
   }
 }
@@ -20,8 +38,10 @@ class BoardsContainer extends Component {
 const mapStateToProps = state => {
   return {
     boards: state.board.boards,
-    loading: state.board.loading
+    loading: state.board.loading,
+    boardTitle: state.formData.boardTitle
+
   }
 }
 
-export default connect(mapStateToProps, { fetchBoards })(BoardsContainer);
+export default connect(mapStateToProps, { fetchBoards, addBoard, fetchBoardTitle })(BoardsContainer);

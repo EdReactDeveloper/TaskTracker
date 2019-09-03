@@ -1,5 +1,4 @@
 import {
-  FETCH_TOPIC_TITLE,
   ADD_TOPIC_SUCCESS,
   ADD_TOPIC_FAIL,
   FETCH_TOPICS_SUCCESS,
@@ -51,10 +50,10 @@ export const addTopic = (title, id) => async (dispatch) => {
 
 export const removeTopic = (id) => async dispatch => {
   try {
-    const result = await axios.delete(`/api/topics/remove/${id}`)
+    await axios.delete(`/api/topics/remove/${id}`)
     dispatch({
       type: REMOVE_TOPIC_SUCCESS,
-      payload: result.data
+      payload: id
     })
   } catch (error) {
     dispatch({
@@ -102,12 +101,6 @@ export const updateListItem = (topicId, listItemId, type) => async dispatch=>{
 }
 
 
-export const fetchTopicTitle = (text) => (dispatch) => {
-  dispatch({
-    type: FETCH_TOPIC_TITLE,
-    payload: text
-  });
-};
 
 export const addNewListData = (topicId, text, type) => dispatch=>{
   dispatch({

@@ -1,7 +1,13 @@
 import {
 	FETCH_BOARDS_SUCCESS,
 	FETCH_BOARDS_FAIL,
-	GET_BOARD
+	GET_BOARD,
+	REMOVE_BOARD_SUCCESS,
+	REMOVE_BOARD_FAIL,
+	ADD_BOARD_SUCCESS,
+	ADD_BOARD_FAIL,
+	FETCH_BOARD_TITLE,
+	CLEAR_BOARD
 } from './types';
 import axios from 'axios';
 
@@ -27,4 +33,42 @@ export const getBoard = (id) => (dispatch) => {
 	});
 };
 
+export const clearBoard = () => dispatch=> {
+  dispatch({
+    type: CLEAR_BOARD
+  })
+}
+
+	export const addBoard = (boardTitle) => async dispatch=>{
+		const config = {headers: {'Content-Type': 'application/json'}}
+		const body = JSON.stringify({boardTitle})
+		try {
+			const result = await axios.post('/api/board/add', body, config)
+			dispatch({
+				type: ADD_BOARD_SUCCESS,
+				payload: result.data
+			})
+		} catch (error) {
+			dispatch({
+				type: ADD_BOARD_FAIL,
+				payload: error
+			})
+		}
+	}	
+
+	export const removeBoard = (boardId, history) => async dispatch => {
+		try {
+			const message = await axios.delete(`/api/board/remove/${boardId}`)
+			dispatch({
+				type: REMOVE_BOARD_SUCCESS,
+				paylaod: message
+			})
+			history.push('/boards')
+		} catch (error) {
+			dispatch({
+				type: REMOVE_BOARD_FAIL,
+				paylaod: error
+			})
+		}
+	}
 

@@ -1,8 +1,10 @@
 import {
 	FETCH_BOARDS_SUCCESS,
 	FETCH_BOARDS_FAIL,
-	CREATE_BOARDS_SUCCESS,
-	CREATE_BOARDS_FALIL,
+	ADD_BOARD_SUCCESS,
+	ADD_BOARD_FAIL,
+	REMOVE_BOARD_SUCCESS,
+	REMOVE_BOARD_FAIL,
 	FETCH_LIST_SUCCESS,
 	FETCH_LIST_FAIL,
 	GET_BOARD,
@@ -17,13 +19,15 @@ import {
 	ADD_LISTITEM_FAIL,
 	REMOVE_LISTITEM_SUCCESS,
 	REMOVE_TOPIC_SUCCESS,
-	REMOVE_TOPIC_FAIL
+	REMOVE_TOPIC_FAIL,
+	CLEAR_BOARD
 } from '../actions/types';
 
 const initialState = {
 	boards: null,
 	loading: true,
 	error: null,
+	message: '',
 	boardTile: '',
 	board: null
 };
@@ -76,17 +80,22 @@ const board = function(state = initialState, action) {
 				}
 			};
 
+		case REMOVE_BOARD_SUCCESS: {
+			return {
+				...state,
+				message: payload
+			};
+		}
+
 		case REMOVE_TOPIC_SUCCESS: {
 			const topics = [ ...state.board.topics ];
 			const index = topics.findIndex((item) => item._id === payload);
-			console.log(index)
 			topics.splice(index, 1);
-			console.log(topics);
 			return {
 				...state,
 				board: {
 					...state.board,
-					topics: topics
+					topics
 				}
 			};
 		}
@@ -100,16 +109,23 @@ const board = function(state = initialState, action) {
 				...state,
 				board: {
 					...state.board,
-					topics: topics
+					topics
 				}
 			};
 		}
+
+		case ADD_BOARD_SUCCESS:
+			return {
+				...state,
+				boards: [ ...state.boards, { ...payload } ]
+			};
 
 		case FETCH_TOPICS_FAIL:
 		case ADD_TOPIC_FAIL:
 		case ADD_LISTITEM_FAIL:
 		case CHECK_LIST_FAIL:
 		case REMOVE_TOPIC_FAIL:
+		case ADD_BOARD_FAIL:
 			return {
 				...state,
 				loading: false,
@@ -119,6 +135,8 @@ const board = function(state = initialState, action) {
 		case FETCH_BOARDS_SUCCESS:
 			return { ...state, boards: payload, loading: false };
 
+		case CLEAR_BOARD:
+			return { ...state, board: null, loading: true };
 		case GET_BOARD:
 			return { ...state, board: state.boards.find((item) => item._id === payload) };
 
