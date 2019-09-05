@@ -10,7 +10,8 @@ import {connect} from 'react-redux';
 import Board from '../containers/Board/Board'; 
 import Boards from '../containers/Boards'; 
 
-const Routes = ({loading}) => {
+const Routes = ({loading, isLoggedIn}) => {
+  console.log(isLoggedIn)
   return (
     <Router>
       {!loading && (
@@ -30,7 +31,9 @@ const Routes = ({loading}) => {
 
 const mapStateToProps = state =>{
   return {
-    loading: state.auth.loading
+    loading: state.auth.loading,
+    isLoggedIn: state.auth.loggedIn
+
   }
 }
 

@@ -40,7 +40,6 @@ router.post(
 
 router.post('/list/add/:id', async (req, res, next) => {
 	const { title, description } = req.body;
-	console.log(req.body)
 	try {
 		const topic = await Topic.findById(req.params.id);
 		const result = await topic.addItem(title, description);

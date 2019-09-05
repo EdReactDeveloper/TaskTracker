@@ -1,50 +1,56 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'; 
+import { connect } from 'react-redux';
 import Topic from '../../components/Boards/Topics/Topic';
-import {addNewListData, addListItem, removeTopic} from '../../store/actions/topic'; 
+import { addNewListData, addListItem, removeTopic } from '../../store/actions/topic';
+import { modalHandler } from '../../store/actions/modal';
 
 class TopicContainer extends Component {
 
-  state={
-    type: {
+  constructor(props){
+    super(props)
+    this.modalType = 'topicModal'
+    this.fieldType = {
       newListTitle: 'newListTitle',
       newListDescription: 'newListDescription'
     }
-  }
+  }  
 
-  submitHandler=(e)=>{
+  submitHandler = (e) => {
     e.preventDefault()
-    const {data, addListItem} = this.props
-    const {type} = this.state
-    console.log(data)
-    addListItem(data._id, data[type.newListTitle], data[type.newListDescription])
+    const { data, addListItem, modalHandler } = this.props
+    addListItem(data._id, data[this.fieldType.newListTitle], data[this.fieldType.newListDescription])
+    modalHandler(this.modalType)
   }
 
   render() {
 
     const {
-      data, 
+      data,
       addNewListData,
-      removeTopic
+      removeTopic,
+      modalHandler,
+      modal
     } = this.props
 
-    return <Topic 
-    data={data} 
-    submitHandler={this.submitHandler}
-    addNewListData={addNewListData}
-    type={this.state.type}
-    removeTopic={removeTopic}
+    return <Topic
+      data={data}
+      submitHandler={this.submitHandler}
+      addNewListData={addNewListData}
+      fieldType={this.fieldType}
+      removeTopic={removeTopic}
+      modalHandler={modalHandler}
+      modal={modal}
+      modalType={this.modalType}
     />
   }
 }
 
 const mapStateToProps = state => {
   return {
-    // listItemTitle: state.fields.listItemTitle,
-    // listItemDescription: state.fields.listItemDescription
+    modal: state.modal.topicModal
   }
 }
 
 
 
-export default connect(mapStateToProps, {addNewListData, addListItem, removeTopic})(TopicContainer);
+export default connect(mapStateToProps, { addNewListData, addListItem, removeTopic, modalHandler })(TopicContainer);

@@ -58,13 +58,14 @@ export const clearBoard = () => dispatch=> {
 
 	export const removeBoard = (boardId, history) => async dispatch => {
 		try {
-			const message = await axios.delete(`/api/board/remove/${boardId}`)
+			const result = await axios.delete(`/api/board/remove/${boardId}`)	
 			dispatch({
 				type: REMOVE_BOARD_SUCCESS,
-				paylaod: message
+				paylaod: result.data
 			})
 			history.push('/boards')
 		} catch (error) {
+			console.log(error)
 			dispatch({
 				type: REMOVE_BOARD_FAIL,
 				paylaod: error

@@ -1,6 +1,40 @@
 .wrapper{
   margin: 2rem 0;
-  border: 1px solid green; 
   padding: 2rem;
   padding-left: 4rem;
+}
+
+.header{
+  display: grid; 
+  grid-template-columns: 1fr 7rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.heading{
+  font-size: 2rem; 
+  text-transform: uppercase;
+  color: #1e90ff;
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.menu{
+grid-column: 2/3;
+grid-row: 1/2;
+& button{
+  height: 2.5rem;
+  background: #fff;
+  border: none; 
+  display: inline-block;
+  
+} 
+}
+
+.icon{
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+  & path {
+    fill: #666;
+  }
 }

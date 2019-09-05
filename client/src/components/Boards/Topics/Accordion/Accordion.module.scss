@@ -1,0 +1,98 @@
+
+.middle{
+  position: absolute; 
+  top: 50%;
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+}
+
+.menu{
+  width: 30rem; 
+  overflow: hidden;
+  border-radius: .8rem; 
+}
+
+.item{
+  border-top: 1px solid #2980b9; 
+  overflow: hidden;
+}
+
+.btnAc{
+  display: flex;
+  align-items: center; 
+  padding: 16px 20px; 
+  background: #3498db; 
+  color: white;
+  font-size: 1.6rem;
+  position: relative; 
+}
+
+.btnAc::before{
+  content: "";
+  width: 1.4rem; 
+  height: 1.4rem;
+  position: absolute;
+  background: #3498db; 
+  left: 2rem; 
+  bottom: -7px; 
+  transform: rotate(45deg); 
+}
+
+.iconAc {
+  width: 2rem;
+  height: 2rem;
+  & path{
+      fill: currentColor;
+  }
+  margin-right: 1rem; 
+}
+
+.smenu{
+  background: #333;
+  overflow: hidden;
+  transition: max-height .7s;
+  max-height: 0; 
+}
+
+.smenu a{
+  &:first-child{
+      margin-top: 1rem;
+  }
+  display: block; 
+  padding: 1.6rem 2.6rem; 
+  color: white; 
+  font-size: 1.4rem; 
+  position: relative;
+  z-index: 5;
+  backface-visibility: hidden;
+}
+
+.smenuItem{
+  &:first-child{
+      margin-top: 1rem;
+  }
+  position: relative;
+}
+
+.smenuItem::before{
+  content: ""; 
+  width: 6px; 
+  height: 100%;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  background: #2980b9;
+  z-index: 1;
+  transform: scale(0);
+  transition: transform .2s, width .4s cubic-bezier(1,0,0,1) .2s;
+}
+
+.smenuItem:hover::before{
+  transform: scale(1);
+  width: 100%;
+  position: absolute;
+}
+
+.activeAc{ 
+  max-height: 20em; 
+}

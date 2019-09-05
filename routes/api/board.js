@@ -42,7 +42,7 @@ router.delete('/remove/:id', async (req, res, next) => {
 	try {
 		await Topics.deleteMany({ boardId: req.params.id });
 		await Board.findByIdAndRemove(req.params.id);
-		res.json({ msg: 'board has been removed' });
+		res.json(req.params.id);
 	} catch (error) {
 		res.status(404).json({ msg: error });
 	}
