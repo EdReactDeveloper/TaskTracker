@@ -1,10 +1,10 @@
 import {MODAL} from './types';
 
 
-export const modalHandler = (modalType) => dispatch =>{
+export const modalHandler = (modalType, id) => dispatch =>{
   console.log(modalType)
   dispatch({
     type: MODAL,
-    payload: modalType
+    payload: {modalType, id}
   })
 }

@@ -1,6 +1,8 @@
 import {
   FETCH_TOPIC_TITLE,
-  FETCH_BOARD_TITLE
+  FETCH_BOARD_TITLE,
+  FETCH_TOPICITEM_TITLE,
+  FETCH_TOPICITEM_DESCRIPTION,
 } from './types';
 
 
@@ -17,3 +19,18 @@ export const fetchBoardTitle = (text) => (dispatch) => {
     payload: text
   });
 };
+
+export const fetchTopicItemTitle = (text) => dispatch =>{
+  dispatch({
+    type: FETCH_TOPICITEM_TITLE,
+    payload: text
+  });
+}
+
+export const fetchTopicItmeDescription = (text) => dispatch =>{
+  dispatch({
+    type: FETCH_TOPICITEM_DESCRIPTION,
+    payload: text
+  });
+}
+

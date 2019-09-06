@@ -3,26 +3,25 @@ import style from './TopicMenu.module.scss';
 
 const AddTopicMenu = ({
   submitHandler,
-  addNewListData,
-  fieldType,
-  topicId,
-  data
+  fetchTopicItemTitle,
+  fetchTopicItmeDescription,
+  topicItemTitle,   
+  topicItemDescription
 }) => {
   return (
     <form onSubmit={submitHandler} className={style.form}>
       <label className={style.heading}>title
       <input
         type="text"
-        value={data[fieldType.newListTitle]}
-        onChange={(e) => addNewListData(topicId, e.target.value, fieldType.newListTitle)}
+        value={topicItemTitle}
+        onChange={(e) => fetchTopicItemTitle(e.target.value)}
         className={style.input}
       />
       </label>
       <label className={style.heading}>description
       <textarea 
-      value={data[fieldType.newListDescription]} 
-      onChange={(e) => addNewListData(topicId, e.target.value, 
-        fieldType.newListDescription)} 
+      value={topicItemDescription} 
+      onChange={(e) => fetchTopicItmeDescription(e.target.value)} 
         className={style.textarea}
         />
         </label>

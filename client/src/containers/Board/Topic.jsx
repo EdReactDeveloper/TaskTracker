@@ -6,51 +6,24 @@ import { modalHandler } from '../../store/actions/modal';
 
 class TopicContainer extends Component {
 
-  constructor(props){
-    super(props)
-    this.modalType = 'topicModal'
-    this.fieldType = {
-      newListTitle: 'newListTitle',
-      newListDescription: 'newListDescription'
-    }
-  }  
-
-  submitHandler = (e) => {
-    e.preventDefault()
-    const { data, addListItem, modalHandler } = this.props
-    addListItem(data._id, data[this.fieldType.newListTitle], data[this.fieldType.newListDescription])
-    modalHandler(this.modalType)
-  }
-
-  render() {
+   render() {
 
     const {
       data,
-      addNewListData,
       removeTopic,
       modalHandler,
-      modal
+      modalType
     } = this.props
 
     return <Topic
       data={data}
-      submitHandler={this.submitHandler}
-      addNewListData={addNewListData}
-      fieldType={this.fieldType}
       removeTopic={removeTopic}
       modalHandler={modalHandler}
-      modal={modal}
-      modalType={this.modalType}
+      modalType={modalType}
     />
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    modal: state.modal.topicModal
-  }
-}
 
 
-
-export default connect(mapStateToProps, { addNewListData, addListItem, removeTopic, modalHandler })(TopicContainer);
+export default connect(null, { addNewListData, addListItem, removeTopic, modalHandler })(TopicContainer);
