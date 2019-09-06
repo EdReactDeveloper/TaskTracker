@@ -3,11 +3,11 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from './reducers/auth'; 
 import board from './reducers/board';
-import formData from './reducers/formData'; 
+import forms from './reducers/forms'; 
 import modal from './reducers/modal'; 
 
 const reducers = combineReducers({
-auth, board, formData, modal
+auth, board, forms, modal
 })
 const middleware = [thunk]
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(...middleware)))

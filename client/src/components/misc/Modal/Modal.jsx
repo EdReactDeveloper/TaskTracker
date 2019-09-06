@@ -1,15 +1,19 @@
 import React from 'react';
-import style from './Modal.module.scss';
+import Dialog from '@material-ui/core/Dialog';
+import style from './Modal.module.scss'; 
 
-const Modal = ({modalHandler, children, modalType}) => {
+const Modal = ({ modalHandler, submitHandler, children, modalType }) => {
   return (
-    <>
-      <div className={style.background} onClick={() => modalHandler(modalType, null)}>
-      </div>
-      <div className={style.container}>
-        {children}
-      </div>
-    </>
+    <Dialog
+      open={() => modalHandler(modalType)}
+      onClose={() => modalHandler(modalType)}
+      aria-labelledby="form-dialog-title"
+      bodyStyle={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
+    >
+      <form onSubmit={submitHandler} className={style.form}>
+      {children}
+      </form>
+    </Dialog>
   );
 };
 

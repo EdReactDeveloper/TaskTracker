@@ -3,7 +3,7 @@ import Topics from '../../../containers/Board/Topics';
 import DropMenu from '../../misc/DropMenu';
 import Modal from '../../misc/Modal/Modal';
 import { renderBoardMenu } from '../../../containers/menuData';
-import BoardMenu from './BoardMenu';
+import BoardForm from './BoardForm';
 import style from './Board.module.scss';
 
 const Board = ({
@@ -19,15 +19,15 @@ const Board = ({
   history }) => {
   return <div className="container">
     <div className={style.wrapper}>
-    <h3>{data.boardTitle}</h3>
-    <DropMenu items={renderBoardMenu(removeBoard, modalHandler, boardId, history, modalType)} />
+      <h3>{data.boardTitle}</h3>
+      <DropMenu items={renderBoardMenu(removeBoard, modalHandler, boardId, history, modalType)} />
     </div>
     {modal &&
-      <Modal modalHandler={modalHandler} modalType={modalType}>
-        <BoardMenu submitHandler={submitHandler} topicTitle={topicTitle} fetchTopicTitle={fetchTopicTitle} />
-      </Modal>  
+      <Modal modalHandler={modalHandler} modalType={modalType} submitHandler={submitHandler}>
+        <BoardForm topicTitle={topicTitle} fetchTopicTitle={fetchTopicTitle} />
+      </Modal>
     }
-    <Topics boardId={boardId}/>
+    <Topics boardId={boardId} />
   </div>
 };
 

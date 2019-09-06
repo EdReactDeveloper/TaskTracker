@@ -6,8 +6,18 @@ import {
 	REMOVE_BOARD_FAIL,
 	ADD_BOARD_SUCCESS,
 	ADD_BOARD_FAIL,
-	FETCH_BOARD_TITLE,
-	CLEAR_BOARD
+	CLEAR_BOARD,
+	FETCH_TOPICS_SUCCESS,
+  FETCH_TOPICS_FAIL,
+	ADD_TOPIC_SUCCESS,
+	ADD_TOPIC_FAIL,
+	REMOVE_TOPIC_SUCCESS,
+	REMOVE_TOPIC_FAIL,
+	UPDATE_LIST_SUCCESS,
+  UPDATE_LIST_FAIL,
+  LISTITEM_FIELDS,
+  ADD_LISTITEM_SUCCESS,
+  ADD_LISTITEM_FAIL  
 } from './types';
 import axios from 'axios';
 
@@ -73,3 +83,98 @@ export const clearBoard = () => dispatch=> {
 		}
 	}
 
+
+
+
+	export const getTopics = (id) => async disptch =>{
+		try {
+			const result = await axios.get(`/api/topics/${id}`)
+			disptch({
+				type: FETCH_TOPICS_SUCCESS, 
+				payload: result.data
+			})
+		} catch (error) {
+			disptch({
+				type: FETCH_TOPICS_FAIL,
+				payload: error
+			})
+		}
+	} 
+	
+	
+	export const addTopic = (title, id) => async (dispatch) => {
+		
+		const config={headers: {'Content-Type': 'application/json'}}
+		const body = JSON.stringify({title, id})
+		try {
+			const result = await axios.post('/api/topics/create', body, config)
+			dispatch({
+				type: ADD_TOPIC_SUCCESS,
+				payload: result.data
+			})
+		} catch (error) {
+			console.log(error)
+			dispatch({
+				type: ADD_TOPIC_FAIL,
+				payload: error
+			})
+		}
+	};
+	
+	export const removeTopic = (id) => async dispatch => {
+		try {
+			await axios.delete(`/api/topics/remove/${id}`)
+			dispatch({
+				type: REMOVE_TOPIC_SUCCESS,
+				payload: id
+			})
+		} catch (error) {
+			dispatch({
+				type: REMOVE_TOPIC_FAIL,
+				payload: error
+			})
+		}
+	}
+	
+	export const addListItem = (topicId, title, description) => async dispatch => {
+		const config = {headers: {'Content-Type': 'application/json'}}
+		const body = JSON.stringify({title, description})
+		try {
+			const result = await axios.post(`/api/topics/list/add/${topicId}`, body, config)
+			dispatch({
+				type: ADD_LISTITEM_SUCCESS,
+				payload: result.data
+			})
+		} catch (error) {
+			dispatch({
+				type: ADD_LISTITEM_FAIL,
+				payload: error
+			})
+		}
+	}
+	
+	export const updateListItem = (topicId, listItemId, type) => async dispatch=>{
+		const config={headers: {'Content-Type': 'application/json'}}
+		const body = JSON.stringify({listItemId})
+		try {
+			const result = await axios.post(`/api/topics/list/${type}/${topicId}`, body, config)
+			console.log(result)
+			dispatch({
+				type: UPDATE_LIST_SUCCESS, 
+				payload: result.data
+			})
+		} catch (error) {
+			console.log(error)
+			dispatch({
+				type: UPDATE_LIST_FAIL,
+				payload: error
+			})
+		}
+	}
+	
+	export const addNewListData = (topicId, text, type) => dispatch=>{
+		dispatch({
+			type: LISTITEM_FIELDS,
+			payload: ({topicId, text, type})
+		});
+	}

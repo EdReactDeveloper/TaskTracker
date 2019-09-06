@@ -1,28 +1,24 @@
 import React, { Component } from 'react';
 import Topics from '../../components/Boards/Topics'
-import {connect} from 'react-redux'; 
-import {getTopics} from '../../store/actions/topic';
+import { connect } from 'react-redux';
+import { getTopics, addListItem } from '../../store/actions/board';
 import Modal from '../../components/misc/Modal/Modal'
-import AddTopicItemForm from '../../components/Boards/Topics/Topic/TopicMenu/TopicMenu'
-import {fetchTopicItemTitle,
-  fetchTopicItmeDescription} from '../../store/actions/formData'; 
-import {modalHandler} from '../../store/actions/modal'; 
-import { addListItem } from '../../store/actions/topic'
+import AddTopicItemForm from '../../components/Boards/Topics/Topic/TopicForm/TopicForm'
+import { fetchTopicItemTitle, fetchTopicItmeDescription } from '../../store/actions/forms';
+import { modalHandler } from '../../store/actions/modal';
+
+
 class TopicsContainer extends Component {
 
-  componentDidMount(){
+  componentDidMount() {
     const id = this.props.boardId
     this.props.getTopics(id)
   }
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.modalType = 'topicModal'
-    this.fieldType = {
-      newListTitle: 'newListTitle',
-      newListDescription: 'newListDescription'
-    }
-  }  
+  }
 
   submitHandler = (e) => {
     e.preventDefault()
@@ -34,25 +30,28 @@ class TopicsContainer extends Component {
 
   render() {
     const {
-      topics, 
-      isModalOpen, 
-      topicItemDescription, 
+      topics,
+      isModalOpen,
+      topicItemDescription,
       topicItemTitle,
-       modalHandler, 
-       fetchTopicItemTitle,
-       fetchTopicItmeDescription
-      } = this.props
-    return <> 
-    {topics && <Topics topics={topics} modalType={this.modalType}/> } 
-    {isModalOpen && <Modal modalHandler={modalHandler} modalType={this.modalType}>
-      <AddTopicItemForm
-            submitHandler={this.submitHandler}
+      modalHandler,
+      fetchTopicItemTitle,
+      fetchTopicItmeDescription
+    } = this.props
+    return <>
+      {topics && <Topics topics={topics} modalType={this.modalType} />}
+      {isModalOpen &&
+        <Modal
+          modalHandler={modalHandler}
+          modalType={this.modalType}
+          submitHandler={this.submitHandler}>
+          <AddTopicItemForm
             topicItemDescription={topicItemDescription}
             topicItemTitle={topicItemTitle}
             fetchTopicItemTitle={fetchTopicItemTitle}
             fetchTopicItmeDescription={fetchTopicItmeDescription}
           />
-    </Modal>}
+        </Modal>}
     </>
   }
 }
@@ -61,11 +60,13 @@ const mapStateToProps = state => {
   return {
     topics: state.board.board.topics,
     isModalOpen: state.modal.topicModal,
-    topicItemTitle: state.formData.topicItemTitle,
-    topicItemDescription: state.formData.topicItemDescription,
+    topicItemTitle: state.forms.topicItemTitle,
+    topicItemDescription: state.forms.topicItemDescription,
     topicId: state.modal.id
   }
 }
 
-export default connect(mapStateToProps, {getTopics, addListItem, modalHandler, fetchTopicItemTitle,
-  fetchTopicItmeDescription})(TopicsContainer);
+export default connect(mapStateToProps, {
+  getTopics, addListItem, modalHandler, fetchTopicItemTitle,
+  fetchTopicItmeDescription
+})(TopicsContainer);

@@ -9,7 +9,7 @@ const AddTopicMenu = ({
   topicItemDescription
 }) => {
   return (
-    <form onSubmit={submitHandler} className={style.form}>
+    <>
       <label className={style.heading}>title
       <input
         type="text"
@@ -29,7 +29,7 @@ const AddTopicMenu = ({
       type="submit" 
       className={style.btn_add}  
       >create</button>
-    </form>
+    </>
   );
 };
 

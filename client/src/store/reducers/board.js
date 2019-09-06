@@ -1,26 +1,23 @@
 import {
 	FETCH_BOARDS_SUCCESS,
 	FETCH_BOARDS_FAIL,
-	ADD_BOARD_SUCCESS,
-	ADD_BOARD_FAIL,
+	GET_BOARD,
 	REMOVE_BOARD_SUCCESS,
 	REMOVE_BOARD_FAIL,
-	FETCH_LIST_SUCCESS,
-	FETCH_LIST_FAIL,
-	GET_BOARD,
+	ADD_BOARD_SUCCESS,
+	ADD_BOARD_FAIL,
+	CLEAR_BOARD,
+	FETCH_TOPICS_SUCCESS,
+  FETCH_TOPICS_FAIL,
 	ADD_TOPIC_SUCCESS,
 	ADD_TOPIC_FAIL,
-	FETCH_TOPICS_SUCCESS,
-	FETCH_TOPICS_FAIL,
-	CHECK_LIST_SUCCESS,
-	CHECK_LIST_FAIL,
-	LISTITEM_FIELDS,
-	ADD_LISTITEM_SUCCESS,
-	ADD_LISTITEM_FAIL,
-	REMOVE_LISTITEM_SUCCESS,
 	REMOVE_TOPIC_SUCCESS,
 	REMOVE_TOPIC_FAIL,
-	CLEAR_BOARD
+  LISTITEM_FIELDS,
+  ADD_LISTITEM_SUCCESS,
+	ADD_LISTITEM_FAIL,
+	UPDATE_LIST_SUCCESS,
+	UPDATE_LIST_FAIL  
 } from '../actions/types';
 
 const initialState = {
@@ -103,8 +100,8 @@ const board = function(state = initialState, action) {
 			};
 		}
 
-		case CHECK_LIST_SUCCESS:
-		case REMOVE_LISTITEM_SUCCESS: {
+		case UPDATE_LIST_SUCCESS:
+		{
 			const topics = [ ...state.board.topics ];
 			const index = topics.findIndex((item) => item._id === payload._id);
 			topics[index] = payload;
@@ -126,9 +123,10 @@ const board = function(state = initialState, action) {
 		case FETCH_TOPICS_FAIL:
 		case ADD_TOPIC_FAIL:
 		case ADD_LISTITEM_FAIL:
-		case CHECK_LIST_FAIL:
+		case UPDATE_LIST_FAIL:
 		case REMOVE_TOPIC_FAIL:
 		case ADD_BOARD_FAIL:
+			case REMOVE_BOARD_FAIL:
 			return {
 				...state,
 				loading: false,

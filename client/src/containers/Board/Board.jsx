@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Board from '../../components/Boards/Board';
 import {connect} from 'react-redux'; 
 import {getBoard, fetchBoards, clearBoard, removeBoard } from '../../store/actions/board';
-import {fetchTopicTitle} from '../../store/actions/formData';
-import {addTopic} from '../../store/actions/topic';
+import {fetchTopicTitle} from '../../store/actions/forms';
+import {addTopic} from '../../store/actions/board';
 import {modalHandler} from '../../store/actions/modal'; 
 
 class BoardContainer extends Component {
@@ -54,7 +54,7 @@ const mapStateToProps = state => {
   return {
     board: state.board.board,
     boardTitle: state.board.boardTilte,
-    topicTitle: state.formData.topicTitle,
+    topicTitle: state.forms.topicTitle,
     modal: state.modal.boardModal
   }
 }

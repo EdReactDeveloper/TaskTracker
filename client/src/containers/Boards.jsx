@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Boards from '../components/Boards';
 import { connect } from 'react-redux';
 import { fetchBoards, addBoard } from '../store/actions/board';
-import { fetchBoardTitle } from '../store/actions/formData'
+import { fetchBoardTitle } from '../store/actions/forms'
 
 class BoardsContainer extends Component {
 
@@ -39,7 +39,7 @@ const mapStateToProps = state => {
   return {
     boards: state.board.boards,
     loading: state.board.loading,
-    boardTitle: state.formData.boardTitle
+    boardTitle: state.forms.boardTitle
 
   }
 }

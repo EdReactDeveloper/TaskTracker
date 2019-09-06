@@ -41,7 +41,6 @@ Topic.methods.checkListItem = function(listItemId) {
 	const updatedItem = !list[index].done;
 	list[index].done = updatedItem;
 	this.list = list
-	console.log(list)
 	return this.save();
 };
 
