@@ -12,3 +12,12 @@ export function renderBoardMenu(removeBoard, modalHandler, boardId, history, mod
   ]
 }
 
+export function renderBoardSMenu(modalHandler, modalType){
+  return [
+    {name: 'add board', icon:'addItem', onClick: ()=> modalHandler(modalType, null)},
+  ]
+}
+
+
+
+

@@ -3,6 +3,7 @@ import { MODAL } from '../actions/types';
 const initialState = {
 	boardModal: false,
 	topicModal: false,
+	boardsModal: false,
 	id: ''
 };
 

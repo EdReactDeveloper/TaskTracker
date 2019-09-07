@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import List from '../../components/Boards/Topics/List';
+import List from '../../components/Board/Topics/List';
 import { connect } from 'react-redux';
 import { updateListItem } from '../../store/actions/board';
 

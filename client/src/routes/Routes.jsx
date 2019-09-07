@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Navigation from '../components/navigation';
 import Home from '../components/Home';
 import Login from '../containers/Login';
@@ -10,8 +10,8 @@ import {connect} from 'react-redux';
 import Board from '../containers/Board/Board'; 
 import Boards from '../containers/Boards'; 
 
-const Routes = ({loading, isLoggedIn}) => {
-  console.log(isLoggedIn)
+const Routes = ({loading}) => {
+  
   return (
     <Router>
       {!loading && (
@@ -31,9 +31,7 @@ const Routes = ({loading, isLoggedIn}) => {
 
 const mapStateToProps = state =>{
   return {
-    loading: state.auth.loading,
-    isLoggedIn: state.auth.loggedIn
-
+    loading: state.auth.loading
   }
 }
 

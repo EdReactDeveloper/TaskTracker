@@ -24,9 +24,14 @@ import axios from 'axios';
 export const fetchBoards = () => async (dispatch) => {
 	try {
 		const result = await axios.get('/api/board/');
+		const boards = result.data
+		for(let board of boards){
+			const topics = await axios.get(`/api/topics/${board._id}`)
+			board.topics = [...topics.data]
+		}
 		dispatch({
 			type: FETCH_BOARDS_SUCCESS,
-			payload: result.data
+			payload: boards
 		});
 	} catch (error) {
 		dispatch({

@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
-import Topics from '../../components/Boards/Topics'
+import Topics from '../../components/Board/Topics'
 import { connect } from 'react-redux';
 import { getTopics, addListItem } from '../../store/actions/board';
-import Modal from '../../components/misc/Modal/Modal'
-import AddTopicItemForm from '../../components/Boards/Topics/Topic/TopicForm/TopicForm'
+import Modal from '../../components/misc/Modal'
+import AddTopicItemForm from '../../components/Board/Topics/Topic/TopicForm/TopicForm'
 import { fetchTopicItemTitle, fetchTopicItmeDescription } from '../../store/actions/forms';
 import { modalHandler } from '../../store/actions/modal';
 
 
 class TopicsContainer extends Component {
-
-  componentDidMount() {
-    const id = this.props.boardId
-    this.props.getTopics(id)
-  }
-
   constructor(props) {
     super(props)
     this.modalType = 'topicModal'

@@ -7,6 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '../icon/Icon';
 import { Item } from '../icon/Selection';
 import style from './DropMenu.module.scss'; 
+
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
@@ -52,17 +53,7 @@ export default function CustomizedMenus(props) {
 
   return (
     <div>
-      <Button
-        // aria-controls="customized-menu"
-        // aria-haspopup="true"
-        // variant="contained"
-        // color="primary"
-
-        className={style.menu_btn}
-        onClick={handleClick}
-      >
-        действия
-      </Button>
+      <Button className={style.menu_btn} onClick={handleClick} >действия</Button>
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}
@@ -71,9 +62,9 @@ export default function CustomizedMenus(props) {
         onClose={handleClose}
       >
         {items.map(item => {
-          function func(){
-            handleClose()
-            item.onClick()
+          function func(){ 
+            handleClose() 
+            item.onClick() 
           }
           return (
             <StyledMenuItem onClick={()=>func()} key={item.name}>

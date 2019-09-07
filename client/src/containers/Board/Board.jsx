@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import Board from '../../components/Boards/Board';
+import Board from '../../components/Board';
 import {connect} from 'react-redux'; 
 import {getBoard, fetchBoards, clearBoard, removeBoard } from '../../store/actions/board';
 import {fetchTopicTitle} from '../../store/actions/forms';
 import {addTopic} from '../../store/actions/board';
 import {modalHandler} from '../../store/actions/modal'; 
+import Loader from '../../components/misc/Loader'; 
+import Modal from '../../components/misc/Modal'; 
+import BoardForm from '../../components/Board/BoardForm';
 
 class BoardContainer extends Component {
  
@@ -34,8 +37,8 @@ class BoardContainer extends Component {
   }
 
   render() {
-    const {board, fetchTopicTitle, topicTitle, removeBoard, history, modalHandler, modal } = this.props
-  return <>{board && <Board 
+    const {board, fetchTopicTitle, topicTitle, removeBoard, history, modalHandler, modal, loading } = this.props
+  return <>{board && !loading  ? <Board 
                       data={board} 
                       boardId={this.props.match.params.id}
                       submitHandler={this.submitHandler}
@@ -43,10 +46,24 @@ class BoardContainer extends Component {
                       topicTitle={topicTitle}
                       removeBoard={removeBoard}
                       history={history}
-                      modalHandler={modalHandler}
-                      modal={modal}
                       modalType={this.modalType}
-    />}</>
+                      modalHandler={modalHandler} 
+    /> : <Loader/>
+    
+  }
+   {modal &&
+      <Modal 
+      modalHandler={modalHandler} 
+      modalType={this.modalType} 
+      submitHandler={this.submitHandler}>
+        <BoardForm 
+        topicTitle={topicTitle} 
+        fetchTopicTitle={fetchTopicTitle} 
+        modalHandler={modalHandler} 
+        />        
+      </Modal>
+    }
+  </>
   }
 }
 
@@ -55,7 +72,8 @@ const mapStateToProps = state => {
     board: state.board.board,
     boardTitle: state.board.boardTilte,
     topicTitle: state.forms.topicTitle,
-    modal: state.modal.boardModal
+    modal: state.modal.boardModal,
+    loading: state.board.loading
   }
 }
 

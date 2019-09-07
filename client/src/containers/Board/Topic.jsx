@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import Topic from '../../components/Boards/Topics/Topic';
+import Topic from '../../components/Board/Topics/Topic';
 import { addNewListData, addListItem, removeTopic } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 
