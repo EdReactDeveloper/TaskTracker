@@ -1,7 +1,7 @@
 import React from 'react';
-import Icon from '../misc/icon/Icon';
-import { Item } from '../misc/icon/Selection';
-import style from './DropMenu.module.scss'; 
+import Icon from '../../../misc/icon/Icon';
+import { Item } from '../../../misc/icon/Selection';
+import style from './Items.module.scss'; 
 
 const MenuItems = ({items, dropdownHandler}) => {
   return (

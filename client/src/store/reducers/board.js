@@ -97,10 +97,8 @@ const board = function(state = initialState, action) {
 
 		case REMOVE_BOARD_SUCCESS: {
 			const boards = [ ...state.boards ];
-			console.log(boards)
 			const index = boards.findIndex((item) => item._id === payload);
 			boards.splice(index, 1);
-			console.log(boards)
 			return {
 				...state,
 				boards, board: null, topic:null
@@ -144,7 +142,7 @@ const board = function(state = initialState, action) {
 			return { ...state, boards: payload, loading: false };
 
 		case CLEAR_BOARD:
-			return { ...state, board: null, loading: true };
+			return { ...state, board: null };
 		case GET_BOARD:
 			return { ...state, topic: null, board: state.boards.find((item) => item._id === payload) };
 

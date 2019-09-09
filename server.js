@@ -53,6 +53,5 @@ app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/board', require('./routes/api/board'));
 app.use('/api/topics', require('./routes/api/topics'));
 
-
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`this app is running at port ${PORT}`));

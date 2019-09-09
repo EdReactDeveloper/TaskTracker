@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fetchBoards, addBoard, getTopic, boardActive, getBoard } from '../store/actions/board';
 import { fetchBoardTitle } from '../store/actions/forms'
 import Loader from '../components/misc/Loader';
-import Modal from '../components/misc/Modal';
+import Modal from '../components/Modal';
 import { modalHandler } from '../store/actions/modal';
 import Form from '../containers/modalForm';
 
@@ -20,6 +20,7 @@ class BoardsContainer extends Component {
     this.props.fetchBoards()
   }
 
+
   goToBoard=(index, id)=>{
     const {boardActive, getBoard} = this.props
     boardActive(index)
@@ -33,6 +34,7 @@ class BoardsContainer extends Component {
       addBoard,
       fetchBoardTitle,
       boardTitle, modalHandler, isOpen, getTopic, boardActive, history } = this.props
+      console.log(boards, loading)
     return <>
       {boards && !loading ? <Boards
         boards={boards}

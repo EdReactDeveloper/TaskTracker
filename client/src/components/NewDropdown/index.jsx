@@ -1,5 +1,5 @@
 import React from 'react';
-import Items from './Menues';
+import List from './List';
 
 const DropDown = ({
   boardItems, 
@@ -14,7 +14,7 @@ const DropDown = ({
       <button>menu</button>
       {isOpen && 
       <div>
-       <Items 
+       <List 
         boardItems={boardItems}
         topicItems={topicItems}
         boardsItems={boardsItems}

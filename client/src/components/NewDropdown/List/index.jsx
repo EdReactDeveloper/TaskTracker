@@ -1,5 +1,5 @@
 import React from 'react';
-import DropMenu from '../MenuItems'
+import DropMenu from './Items'
 const Menues = ({
   dropdownHandler,
   boardItems,

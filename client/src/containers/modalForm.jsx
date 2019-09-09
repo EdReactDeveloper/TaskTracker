@@ -1,7 +1,7 @@
 import React from 'react';
-import TopicForm from '../components/misc/Modal/Froms/TopicForm';
-import BoardForm from '../components/misc/Modal/Froms/BoardForm'
-import BoardsForm from '../components/misc/Modal/Froms/BoardsForm';
+import TopicForm from '../components/Modal/Froms/TopicForm';
+import BoardForm from '../components/Modal/Froms/BoardForm'
+import BoardsForm from '../components/Modal/Froms/BoardsForm';
 import { connect } from 'react-redux';
 import {
   fetchTopicItemTitle,
