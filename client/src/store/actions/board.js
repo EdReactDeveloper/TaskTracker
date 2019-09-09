@@ -19,7 +19,6 @@ import {
   ADD_LISTITEM_SUCCESS,
 	ADD_LISTITEM_FAIL,
 	FETCH_TOPIC_SUCCESS, 
-	FETCH_TOPIC_FAIL,
 	BOARD_ACTIVE  
 } from './types';
 import axios from 'axios';
@@ -77,10 +76,10 @@ export const clearBoard = () => dispatch=> {
 
 	export const removeBoard = (boardId, history) => async dispatch => {
 		try {
-			const result = await axios.delete(`/api/board/remove/${boardId}`)	
+			await axios.delete(`/api/board/remove/${boardId}`)	
 			dispatch({
 				type: REMOVE_BOARD_SUCCESS,
-				paylaod: result.data
+				paylaod: boardId
 			})
 			history.push('/boards')
 		} catch (error) {
@@ -143,12 +142,12 @@ export const clearBoard = () => dispatch=> {
 		}
 	};
 	
-	export const removeTopic = (boardId, topicId) => async dispatch => {
+	export const removeTopic = (topicId) => async dispatch => {
 		try {
 	 await axios.delete(`/api/topics/remove/${topicId}`)
 			dispatch({
 				type: REMOVE_TOPIC_SUCCESS,
-				payload: ({boardId, topicId})
+				payload: topicId
 			})
 		} catch (error) {
 			console.log(error)

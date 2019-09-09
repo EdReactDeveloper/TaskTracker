@@ -1,16 +1,12 @@
 import React from 'react';
-import DropMenu from '../misc/DropMenu';
-import { renderBoardSMenu } from '../../containers/menuData';
-import SideBar from '../Sidebar'; 
-
-const Boards = ({ boards, modalHandler, modalType, getTopic, goToBoard }) => {
+import SideBar from '../Sidebar';
+import Dropdown from '../../containers/DropDown'
+const Boards = ({ boards, getTopic, goToBoard, history }) => {
 
   return (
     <div >
-      <DropMenu items={renderBoardSMenu(modalHandler, modalType)} />
-      <div>
-        <SideBar getTopic={getTopic} boards={boards} goToBoard={goToBoard} />
-      </div>
+      <Dropdown history={history}/>
+      <SideBar getTopic={getTopic} boards={boards} goToBoard={goToBoard} />
     </div>
   );
 };

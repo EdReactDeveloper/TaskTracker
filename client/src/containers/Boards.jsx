@@ -8,6 +8,7 @@ import Modal from '../components/misc/Modal';
 import { modalHandler } from '../store/actions/modal';
 import Form from '../containers/modalForm';
 
+
 class BoardsContainer extends Component {
 
   constructor(props) {
@@ -17,9 +18,7 @@ class BoardsContainer extends Component {
 
   componentDidMount() {
     this.props.fetchBoards()
-
   }
-
 
   goToBoard=(index, id)=>{
     const {boardActive, getBoard} = this.props
@@ -33,7 +32,7 @@ class BoardsContainer extends Component {
       loading,
       addBoard,
       fetchBoardTitle,
-      boardTitle, modalHandler, isOpen, getTopic, boardActive } = this.props
+      boardTitle, modalHandler, isOpen, getTopic, boardActive, history } = this.props
     return <>
       {boards && !loading ? <Boards
         boards={boards}
@@ -45,6 +44,7 @@ class BoardsContainer extends Component {
         modalHandler={modalHandler}
         boardActive={boardActive}
         goToBoard={this.goToBoard}
+        history={history}
       /> : <Loader />}
       {isOpen && <Modal modalHandler={modalHandler} modalType={this.modalType}>
         <Form modalType={this.modalType} boardId={this.props.match.params.id}/>
@@ -62,4 +62,12 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { fetchBoards, getBoard, getTopic, boardActive, addBoard, fetchBoardTitle, modalHandler })(BoardsContainer);
+export default connect(mapStateToProps, { 
+  fetchBoards, 
+  getBoard, 
+  getTopic, 
+  boardActive, 
+  addBoard, 
+  fetchBoardTitle, 
+  modalHandler 
+})(BoardsContainer);

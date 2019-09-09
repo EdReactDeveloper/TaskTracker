@@ -5,7 +5,6 @@ import {logout} from '../store/actions/auth';
 
 class HeaderContainer extends Component {
  
-
   render() {
     const {isLoggedIn, logout} = this.props
     return <Header isLoggedIn={isLoggedIn} logout={logout}/>

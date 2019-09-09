@@ -6,9 +6,6 @@ import { fetchTopicTitle } from '../../store/actions/forms';
 import { addTopic } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 import Loader from '../../components/misc/Loader';
-import Modal from '../../components/misc/Modal';
-import BoardForm from '../../components/Board/BoardForm';
-
 
 class BoardContainer extends Component {
 

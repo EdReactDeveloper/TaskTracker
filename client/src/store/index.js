@@ -5,9 +5,10 @@ import auth from './reducers/auth';
 import board from './reducers/board';
 import forms from './reducers/forms'; 
 import modal from './reducers/modal'; 
+import dropdown from './reducers/dropdown'; 
 
 const reducers = combineReducers({
-auth, board, forms, modal
+auth, board, forms, modal, dropdown
 })
 const middleware = [thunk]
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(...middleware)))

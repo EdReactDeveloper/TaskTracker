@@ -1,7 +1,7 @@
 import React from 'react';
-import TopicForm from '../components/Board/Topics/Topic/TopicForm/TopicForm';
-import BoardForm from '../components/Board/BoardForm'
-import BoardsForm from '../components/Boards/BoardsForm';
+import TopicForm from '../components/misc/Modal/Froms/TopicForm';
+import BoardForm from '../components/misc/Modal/Froms/BoardForm'
+import BoardsForm from '../components/misc/Modal/Froms/BoardsForm';
 import { connect } from 'react-redux';
 import {
   fetchTopicItemTitle,
@@ -24,10 +24,9 @@ const Form = ({
   addBoard,
   modalType,
   modalHandler,
-  boardId,
   addTopic,
   addListItem,
-  modalId
+  topic, board
 }) => {
 
   const submitHandler = e => {
@@ -35,11 +34,11 @@ const Form = ({
     switch (modalType) {
       case 'topicModal':
         e.preventDefault()
-        addListItem(modalId, topicItemTitle, topicItemDescription);
+        addListItem(topic._id, topicItemTitle, topicItemDescription);
         modalHandler(modalType);
         break;
       case 'boardModal':
-        addTopic(topicTitle, modalId);
+        addTopic(topicTitle, board._id);
         modalHandler(modalType);
         break;
       case 'boardsModal':
@@ -84,8 +83,8 @@ const mapStateToProps = state => {
     topicTitle: state.forms.topicTitle,
     boardTitle: state.forms.boardTitle,
     modalType: state.modal.modalType,
-    modalId: state.modal.id,
-    // boardId: state.modal.board._id
+    board: state.board.board,
+    topic: state.board.topic
   }
 }
 

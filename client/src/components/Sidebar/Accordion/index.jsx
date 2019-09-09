@@ -1,9 +1,4 @@
 import React, { Component } from "react";
-// import { ICONS } from './svg/data';
-// import Icon from './svg/icon';
-import Icon from '../../misc/icon/Icon';
-import { Item } from '../../misc/icon/Selection';
-import Topic from '../../Board/Topics/Topic/index';
 import style from './Accordion.module.scss'
 import { Link } from 'react-router-dom';
 

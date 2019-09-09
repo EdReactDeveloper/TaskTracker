@@ -49,11 +49,11 @@ const board = function(state = initialState, action) {
 			};
 		}
 
-		case ADD_LISTITEM_SUCCESS: {		
+		case ADD_LISTITEM_SUCCESS: 	
+		case UPDATE_LIST_SUCCESS: 	
 			return {
 				...state, topic: payload
 				}
-			};
 
 		case BOARD_ACTIVE:{
 			const boards = [...state.boards]
@@ -97,8 +97,10 @@ const board = function(state = initialState, action) {
 
 		case REMOVE_BOARD_SUCCESS: {
 			const boards = [ ...state.boards ];
+			console.log(boards)
 			const index = boards.findIndex((item) => item._id === payload);
 			boards.splice(index, 1);
+			console.log(boards)
 			return {
 				...state,
 				boards, board: null, topic:null
@@ -107,10 +109,10 @@ const board = function(state = initialState, action) {
 
 		case REMOVE_TOPIC_SUCCESS: {
 			const boards = [...state.boards]
-			const boardIndex = boards.findIndex(item => item._id === payload.boardId)
+			const boardIndex = boards.findIndex(item => item._id === state.board._id)
 			const board = boards[boardIndex]
 			const topics = [ ...state.board.topics ];
-			const topicIndex = topics.findIndex((item) => item._id === payload.topicId);
+			const topicIndex = topics.findIndex((item) => item._id === payload);
 			topics.splice(topicIndex, 1);
 			board.topics = topics
 			boards[boardIndex] = board
@@ -118,14 +120,6 @@ const board = function(state = initialState, action) {
 				...state,	boards, board, topic: null
 			};
 		}
-
-		case UPDATE_LIST_SUCCESS: {
-			
-			return {
-				...state, topic: payload
-				}
-			};
-
 
 		case ADD_BOARD_SUCCESS:
 			return {
@@ -152,7 +146,7 @@ const board = function(state = initialState, action) {
 		case CLEAR_BOARD:
 			return { ...state, board: null, loading: true };
 		case GET_BOARD:
-			return { ...state, board: state.boards.find((item) => item._id === payload) };
+			return { ...state, topic: null, board: state.boards.find((item) => item._id === payload) };
 
 		case FETCH_BOARDS_FAIL:
 			return { ...state, boards: null, loading: false };

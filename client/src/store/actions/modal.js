@@ -1,9 +1,9 @@
 import {MODAL} from './types';
 
 
-export const modalHandler = (modalType, id) => dispatch =>{
+export const modalHandler = (modalType) => dispatch =>{
   dispatch({
     type: MODAL,
-    payload: {modalType, id}
+    payload: modalType
   })
 }

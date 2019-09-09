@@ -14,7 +14,7 @@ const BoardForm = ({topicTitle, fetchTopicTitle, submitHandler}) => {
         className={style.input}
         />        
       </label>
-      <button className={style.btn_add}>add topic</button>
+      <button className={style.btn_add} type="submit">add topic</button>
     </form>
   );
 };

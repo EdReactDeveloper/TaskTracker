@@ -5,7 +5,7 @@ const BoardsForm = ({ boardTitle, fetchBoardTitle, addBoard, submitHandler }) =>
   return (
     <form className={style.form} onSubmit={submitHandler}>
       <input type="text" value={boardTitle} onChange={(e) => fetchBoardTitle(e.target.value)} />
-      <button onClick={() => addBoard()}>add board</button>
+      <button type="submit">add board</button>
     </form>
   );
 };

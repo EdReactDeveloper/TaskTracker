@@ -138,8 +138,8 @@
   padding-left: 3rem;
   border: 1px solid #bdc3c7;
   background: #fff;
-  width: 50vw;
   min-width: 5rem;
+  max-width: 30rem;
   z-index: 1;
   transition: all .3s;
   &:hover {
