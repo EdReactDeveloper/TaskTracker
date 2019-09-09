@@ -1,16 +1,16 @@
 import React from 'react';
-import style from './Boards.module.scss';
-import DisplayBoard from './DisplayBoard'
-import DropMenu from '../misc/DropMenu'; 
-import {renderBoardSMenu} from '../../containers/menuData';
+import DropMenu from '../misc/DropMenu';
+import { renderBoardSMenu } from '../../containers/menuData';
+import SideBar from '../Sidebar'; 
 
-const Boards = ({ boards, modalHandler, modalType}) => {
+const Boards = ({ boards, modalHandler, modalType, getTopic, goToBoard }) => {
 
-  const listOfBoards = boards.map(board => <DisplayBoard key={board._id} board={board} />)
   return (
-    <div className={`${style.wrapper} container`}>
-          <DropMenu  items={renderBoardSMenu(modalHandler, modalType)}/>
-      {listOfBoards}
+    <div >
+      <DropMenu items={renderBoardSMenu(modalHandler, modalType)} />
+      <div>
+        <SideBar getTopic={getTopic} boards={boards} goToBoard={goToBoard} />
+      </div>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Routes from './routes/Routes';
 import { Provider } from 'react-redux';
 import store from './store';
-import './App.scss'; 
+import style from './App.module.scss'; 
 import {getUser} from './store/actions/user'; 
 function App() {
 
@@ -11,7 +11,7 @@ function App() {
 	}, [])
 
 	return (
-		<div className='App'>
+		<div className={style.app}>
 			<Provider store={store}>
 				<Routes />
 			</Provider>

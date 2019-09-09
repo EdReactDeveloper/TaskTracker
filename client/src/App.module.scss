@@ -27,6 +27,15 @@ body {
   color: #666;
 }
 
+.app{
+  
+}
+
+.board{
+  display: grid; 
+  grid-template-columns: 30rem 1fr; 
+  grid-gap: 2rem;
+}
 
 
 .container {

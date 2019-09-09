@@ -5,14 +5,10 @@ import { updateListItem } from '../../store/actions/board';
 
 class ListContainer extends Component {
 
-  componentDidMount() {
-
-  }
-
   render() {
-    const { data, updateListItem } = this.props
+    const { list, updateListItem } = this.props
     return <List
-      list={data}
+      list={list}
       updateListItem={updateListItem}
     />
   }

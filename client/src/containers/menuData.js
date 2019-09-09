@@ -1,7 +1,7 @@
-export function renderTopicMenu(removeTopic, modalHandler, topicId, modalType){
+export function renderTopicMenu(removeTopic, modalHandler, topicId, boardId, modalType){
   return [
     {name: 'add item', icon:'addItem', onClick: ()=>modalHandler(modalType, topicId)},
-    {name: 'delete this TOPIC', icon:'delete', onClick: ()=> removeTopic(topicId)}
+    {name: 'delete this TOPIC', icon:'delete', onClick: ()=> removeTopic(boardId, topicId)}
   ]
 }
 

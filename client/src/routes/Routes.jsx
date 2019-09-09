@@ -9,6 +9,7 @@ import AuthRoute from './AuthRoute';
 import {connect} from 'react-redux'; 
 import Board from '../containers/Board/Board'; 
 import Boards from '../containers/Boards'; 
+import style from '../App.module.scss';
 
 const Routes = ({loading}) => {
   
@@ -20,9 +21,11 @@ const Routes = ({loading}) => {
           <Route exact path="/" component={Home}/>
           <AuthRoute exact path="/login" component={Login}/>
           <Route exact path="/register" component={Register}/>
-          <PrivateRoute exact path="/boards" component={Boards}/>
-          <PrivateRoute exact path="/boards/:id" component={Board}/>
         </Switch>
+        <div className={`${style.container} ${style.board}`}>
+          <PrivateRoute path="/boards" component={Boards}/>
+          <PrivateRoute exact path="/boards/:id" component={Board}/>
+        </div>
       </Navigation>
       )}
     </Router>

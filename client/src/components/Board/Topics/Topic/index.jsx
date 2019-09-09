@@ -4,16 +4,16 @@ import style from './Topic.module.scss';
 import Dropmenu from '../../../misc/DropMenu';
 import {renderTopicMenu} from '../../../../containers/menuData'
 
-const Topic = ({ data, removeTopic, modalHandler, modalType }) => {
+const Topic = ({ topic, removeTopic, modalHandler, modalType }) => {
   return (
     <div className={style.wrapper}>
       <div className={style.header}>
-        <h3 className={style.heading}>{data.title}</h3>
+        <h3 className={style.heading}>{topic.title}</h3>
         <div className={style.menu}>
-          <Dropmenu items={renderTopicMenu(removeTopic, modalHandler, data._id, modalType)} />           
+          <Dropmenu items={renderTopicMenu(removeTopic, modalHandler, topic._id, topic.boardId, modalType)} />           
         </div>
       </div>
-      <List data={data.list} />
+      <List list={topic.list} />
     </div>
   );
 };

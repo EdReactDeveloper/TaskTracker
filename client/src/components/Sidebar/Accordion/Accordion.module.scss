@@ -1,20 +1,18 @@
 
-.middle{
-  position: absolute; 
-  top: 50%;
-  left: 50%; 
-  transform: translate(-50%, -50%); 
-}
-
 .menu{
   width: 30rem; 
   overflow: hidden;
-  border-radius: .8rem; 
+ 
+  list-style: none;
 }
 
 .item{
   border-top: 1px solid #2980b9; 
   overflow: hidden;
+}
+
+.item:active {
+  height: auto; 
 }
 
 .btnAc{
@@ -54,9 +52,12 @@
   max-height: 0; 
 }
 
-.smenu a{
+.smenu li{
   &:first-child{
       margin-top: 1rem;
+  }
+  &:last-child{
+    margin-bottom: 1rem;
   }
   display: block; 
   padding: 1.6rem 2.6rem; 
@@ -67,11 +68,9 @@
   backface-visibility: hidden;
 }
 
-.smenuItem{
-  &:first-child{
-      margin-top: 1rem;
-  }
+.smenuItemIitle{
   position: relative;
+  z-index: 100; 
 }
 
 .smenuItem::before{

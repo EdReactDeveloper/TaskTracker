@@ -1,12 +1,12 @@
 import React from 'react';
+import style from './BoardsFrom.module.scss'; 
 
-const BoardsForm = () => {
+const BoardsForm = ({ boardTitle, fetchBoardTitle, addBoard, submitHandler }) => {
   return (
-    <>
-    fgdgdf
-      {/* <input type="text" value={boardTitle} onChange={(e) => fetchBoardTitle(e.target.value)} />
-      <button onClick={() => addBoard()}>add board</button> */}
-    </>
+    <form className={style.form} onSubmit={submitHandler}>
+      <input type="text" value={boardTitle} onChange={(e) => fetchBoardTitle(e.target.value)} />
+      <button onClick={() => addBoard()}>add board</button>
+    </form>
   );
 };
 

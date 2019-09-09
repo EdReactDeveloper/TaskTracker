@@ -1,9 +1,9 @@
 import React from 'react';
 import style from './BoardForm.module.scss'; 
 
-const AddTopicMenu = ({topicTitle, fetchTopicTitle}) => {
+const BoardForm = ({topicTitle, fetchTopicTitle, submitHandler}) => {
   return (
-    <>
+    <form className={style.form} onSubmit={submitHandler}>
       <label htmlFor="title" className={style.title}>
         topic tiltle
         <input 
@@ -15,8 +15,8 @@ const AddTopicMenu = ({topicTitle, fetchTopicTitle}) => {
         />        
       </label>
       <button className={style.btn_add}>add topic</button>
-    </>
+    </form>
   );
 };
 
-export default AddTopicMenu;
+export default BoardForm;

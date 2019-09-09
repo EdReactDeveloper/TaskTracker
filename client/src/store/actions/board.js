@@ -17,15 +17,19 @@ import {
   UPDATE_LIST_FAIL,
   LISTITEM_FIELDS,
   ADD_LISTITEM_SUCCESS,
-  ADD_LISTITEM_FAIL  
+	ADD_LISTITEM_FAIL,
+	FETCH_TOPIC_SUCCESS, 
+	FETCH_TOPIC_FAIL,
+	BOARD_ACTIVE  
 } from './types';
 import axios from 'axios';
 
 export const fetchBoards = () => async (dispatch) => {
 	try {
 		const result = await axios.get('/api/board/');
-		const boards = result.data
+		const boards = [...result.data]
 		for(let board of boards){
+			board.active = 'no'
 			const topics = await axios.get(`/api/topics/${board._id}`)
 			board.topics = [...topics.data]
 		}
@@ -89,8 +93,6 @@ export const clearBoard = () => dispatch=> {
 	}
 
 
-
-
 	export const getTopics = (id) => async disptch =>{
 		try {
 			const result = await axios.get(`/api/topics/${id}`)
@@ -105,10 +107,25 @@ export const clearBoard = () => dispatch=> {
 			})
 		}
 	} 
+
+	export const boardActive = index=> dispatch=> {
+		dispatch({
+			type: BOARD_ACTIVE,
+			payload: index
+		})
+	}
 	
+
+
+	export const getTopic = (topicId) => async dispatch => {
+		dispatch({
+			type: FETCH_TOPIC_SUCCESS,
+			payload: topicId
+		})
+	}
+
 	
 	export const addTopic = (title, id) => async (dispatch) => {
-		
 		const config={headers: {'Content-Type': 'application/json'}}
 		const body = JSON.stringify({title, id})
 		try {
@@ -126,14 +143,15 @@ export const clearBoard = () => dispatch=> {
 		}
 	};
 	
-	export const removeTopic = (id) => async dispatch => {
+	export const removeTopic = (boardId, topicId) => async dispatch => {
 		try {
-			await axios.delete(`/api/topics/remove/${id}`)
+	 await axios.delete(`/api/topics/remove/${topicId}`)
 			dispatch({
 				type: REMOVE_TOPIC_SUCCESS,
-				payload: id
+				payload: ({boardId, topicId})
 			})
 		} catch (error) {
+			console.log(error)
 			dispatch({
 				type: REMOVE_TOPIC_FAIL,
 				payload: error
@@ -146,6 +164,7 @@ export const clearBoard = () => dispatch=> {
 		const body = JSON.stringify({title, description})
 		try {
 			const result = await axios.post(`/api/topics/list/add/${topicId}`, body, config)
+			console.log(result.data)
 			dispatch({
 				type: ADD_LISTITEM_SUCCESS,
 				payload: result.data
