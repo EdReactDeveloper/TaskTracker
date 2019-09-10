@@ -23,18 +23,19 @@ import {
 } from './types';
 import axios from 'axios';
 
-export const fetchBoards = () => async (dispatch) => {
+export const fetchBoards = (history) => async (dispatch) => {
+
 	try {
 		const result = await axios.get('/api/board/');
 		const boards = [...result.data]
 		for(let board of boards){
-			board.active = 'no'
+			board.active = false
 			const topics = await axios.get(`/api/topics/${board._id}`)
 			board.topics = [...topics.data]
 		}
 		dispatch({
 			type: FETCH_BOARDS_SUCCESS,
-			payload: boards
+			payload: ({boards, history})
 		});
 	} catch (error) {
 		dispatch({

@@ -15,15 +15,14 @@ class BoardContainer extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     if (!this.props.boards) {
       this.props.fetchBoards().then(() => {
         const id = this.props.match.params.id
-        this.props.getBoard(id)
+        this.props.getBoard(id)      
       })
     } else {
       const id = this.props.match.params.id
-      this.props.getBoard(id)
+      this.props.getBoard(id) 
     }
   }
 

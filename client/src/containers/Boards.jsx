@@ -17,12 +17,17 @@ class BoardsContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchBoards()
+    const { fetchBoards, getBoard, history, board } = this.props
+    if (!board) {
+      fetchBoards(history)
+    } else {
+      getBoard(board._id)
+    }
   }
 
 
-  goToBoard=(index, id)=>{
-    const {boardActive, getBoard} = this.props
+  goToBoard = (index, id) => {
+    const { boardActive, getBoard } = this.props
     boardActive(index)
     getBoard(id)
   }
@@ -33,8 +38,8 @@ class BoardsContainer extends Component {
       loading,
       addBoard,
       fetchBoardTitle,
-      boardTitle, modalHandler, isOpen, getTopic, boardActive, history } = this.props
-      console.log(boards, loading)
+      boardTitle, modalHandler, isOpen, getTopic, boardActive, board } = this.props
+    console.log(boards, loading)
     return <>
       {boards && !loading ? <Boards
         boards={boards}
@@ -46,10 +51,10 @@ class BoardsContainer extends Component {
         modalHandler={modalHandler}
         boardActive={boardActive}
         goToBoard={this.goToBoard}
-        history={history}
+        board={board}
       /> : <Loader />}
       {isOpen && <Modal modalHandler={modalHandler} modalType={this.modalType}>
-        <Form modalType={this.modalType} boardId={this.props.match.params.id}/>
+        <Form modalType={this.modalType} boardId={this.props.match.params.id} />
       </Modal>}
     </>
   }
@@ -60,16 +65,17 @@ const mapStateToProps = state => {
     boards: state.board.boards,
     loading: state.board.loading,
     boardTitle: state.forms.boardTitle,
-    isOpen: state.modal.isOpen
+    isOpen: state.modal.isOpen,
+    board: state.board.board
   }
 }
 
-export default connect(mapStateToProps, { 
-  fetchBoards, 
-  getBoard, 
-  getTopic, 
-  boardActive, 
-  addBoard, 
-  fetchBoardTitle, 
-  modalHandler 
+export default connect(mapStateToProps, {
+  fetchBoards,
+  getBoard,
+  getTopic,
+  boardActive,
+  addBoard,
+  fetchBoardTitle,
+  modalHandler
 })(BoardsContainer);

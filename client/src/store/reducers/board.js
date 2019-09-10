@@ -21,12 +21,14 @@ import {
 	FETCH_TOPIC_SUCCESS,
 	BOARD_ACTIVE
 } from '../actions/types';
+import { stat } from 'fs';
 
 const initialState = {
 	boards: null,
 	loading: true,
 	error: null,
 	message: '',
+	history: null,
 	boardTile: '',
 	board: null,
 	topic: null
@@ -59,9 +61,9 @@ const board = function(state = initialState, action) {
 			const boards = [...state.boards]
 			for(let i = 0; i < boards.length; i+=1){
 				if(i === payload){
-					boards[i].active = 'yes'
+					boards[i].active = true
 				}else{
-					boards[i].active = 'no'
+					boards[i].active = false
 				}
 			}
 			return {
@@ -79,10 +81,19 @@ const board = function(state = initialState, action) {
 			};
 
 		case FETCH_TOPIC_SUCCESS: {
-			const topics = [...state.board.topics]
-			const index = topics.findIndex((item) => item._id === payload);
-			const topic = topics[index]
-			return { ...state, topic };
+			const boards = [...state.boards]
+			const boardIndex = boards.findIndex(board => board._id === state.board._id)
+			const topics = boards[boardIndex].topics
+			for(let topic of topics) {
+				if(topic._id === payload){
+					topic.active = true
+				}else{
+					topic.active = false
+				}
+			}
+			const topic = topics.find(topic => topic._id === payload)
+		
+			return { ...state, boards, topic };
 		}
 
 		case ADD_TOPIC_SUCCESS:
@@ -92,7 +103,7 @@ const board = function(state = initialState, action) {
 			board.topics = [payload, ...board.topics]
 			boards[index] = board
 			return {
-				...state, boards			
+				...state, boards, topic: payload			
 			};
 
 		case REMOVE_BOARD_SUCCESS: {
@@ -139,12 +150,18 @@ const board = function(state = initialState, action) {
 			};
 
 		case FETCH_BOARDS_SUCCESS:
-			return { ...state, boards: payload, loading: false };
+			return { ...state, boards: payload.boards, history: payload.history, loading: false };
 
 		case CLEAR_BOARD:
 			return { ...state, board: null };
-		case GET_BOARD:
-			return { ...state, topic: null, board: state.boards.find((item) => item._id === payload) };
+		case GET_BOARD:{
+			const boards = [...state.boards]
+			const index = state.boards.findIndex((item) => item._id === payload)
+			const board = boards[index]
+			boards[index].active = 'yes'
+			return { ...state, boards, board, topic: null };
+
+		}
 
 		case FETCH_BOARDS_FAIL:
 			return { ...state, boards: null, loading: false };

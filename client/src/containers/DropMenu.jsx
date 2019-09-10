@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { dropdownHandler } from '../store/actions/dropdown';
-import DropDown from '../components/NewDropdown'
+import DropDown from '../components/DropMenu'
 import { renderBoardSMenu, renderBoardMenu, renderTopicMenu } from './menuData';
 import { removeBoard, removeTopic } from '../store/actions/board';
 import { modalHandler } from '../store/actions/modal';
@@ -36,6 +36,7 @@ class DropDownContainer extends Component {
       dropdownHandler(false)
     } else {
       dropdownHandler(true)
+      
     }
   }
 
@@ -61,7 +62,8 @@ const mapStateToProps = state => {
   return {
     isOpen: state.dropdown.isOpen,
     topic: state.board.topic,
-    board: state.board.board
+    board: state.board.board,
+    history: state.board.history
   }
 }
 

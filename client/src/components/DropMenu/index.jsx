@@ -1,5 +1,7 @@
 import React from 'react';
 import List from './List';
+import Button from './Button'; 
+import style from './DropMenu.module.scss';
 
 const DropDown = ({
   boardItems, 
@@ -10,10 +12,9 @@ const DropDown = ({
   board, topic
 }) => {
   return (
-    <div>
-      <button>menu</button>
-      {isOpen && 
-      <div>
+    <div className={style.wrapper}>
+      <Button>menu</Button>
+      {isOpen &&
        <List 
         boardItems={boardItems}
         topicItems={topicItems}
@@ -22,8 +23,6 @@ const DropDown = ({
         board={board}
         topic={topic}
        />
-        
-      </div>
       }
     </div>
   );

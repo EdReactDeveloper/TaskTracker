@@ -94,3 +94,24 @@
 .activeAc{ 
   max-height: 20em; 
 }
+
+.board_background{
+background: red;
+
+&::before{
+  content: "";
+  width: 1.4rem; 
+  height: 1.4rem;
+  position: absolute;
+  background:red; 
+  left: 2rem; 
+  bottom: -7px; 
+  transform: rotate(45deg); 
+}
+}
+
+.topic_background{
+  background: #2980b9;
+  
+ 
+  }

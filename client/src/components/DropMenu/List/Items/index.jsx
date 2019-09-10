@@ -5,14 +5,14 @@ import style from './Items.module.scss';
 
 const MenuItems = ({items, dropdownHandler}) => {
   return (
-    <ul>
+    <ul className={style.list}>
       {items.map(item => {
           function func(){ 
             dropdownHandler(false)
             item.onClick() 
           }
           return (
-            <li onClick={()=>func()} key={item.name}>
+            <li onClick={()=>func()} key={item.name} className={style.item}>
             <Icon d={Item[item.icon]} className={style.icon} />
             <p>{item.name}</p>
           </li>

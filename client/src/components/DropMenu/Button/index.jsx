@@ -1,6 +1,12 @@
 import React from 'react';
 import style from './Button.module.scss'; 
 
-const Button = ({handleClick}) => <button onClick={handleClick} className={style.boards}>options</button>
- 
+const Button = (props) => {
+  return (
+    <button className={style.btn}>
+      {props.children}
+    </button>
+  );
+};
+
 export default Button;
