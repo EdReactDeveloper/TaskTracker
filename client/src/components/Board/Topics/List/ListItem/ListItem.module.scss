@@ -140,6 +140,7 @@
   background: #fff;
   min-width: 5rem;
   max-width: 30rem;
+  width: max-content;
   z-index: 1;
   transition: all .3s;
   &:hover {

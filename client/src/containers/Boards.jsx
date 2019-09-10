@@ -21,10 +21,9 @@ class BoardsContainer extends Component {
     if (!board) {
       fetchBoards(history)
     } else {
-      getBoard(board._id)
+      getBoard(board._id)   
     }
   }
-
 
   goToBoard = (index, id) => {
     const { boardActive, getBoard } = this.props
@@ -39,7 +38,6 @@ class BoardsContainer extends Component {
       addBoard,
       fetchBoardTitle,
       boardTitle, modalHandler, isOpen, getTopic, boardActive, board } = this.props
-    console.log(boards, loading)
     return <>
       {boards && !loading ? <Boards
         boards={boards}

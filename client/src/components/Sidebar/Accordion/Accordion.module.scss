@@ -96,14 +96,16 @@
 }
 
 .board_background{
-background: red;
+  background:#ccc;
+  color: #000; 
 
 &::before{
   content: "";
   width: 1.4rem; 
   height: 1.4rem;
   position: absolute;
-  background:red; 
+  background:#ccc;
+  color: #000; 
   left: 2rem; 
   bottom: -7px; 
   transform: rotate(45deg); 

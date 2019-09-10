@@ -101,6 +101,13 @@ const board = function(state = initialState, action) {
 			const index = boards.findIndex(item=> item._id === payload.boardId)
 			const board = boards[index]
 			board.topics = [payload, ...board.topics]
+			for(let topic of board.topics){
+				if(topic._id === payload._id){
+					topic.active = true
+				}else{
+					topic.active = false
+				}
+			}
 			boards[index] = board
 			return {
 				...state, boards, topic: payload			

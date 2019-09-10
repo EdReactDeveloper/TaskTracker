@@ -15,15 +15,10 @@ class BoardContainer extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.boards) {
-      this.props.fetchBoards().then(() => {
-        const id = this.props.match.params.id
-        this.props.getBoard(id)      
-      })
-    } else {
+    this.props.fetchBoards().then(() => {
       const id = this.props.match.params.id
-      this.props.getBoard(id) 
-    }
+      this.props.getBoard(id)
+    })
   }
 
   componentWillUnmount() {
@@ -42,19 +37,19 @@ class BoardContainer extends Component {
 
   render() {
     const { board, fetchTopicTitle, topicTitle, removeBoard, history, modalHandler, loading, getTopic } = this.props
-    return <>{board && !loading ? 
+    return <>{board && !loading ?
       <Board
-      board={board}
-      boardId={this.props.match.params.id}
-      submitHandler={this.submitHandler}
-      fetchTopicTitle={fetchTopicTitle}
-      topicTitle={topicTitle}
-      removeBoard={removeBoard}
-      history={history}
-      getTopic={getTopic}
-      modalType={this.modalType}
-      modalHandler={modalHandler}
-    /> : <Loader />
+        board={board}
+        boardId={this.props.match.params.id}
+        submitHandler={this.submitHandler}
+        fetchTopicTitle={fetchTopicTitle}
+        topicTitle={topicTitle}
+        removeBoard={removeBoard}
+        history={history}
+        getTopic={getTopic}
+        modalType={this.modalType}
+        modalHandler={modalHandler}
+      /> : <Loader />
     }
     </>
   }
@@ -63,9 +58,11 @@ class BoardContainer extends Component {
 const mapStateToProps = state => {
   return {
     board: state.board.board,
+    boards: state.board.boards,
     boardTitle: state.board.boardTilte,
     topicTitle: state.forms.topicTitle,
-    loading: state.board.loading
+    loading: state.board.loading,
+
   }
 }
 

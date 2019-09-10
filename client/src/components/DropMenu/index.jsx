@@ -13,7 +13,7 @@ const DropDown = ({
 }) => {
   return (
     <div className={style.wrapper}>
-      <Button>menu</Button>
+      <Button />
       {isOpen &&
        <List 
         boardItems={boardItems}

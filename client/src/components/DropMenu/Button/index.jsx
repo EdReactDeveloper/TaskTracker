@@ -4,7 +4,7 @@ import style from './Button.module.scss';
 const Button = (props) => {
   return (
     <button className={style.btn}>
-      {props.children}
+      <div className={style.btn_content}></div>
     </button>
   );
 };
