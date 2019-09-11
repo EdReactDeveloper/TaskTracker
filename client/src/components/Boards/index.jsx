@@ -1,9 +1,9 @@
 import React from 'react';
 import SideBar from '../Sidebar';
 
-const Boards = ({ boards, board, getTopic, goToBoard, history }) => {
+const Boards = ({ boards, getTopic, getBoard }) => {
   return (  
-      <SideBar getTopic={getTopic} boards={boards} goToBoard={goToBoard} />
+      <SideBar getTopic={getTopic} boards={boards} getBoard={getBoard} />
   );
 };
 

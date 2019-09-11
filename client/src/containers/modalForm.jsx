@@ -9,7 +9,15 @@ import {
   fetchTopicTitle,
   fetchBoardTitle
 } from '../store/actions/forms';
-import { addBoard, addTopic, addListItem } from '../store/actions/board';
+import { 
+  addBoard, 
+  addTopic,
+  addListItem, 
+  fetchBoardTitleEdit, 
+  fetchTopicTitleEdit,
+  updateBoardAction,
+  updateTopicAction
+ } from '../store/actions/board';
 import { modalHandler } from '../store/actions/modal';
 
 const Form = ({
@@ -26,7 +34,14 @@ const Form = ({
   modalHandler,
   addTopic,
   addListItem,
-  topic, board
+  topic, 
+  board,
+  history, 
+  edit,
+  fetchBoardTitleEdit,
+  fetchTopicTitleEdit,
+  updateBoardAction,
+  updateTopicAction
 }) => {
 
   const submitHandler = e => {
@@ -38,11 +53,19 @@ const Form = ({
         modalHandler(modalType);
         break;
       case 'boardModal':
-        addTopic(topicTitle, board._id);
+        if(edit){
+          updateTopicAction(topic.title, topic._id)
+        }else{
+          addTopic(topicTitle, board._id);          
+        }
         modalHandler(modalType);
         break;
       case 'boardsModal':
-        addBoard(boardTitle);
+        if(edit){
+          updateBoardAction(board.boardTitle, board._id)
+        }else{
+          addBoard(boardTitle, history);
+        }
         modalHandler(modalType);
         break;
       default: e.preventDefault()
@@ -61,18 +84,20 @@ const Form = ({
       return <BoardForm topicTitle={topicTitle}
         fetchTopicTitle={fetchTopicTitle}
         submitHandler={submitHandler}
+        fetchTopicTitleEdit={fetchTopicTitleEdit}
+        edit={edit}
+        topic={topic}
       />
     case 'boardsModal':
       return <BoardsForm boardTitle={boardTitle}
         fetchBoardTitle={fetchBoardTitle}
         addBoard={addBoard}
         submitHandler={submitHandler}
+        edit={edit}
+        board={board}
+        fetchBoardTitleEdit={fetchBoardTitleEdit}
       />
-    default: return <BoardsForm boardTitle={boardTitle}
-      fetchBoardTitle={fetchBoardTitle}
-      addBoard={addBoard}
-      submitHandler={submitHandler}
-    />
+    default: return 'what is this?'
   }
 };
 
@@ -84,7 +109,8 @@ const mapStateToProps = state => {
     boardTitle: state.forms.boardTitle,
     modalType: state.modal.modalType,
     board: state.board.board,
-    topic: state.board.topic
+    topic: state.board.topic,
+    edit: state.modal.edit
   }
 }
 
@@ -97,5 +123,9 @@ export default connect(mapStateToProps,
     addBoard,
     addTopic,
     addListItem,
-    modalHandler
+    modalHandler,
+    fetchBoardTitleEdit, 
+    fetchTopicTitleEdit,
+    updateBoardAction,
+    updateTopicAction
   })(Form);

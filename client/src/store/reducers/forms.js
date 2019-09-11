@@ -3,7 +3,7 @@ import {
 	FETCH_BOARD_TITLE,
 	FETCH_TOPICITEM_TITLE,
 	FETCH_TOPICITEM_DESCRIPTION,
-
+	CLEAR_FIELDS
 } from '../actions/types';
 
 const initialState = {
@@ -24,6 +24,9 @@ const formData = function(state = initialState, action) {
 			return { ...state, topicItemTitle: payload };
 		case FETCH_TOPICITEM_DESCRIPTION:
 			return { ...state, topicItemDescription: payload };
+			case CLEAR_FIELDS: {
+				return {...state, topicTitle: '', boardTitle:'', topicItemTitle:'', topicItemDescription: ''}
+			}
 		default:
 			return state;
 	}

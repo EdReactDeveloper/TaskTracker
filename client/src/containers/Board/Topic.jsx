@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Topic from '../../components/Board/Topics/Topic';
-import { addNewListData, addListItem, removeTopic, getTopic, getBoard, fetchBoards } from '../../store/actions/board';
+import { addNewListData, addListItem, getTopic, getBoard, fetchBoards } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 
 class TopicContainer extends Component {
@@ -14,17 +14,14 @@ class TopicContainer extends Component {
   render() {
     const {
       topic,
-      removeTopic,
       modalHandler,
     } = this.props
 
     return <>
       {topic ? <Topic
         topic={topic}
-        removeTopic={removeTopic}
         modalHandler={modalHandler}
-        modalType={this.modalType}
-      /> : 'select your topic'}
+      /> : 'select a topic or add one '}
     </>
   }
 }
@@ -41,7 +38,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   addNewListData,
   addListItem,
-  removeTopic,
   modalHandler,
   getTopic,
   getBoard,

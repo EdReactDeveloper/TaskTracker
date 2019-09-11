@@ -19,20 +19,27 @@ router.post('/add', [ check('boardTitle', 'title is missing').not().isEmpty() ],
 	if (!errors.isEmpty()) {
 		return res.status(400).json({ errors: errors.array() });
 	}
-	const { boardTitle } = req.body;
+	const { boardTitle, id } = req.body;
 	try {
 		const user = await User.findById(req.session.user._id).select('-password');
 		if (!user) {
 			return res.status(404).json({ msg: 'you need to authorize' });
 		}
-		const newBoard = new Board({
-			boardTitle,
-			userId: req.session.user._id,
-			topics: []
-		});
+		let board = null
+		if(id){
+			board = await Board.findById(id)
+			board.boardTitle = boardTitle
+		}else {
+			const newBoard = new Board({
+				boardTitle,
+				userId: req.session.user._id,
+				topics: []
+			});
+			board = newBoard
+		}
 
-		const board = await newBoard.save();
-		res.json(board);
+		const result = await board.save();
+		res.json(result);
 	} catch (error) {
 		res.status(404).json({ msg: error });
 	}

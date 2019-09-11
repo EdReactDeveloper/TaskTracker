@@ -5,7 +5,8 @@ import Sidebar from '../Sidebar';
 
 const Board = ({
   board,
-  getTopic }) => {
+  getTopic 
+}) => {
   return <div className={style.contentWrapper}>
     <Sidebar board={board} getTopic={getTopic} />
     <Topic />

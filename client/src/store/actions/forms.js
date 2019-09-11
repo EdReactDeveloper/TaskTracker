@@ -3,6 +3,7 @@ import {
   FETCH_BOARD_TITLE,
   FETCH_TOPICITEM_TITLE,
   FETCH_TOPICITEM_DESCRIPTION,
+  CLEAR_FIELDS
 } from './types';
 
 
@@ -32,5 +33,11 @@ export const fetchTopicItmeDescription = (text) => dispatch =>{
     type: FETCH_TOPICITEM_DESCRIPTION,
     payload: text
   });
+}
+
+export const clearFieldsHandler = () => dispatch => {
+  dispatch({
+    type: CLEAR_FIELDS
+  })
 }
 

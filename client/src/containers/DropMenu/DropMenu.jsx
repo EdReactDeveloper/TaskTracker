@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { dropdownHandler } from '../store/actions/dropdown';
-import DropDown from '../components/DropMenu'
+import { dropdownHandler } from '../../store/actions/dropdown';
+import DropDown from '../../components/DropMenu'
 import { renderBoardSMenu, renderBoardMenu, renderTopicMenu } from './menuData';
-import { removeBoard, removeTopic } from '../store/actions/board';
-import { modalHandler } from '../store/actions/modal';
+import { removeBoard, removeTopic } from '../../store/actions/board';
+import { modalHandler } from '../../store/actions/modal';
+import {withRouter} from 'react-router-dom'; 
 
-
-/**
- * Component that alerts if you click outside of it
- */
 class DropDownContainer extends Component {
 
   componentDidMount() {
@@ -20,28 +17,21 @@ class DropDownContainer extends Component {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
-  /**
-   * Set the wrapper ref
-   */
   setWrapperRef = (node) => {
     this.wrapperRef = node;
   }
 
-  /**
-   * Alert if clicked on outside of element
-   */
   handleClickOutside = (event) => {
-    const { dropdownHandler, isOpen } = this.props
+    const { dropdownHandler } = this.props
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       dropdownHandler(false)
     } else {
       dropdownHandler(true)
-      
     }
   }
 
   render() {
-    const { modalHandler, dropdownHandler, removeBoard, history, removeTopic, topic, board, isOpen } = this.props
+    const { modalHandler, dropdownHandler, removeBoard, removeTopic, topic, history, board, isOpen } = this.props
     const boardsItems = renderBoardSMenu(modalHandler)
     const boardItems = board && renderBoardMenu(removeBoard, modalHandler, board._id, history)
     const topicItems = topic && renderTopicMenu(removeTopic, modalHandler, topic._id)
@@ -62,10 +52,9 @@ const mapStateToProps = state => {
   return {
     isOpen: state.dropdown.isOpen,
     topic: state.board.topic,
-    board: state.board.board,
-    history: state.board.history
+    board: state.board.board
   }
 }
 
-export default connect(mapStateToProps, { dropdownHandler, removeBoard, removeTopic, modalHandler })(DropDownContainer)
+export default connect(mapStateToProps, { dropdownHandler, removeBoard, removeTopic, modalHandler })(withRouter(DropDownContainer))
 

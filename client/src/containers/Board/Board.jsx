@@ -37,8 +37,8 @@ class BoardContainer extends Component {
 
   render() {
     const { board, fetchTopicTitle, topicTitle, removeBoard, history, modalHandler, loading, getTopic } = this.props
-    return <>{board && !loading ?
-      <Board
+    if(board && !loading){
+      return <Board
         board={board}
         boardId={this.props.match.params.id}
         submitHandler={this.submitHandler}
@@ -49,9 +49,12 @@ class BoardContainer extends Component {
         getTopic={getTopic}
         modalType={this.modalType}
         modalHandler={modalHandler}
-      /> : <Loader />
-    }
-    </>
+        />
+      }else if(!board && loading ){
+        return <Loader />
+      }else{
+        return 'no board'
+      }        
   }
 }
 

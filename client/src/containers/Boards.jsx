@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Boards from '../components/Boards';
 import { connect } from 'react-redux';
-import { fetchBoards, addBoard, getTopic, boardActive, getBoard } from '../store/actions/board';
+import { fetchBoards, addBoard, getTopic, getBoard } from '../store/actions/board';
 import { fetchBoardTitle } from '../store/actions/forms'
 import Loader from '../components/misc/Loader';
 import Modal from '../components/Modal';
@@ -25,34 +25,19 @@ class BoardsContainer extends Component {
     }
   }
 
-  goToBoard = (index, id) => {
-    const { boardActive, getBoard } = this.props
-    boardActive(index)
-    getBoard(id)
-  }
-
   render() {
     const {
       boards,
       loading,
-      addBoard,
-      fetchBoardTitle,
-      boardTitle, modalHandler, isOpen, getTopic, boardActive, board } = this.props
+      modalHandler, isOpen, getTopic, getBoard, history } = this.props
     return <>
       {boards && !loading ? <Boards
         boards={boards}
         getTopic={getTopic}
-        addBoard={addBoard}
-        boardTitle={boardTitle}
-        fetchBoardTitle={fetchBoardTitle}
-        modalType={this.modalType}
-        modalHandler={modalHandler}
-        boardActive={boardActive}
-        goToBoard={this.goToBoard}
-        board={board}
+        getBoard={getBoard}
       /> : <Loader />}
       {isOpen && <Modal modalHandler={modalHandler} modalType={this.modalType}>
-        <Form modalType={this.modalType} boardId={this.props.match.params.id} />
+        <Form modalType={this.modalType} boardId={this.props.match.params.id} history={history} />
       </Modal>}
     </>
   }
@@ -72,7 +57,6 @@ export default connect(mapStateToProps, {
   fetchBoards,
   getBoard,
   getTopic,
-  boardActive,
   addBoard,
   fetchBoardTitle,
   modalHandler

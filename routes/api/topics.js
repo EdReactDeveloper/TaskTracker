@@ -22,14 +22,19 @@ router.post(
 		}
 
 		const { title, id } = req.body;
+		let topic = await Topic.findById(id);
 		try {
-			const topic = new Topic({
-				boardId: id,
-				title,
-				list: []
-			});
-
+			if (!topic) {
+				topic = new Topic({
+					boardId: id,
+					title,
+					list: []
+				});
+			} else {
+				topic.title = title;
+			}
 			await topic.save();
+			console.log(topic);
 			res.json(topic);
 		} catch (error) {
 			console.log(error);
@@ -60,26 +65,26 @@ router.post('/list/update/:id', async (req, res, next) => {
 	}
 });
 
-router.post('/list/remove/:id', async(req, res, next)=>{
-	const {listItemId} = req.body
+router.post('/list/remove/:id', async (req, res, next) => {
+	const { listItemId } = req.body;
 	try {
 		const topic = await Topic.findById(req.params.id);
 		const result = await topic.removeItem(listItemId);
-		res.json(result)
+		res.json(result);
 	} catch (error) {
-		res.status(404).json({ msg: error });		
+		res.status(404).json({ msg: error });
 	}
-})
+});
 
-router.delete('/remove/:id', async(req, res, next) => {
-	const id = req.params.id
+router.delete('/remove/:id', async (req, res, next) => {
+	const id = req.params.id;
 	try {
-		const topic = await Topic.findById(id)
-		await topic.remove()	
-		return res.json(id)	
+		const topic = await Topic.findById(id);
+		await topic.remove();
+		return res.json(id);
 	} catch (error) {
-		res.status(404).json({ msg: error });				
+		res.status(404).json({ msg: error });
 	}
-})
+});
 
 module.exports = router;

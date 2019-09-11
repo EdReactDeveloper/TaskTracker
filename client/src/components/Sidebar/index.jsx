@@ -1,11 +1,11 @@
 import React from 'react';
 import style from './Sidebar.module.scss'; 
 import Accordion from './Accordion'
-const Sidebar = ({boards, getTopic, boardActive, goToBoard}) => {
+const Sidebar = ({boards, getTopic, getBoard}) => {
   return (
     <aside className={style.wrapper}>
       {boards && 
-      <Accordion boards={boards} getTopic={getTopic} boardActive={boardActive} goToBoard={goToBoard}/>
+      <Accordion boards={boards} getTopic={getTopic} getBoard={getBoard}/>
       }
     </aside>
   );

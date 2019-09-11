@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Nav from '../components/Nav'
 import {connect} from 'react-redux'; 
+import {modalHandler} from '../store/actions/modal'; 
 
 class NavContainer extends Component {
   render() {
-    const {history, board} = this.props
-    return <Nav history={history} board={board}/>
+    const {history, board, modalHandler} = this.props
+    return <Nav history={history} board={board} modalHandler={modalHandler}/>
   }
 }
 
@@ -16,4 +17,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(NavContainer);
+export default connect(mapStateToProps, {modalHandler})(NavContainer);
