@@ -24,7 +24,8 @@ import {
 	UPDATE_BOARD_FAIL,
 	FETCH_TOPICTITLE_EDIT,
 	UPDATE_TOPIC_SUCCESS,
-	UPDATE_TOPIC_FAIL
+	UPDATE_TOPIC_FAIL,
+	FETCH_LISTITEM_EDIT
 } from '../actions/types';
 
 const initialState = {
@@ -55,10 +56,19 @@ const board = function(state = initialState, action) {
 
 		case ADD_LISTITEM_SUCCESS:
 		case UPDATE_LIST_SUCCESS:
-			return {
-				...state,
-				topic: payload
-			};
+			{
+				const boards = [...state.boards]
+				const boardIndex = boards.findIndex(item => item._id === state.board._id)
+				const board = boards[boardIndex]
+				const topicIndex = board.topics.findIndex(item => item._id === payload._id)
+				board.topics[topicIndex] = payload
+				board.topics[topicIndex].active = true 
+				boards[boardIndex] = board
+				return {
+					...state, boards,
+					topic: payload
+				};
+			}
 
 		case FETCH_TOPICS_SUCCESS:
 			return {
@@ -175,6 +185,25 @@ const board = function(state = initialState, action) {
 				topic: payload
 			};
 		}
+
+
+		case FETCH_LISTITEM_EDIT:{
+			const boards = [...state.boards]
+			const boardIndex = boards.findIndex(item => item._id === state.board._id)
+			const board = {...boards[boardIndex]}
+			const topicIndex = board.topics.findIndex(item => item._id === state.topic._id)
+			const topic = board.topics[topicIndex]
+			const itemIndex = topic.list.findIndex(item => item._id === payload.id)
+			const item = topic.list[itemIndex]
+			item[payload.type] = payload.text
+			topic.list[itemIndex] = item
+			board.topics[topicIndex] = topic
+			boards[boardIndex] = board
+			return {
+				...state, boards, board, topic
+			}
+		}
+
 
 		case ADD_BOARD_SUCCESS:
 			return {

@@ -25,7 +25,7 @@ import {
 	UPDATE_BOARD_FAIL,
 	UPDATE_TOPIC_SUCCESS,
 	UPDATE_TOPIC_FAIL,
-
+	FETCH_LISTITEM_EDIT
 } from './types';
 import axios from 'axios';
 import { clearFieldsHandler } from './forms';
@@ -213,11 +213,11 @@ export const addListItem = (topicId, title, description) => async (dispatch) => 
 	}
 };
 
-export const updateListItem = (topicId, listItemId, type) => async (dispatch) => {
+export const updateListItem = (payload, type) => async (dispatch) => {
 	const config = { headers: { 'Content-Type': 'application/json' } };
-	const body = JSON.stringify({ listItemId });
+	const body = JSON.stringify({ payload });
 	try {
-		const result = await axios.post(`/api/topics/list/${type}/${topicId}`, body, config);
+		const result = await axios.post(`/api/topics/list/${type}/${payload.topicId}`, body, config);
 		dispatch({
 			type: UPDATE_LIST_SUCCESS,
 			payload: result.data
@@ -250,5 +250,12 @@ export const fetchTopicTitleEdit = (title) => dispatch => {
 	dispatch({
 		type: FETCH_TOPICTITLE_EDIT, 
 		payload: title
+	})
+}
+
+export const fetchListItemTitleEdit = (text, id, type) => dispatch => {
+	dispatch({
+		type: FETCH_LISTITEM_EDIT,
+		payload: ({text, id, type})
 	})
 }

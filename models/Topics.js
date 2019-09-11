@@ -44,6 +44,16 @@ Topic.methods.checkListItem = function(listItemId) {
 	return this.save();
 };
 
+Topic.methods.editItem = function(title, desctiption, id){
+	console.log('reached')
+const list = [...this.list]
+const itemIndex = list.findIndex(item => item._id.toString() === id.toString())
+list[itemIndex].title = title
+list[itemIndex].description = desctiption
+this.list = list
+return this.save()
+}
+
 Topic.methods.removeItem = function(listItemId) {
 	const list = [...this.list]
 	const index = list.findIndex((item) => item._id.toString() === listItemId.toString());

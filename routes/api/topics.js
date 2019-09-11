@@ -54,11 +54,27 @@ router.post('/list/add/:id', async (req, res, next) => {
 	}
 });
 
-router.post('/list/update/:id', async (req, res, next) => {
-	const { listItemId } = req.body;
+router.post('/list/check/:id', async (req, res, next) => {
+	const { payload } = req.body;
 	try {
 		const topic = await Topic.findById(req.params.id);
-		const result = await topic.checkListItem(listItemId);
+		const result = await topic.checkListItem(payload.itemId);
+		res.json(result);
+	} catch (error) {
+		res.status(404).json({ msg: error });
+	}
+});
+
+router.post('/list/edit/:id', async (req, res, next) => {
+	const { payload } = req.body;
+	console.log(payload)
+	const title = payload.title
+	const description = payload.description
+	const id = payload._id
+	try {
+		const topic = await Topic.findById(req.params.id);
+
+		const result = await topic.editItem(title, description, id);
 		res.json(result);
 	} catch (error) {
 		res.status(404).json({ msg: error });
@@ -66,10 +82,10 @@ router.post('/list/update/:id', async (req, res, next) => {
 });
 
 router.post('/list/remove/:id', async (req, res, next) => {
-	const { listItemId } = req.body;
+	const { payload } = req.body;
 	try {
 		const topic = await Topic.findById(req.params.id);
-		const result = await topic.removeItem(listItemId);
+		const result = await topic.removeItem(payload.itemId);
 		res.json(result);
 	} catch (error) {
 		res.status(404).json({ msg: error });

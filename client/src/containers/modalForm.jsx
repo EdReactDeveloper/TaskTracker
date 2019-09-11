@@ -9,15 +9,18 @@ import {
   fetchTopicTitle,
   fetchBoardTitle
 } from '../store/actions/forms';
-import { 
-  addBoard, 
+import {
+  addBoard,
   addTopic,
-  addListItem, 
-  fetchBoardTitleEdit, 
+  addListItem,
+  fetchBoardTitleEdit,
   fetchTopicTitleEdit,
   updateBoardAction,
-  updateTopicAction
- } from '../store/actions/board';
+  updateTopicAction,
+  updateListItem,
+  fetchListItemTitleEdit,
+  
+} from '../store/actions/board';
 import { modalHandler } from '../store/actions/modal';
 
 const Form = ({
@@ -34,42 +37,54 @@ const Form = ({
   modalHandler,
   addTopic,
   addListItem,
-  topic, 
+  topic,
   board,
-  history, 
+  history,
   edit,
+  id,
   fetchBoardTitleEdit,
   fetchTopicTitleEdit,
   updateBoardAction,
-  updateTopicAction
+  updateTopicAction,
+  fetchListItemTitleEdit,
+  updateListItem
 }) => {
 
   const submitHandler = e => {
     e.preventDefault()
     switch (modalType) {
       case 'topicModal':
-        e.preventDefault()
-        addListItem(topic._id, topicItemTitle, topicItemDescription);
+        if (edit) {
+          const item = fetchItem(id)
+          updateListItem(item, 'edit')
+        } else {
+          addListItem(topic._id, topicItemTitle, topicItemDescription);
+        }
         modalHandler(modalType);
         break;
       case 'boardModal':
-        if(edit){
+        if (edit) {
           updateTopicAction(topic.title, topic._id)
-        }else{
-          addTopic(topicTitle, board._id);          
+        } else {
+          addTopic(topicTitle, board._id);
         }
         modalHandler(modalType);
         break;
       case 'boardsModal':
-        if(edit){
+        if (edit) {
           updateBoardAction(board.boardTitle, board._id)
-        }else{
+        } else {
           addBoard(boardTitle, history);
         }
         modalHandler(modalType);
         break;
       default: e.preventDefault()
     }
+  }
+
+  const fetchItem = id => {
+    const index = topic.list.findIndex(item => item._id === id)
+    return topic.list[index]
   }
 
   switch (modalType) {
@@ -79,6 +94,9 @@ const Form = ({
         topicItemTitle={topicItemTitle}
         topicItemDescription={topicItemDescription}
         submitHandler={submitHandler}
+        fetchListItemTitleEdit={fetchListItemTitleEdit}
+        item={fetchItem(id)}
+        edit={edit}
       />
     case 'boardModal':
       return <BoardForm topicTitle={topicTitle}
@@ -110,7 +128,8 @@ const mapStateToProps = state => {
     modalType: state.modal.modalType,
     board: state.board.board,
     topic: state.board.topic,
-    edit: state.modal.edit
+    edit: state.modal.edit,
+    id: state.modal.id
   }
 }
 
@@ -124,8 +143,10 @@ export default connect(mapStateToProps,
     addTopic,
     addListItem,
     modalHandler,
-    fetchBoardTitleEdit, 
+    fetchBoardTitleEdit,
     fetchTopicTitleEdit,
     updateBoardAction,
-    updateTopicAction
+    updateTopicAction,
+    updateListItem,
+    fetchListItemTitleEdit
   })(Form);

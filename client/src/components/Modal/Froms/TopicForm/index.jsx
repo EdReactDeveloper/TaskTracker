@@ -1,35 +1,41 @@
 import React from 'react';
 import style from './TopicForm.module.scss';
+import Edit from './Edit';
+import Create from './Create';
 
 const TopicForm = ({
   submitHandler,
   fetchTopicItemTitle,
   fetchTopicItmeDescription,
-  topicItemTitle,   
-  topicItemDescription
+  topicItemTitle,
+  topicItemDescription,
+  fetchListItemTitleEdit,
+  edit,
+  item
 }) => {
+  console.log()
   return (
     <form className={style.form} onSubmit={submitHandler}>
-      <label className={style.heading}>title
-      <input
-        type="text"
-        value={topicItemTitle}
-        onChange={(e) => fetchTopicItemTitle(e.target.value)}
-        className={style.input}
+      {edit ?
+        <Edit
+          fetchListItemTitleEdit={fetchListItemTitleEdit}
+          item={item}
         />
-      </label>
-      <label className={style.heading}>description
-      <textarea 
-      value={topicItemDescription} 
-      onChange={(e) => fetchTopicItmeDescription(e.target.value)} 
-      className={style.textarea}
-      />
-        </label>
-      <button 
-      type="submit" 
-      className={style.btn_add}  
+        :
+        <Create
+          fetchTopicItemTitle={fetchTopicItemTitle}
+          fetchTopicItmeDescription={fetchTopicItmeDescription}
+          topicItemTitle={topicItemTitle}
+          topicItemDescription={topicItemDescription}
+        />
+
+      }
+
+      <button
+        type="submit"
+        className={style.btn_add}
       >create</button>
-      </form>
+    </form>
   );
 };
 
