@@ -1,15 +1,20 @@
 import React from 'react';
-import style from './BoardsFrom.module.scss';
+import style from '../Forms.module.scss';
+import Add from './Add';
+import Edit from './Edit';
 
 const BoardsForm = ({ boardTitle, fetchBoardTitle, fetchBoardTitleEdit, submitHandler, edit, board }) => {
   return (
     <form className={style.form} onSubmit={submitHandler}>
+      <label className={style.heading}>
+        board name
       {edit ?
-        <input type="text" value={board.boardTitle} onChange={(e) => fetchBoardTitleEdit(e.target.value)} />
-        :
-        <input type="text" value={boardTitle} onChange={(e) => fetchBoardTitle(e.target.value)} />
-      }
-      <button type="submit">add board</button>
+          <Edit board={board} fetchBoardTitleEdit={fetchBoardTitleEdit} />
+          :
+          <Add boardTitle={boardTitle} fetchBoardTitle={fetchBoardTitle} />
+        }
+        <button type="submit" className={style.submit}>add board</button>
+      </label>
     </form>
   );
 };

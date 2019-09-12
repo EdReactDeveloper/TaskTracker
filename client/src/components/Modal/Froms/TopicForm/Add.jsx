@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './TopicForm.module.scss';
+import style from '../Forms.module.scss';
 const Create = ({
   fetchTopicItemTitle,
   fetchTopicItmeDescription,

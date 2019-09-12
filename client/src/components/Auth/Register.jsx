@@ -12,16 +12,16 @@ const Register = ({
 }) => {
   return (
     <form onSubmit={submitHandler} className={style.form}>
-      <label htmlFor="email">email
-        <input type="email" name="email" value={email} onChange={(e)=> fetchEmail(e.target.value) }/>
+      <label htmlFor="email" className={style.heading}>email
+        <input type="email" name="email" className={style.input} value={email} onChange={(e)=> fetchEmail(e.target.value) }/>
       </label>
-      <label htmlFor="password">password
-        <input type="text" name="password" value={password} onChange={(e)=> fetchPassword(e.target.value) } />
+      <label htmlFor="password" className={style.heading}>password
+        <input type="text" name="password" className={style.input} value={password} onChange={(e)=> fetchPassword(e.target.value) } />
       </label>
-      <label htmlFor="re-enter-password">re-enter password
-        <input type="text" name="re-enter-password" value={reenterPassword} onChange={(e)=> fetchReEterPassword(e.target.value) } />
+      <label htmlFor="re-enter-password" className={style.heading}>re-enter password
+        <input type="text" name="re-enter-password" className={style.input} value={reenterPassword} onChange={(e)=> fetchReEterPassword(e.target.value) } />
       </label>
-      <button type="submit">submit</button>
+      <button type="submit" className={style.submit}>submit</button>
     </form>
   );
 };

@@ -1,10 +1,7 @@
 import React from 'react';
-import style from './TopicForm.module.scss';
-const Edit = ({
-  fetchListItemTitleEdit,
-  fetchListItemDescriptionEdit,
-  item
-}) => {
+import style from '../Forms.module.scss';
+
+const Edit = ({ fetchListItemTitleEdit, item }) => {
   return (
     <>
       <label className={style.heading}>title

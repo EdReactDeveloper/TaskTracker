@@ -1,7 +1,7 @@
 import React from 'react';
-import style from './TopicForm.module.scss';
+import style from '../Forms.module.scss'
 import Edit from './Edit';
-import Create from './Create';
+import Create from './Add';
 
 const TopicForm = ({
   submitHandler,
@@ -13,7 +13,6 @@ const TopicForm = ({
   edit,
   item
 }) => {
-  console.log()
   return (
     <form className={style.form} onSubmit={submitHandler}>
       {edit ?
@@ -28,13 +27,11 @@ const TopicForm = ({
           topicItemTitle={topicItemTitle}
           topicItemDescription={topicItemDescription}
         />
-
       }
-
       <button
         type="submit"
-        className={style.btn_add}
-      >create</button>
+        className={style.submit}
+      >submit</button>
     </form>
   );
 };
