@@ -34,14 +34,12 @@ body {
 .board{
   display: grid; 
   grid-template-columns: 30rem 1fr; 
-  grid-template-rows: 7rem;
-  grid-gap: 2rem;
+  grid-template-rows: 7rem 1fr;
   height: calc(100vh - 26rem)
 }
 
 
 .container {
-  max-width: 120rem;
   margin: 0 auto;
 
   @media (max-width: 1240px) {

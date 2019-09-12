@@ -1,9 +1,18 @@
-.wrapper {}
+.wrapper {
+  display: flex;
+  grid-column: 2/3; 
+  grid-row: 2/-1;
+  flex-direction: column;
+
+}
 
 .header {
-  display: grid;
-  grid-template-columns: 1fr 7rem;
-  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  padding: 2rem; 
+  &:hover .menu{
+    opacity: 1;
+  }
 }
 
 .heading {
@@ -12,19 +21,18 @@
   color: #1e90ff;
   grid-column: 1/2;
   grid-row: 1/2;
+  margin-right: 2rem;
 }
 
-.menu {
-  grid-column: 2/3;
-  grid-row: 1/2;
-
-  & button {
+.menu {  
     height: 2.5rem;
-    background: #fff;
+    padding: .5rem;
+    font-size: 1.6rem;
     border: none;
-    display: inline-block;
-
-  }
+    transition: all .2s; 
+    opacity: 0;
+    background: #fff;
+    cursor: pointer;
 }
 
 .icon {
@@ -34,5 +42,15 @@
 
   & path {
     fill: #666;
+  }
+}
+
+.noTopic{
+  display: flex;
+  justify-content: center;
+  padding-top: 20rem;
+  width: 100%;
+  &_heading{
+    color: cornflowerblue
   }
 }

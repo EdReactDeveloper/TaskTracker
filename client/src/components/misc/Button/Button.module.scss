@@ -1,0 +1,52 @@
+.icon{
+  width: 2rem;
+  height: 2rem;
+  & path {
+    fill: #666;
+  }
+}
+
+.edit{
+  background: #fff;
+  margin-left: 3rem;
+  border: none;
+  cursor: pointer;
+  transition: all .2s; 
+  margin-top: 1rem;
+  opacity: 0;
+}
+
+.delete {
+  display: flex;
+  grid-column: 2/3;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+
+  &_icon {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  &:hover ~ div label {
+    color: #ff4757;
+  }
+}
+
+.info{
+
+    height: 1rem;
+    width: 1rem;
+    line-height: .5rem;
+    padding: .5rem;
+    background-color: #eee;
+    border: 1px solid #bdc3c7;
+    &:hover~.info_block {
+      visibility: visible;
+      opacity: 1;
+      z-index: 1000;
+    }
+}

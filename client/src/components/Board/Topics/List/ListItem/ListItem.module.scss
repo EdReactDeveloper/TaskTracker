@@ -3,6 +3,7 @@
   grid-template-columns: 1fr 4rem;
   align-items: center;
   margin-bottom: 1rem;
+  padding-left: 4rem;
 }
 
 .container {
@@ -17,6 +18,9 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  &:hover > button{
+    opacity: 1;
+  }
 }
 
 /* Hide the browser's default checkbox */
@@ -89,41 +93,9 @@
   }
 }
 
-.btn {
-
-  &_info {
-    height: 1rem;
-    width: 1rem;
-    line-height: .5rem;
-    padding: .5rem;
-    background-color: #eee;
-    border: 1px solid #bdc3c7;
-    &:hover~.info_block {
-      visibility: visible;
-      opacity: 1;
-      z-index: 1000;
-    }
-  }
-
-  &_delete {
-    display: flex;
-    grid-column: 2/3;
-    height: 2.5rem;
-    width: 2.5rem;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    outline: none;
-
-    &_icon {
-      height: 2rem;
-      width: 2rem;
-    }
-
-    &:hover~.container {
-      color: #ff4757;
-    }
-  }
+.checkTitle{
+  display: flex;
+  align-items: center;
 }
 
 

@@ -1,20 +1,18 @@
 import React from 'react';
-import List from '../../../../containers/Board/List';
+
 import style from './Topic.module.scss';
+import Topic from './Topic'; 
+import NoTopic from './NoTopic'
 
-
-const Topic = ({ topic, modalHandler }) => {
-  return (
-    <div className={style.wrapper}>
-      <div className={style.header}>
-        <h3 className={style.heading}>{topic.title}</h3>
-        <div className={style.menu}>
-        <button onClick={() => modalHandler('boardModal', topic._id)}> edit </button>        
-        </div>
-      </div>
-      <List list={topic.list} />
-    </div>
-  );
+const TopicWrapper = ({ topic, modalHandler }) => {
+  return <div className={style.wrapper}>
+    {topic ? 
+    <Topic topic={topic} modalHandler={modalHandler}/> 
+    : 
+    <NoTopic />
+  }
+  </div>
+  
 };
 
-export default Topic;
+export default TopicWrapper;

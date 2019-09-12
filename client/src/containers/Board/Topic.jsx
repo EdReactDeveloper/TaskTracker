@@ -6,7 +6,7 @@ import { modalHandler } from '../../store/actions/modal';
 
 class TopicContainer extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.modalType = 'topicModal'
   }
@@ -17,12 +17,11 @@ class TopicContainer extends Component {
       modalHandler,
     } = this.props
 
-    return <>
-      {topic ? <Topic
+    return <Topic
         topic={topic}
         modalHandler={modalHandler}
-      /> : 'select a topic or add one '}
-    </>
+      /> 
+   
   }
 }
 
