@@ -5,4 +5,9 @@
   grid-column: 2/3;
   padding: 0 2rem;
   border-bottom: 1px solid #ccc;
+  position: relative;
+
+  &:hover button{
+    opacity: 1;
+  }
 }

@@ -1,19 +1,38 @@
-.icon{
+.icon {
   width: 2rem;
   height: 2rem;
+
   & path {
     fill: #666;
   }
 }
 
-.edit{
+.edit {
   background: #fff;
   margin-left: 3rem;
   border: none;
   cursor: pointer;
-  transition: all .2s; 
-  margin-top: 1rem;
+  transition: all .2s;
+  margin-top: .3rem;
+}
+
+.editAll {
+  background: #00a8ff;
+  border: 2px solid #0097e6;
+  padding: .5rem 3rem;
+  border-radius: 15rem;
+  cursor: pointer;
+  color: #fff;
+  outline: none;
+  transition: all .4s;
+  margin-left: auto;
   opacity: 0;
+}
+
+.yellow {
+  background: #fbc531;
+  border: 1px solid #e1b12c;
+  opacity: 1;
 }
 
 .delete {
@@ -24,6 +43,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: all .3s;
   outline: none;
 
   &_icon {
@@ -31,22 +51,97 @@
     width: 2rem;
   }
 
-  &:hover ~ div label {
+  &:hover~div label {
     color: #ff4757;
   }
 }
 
-.info{
+.info {
+  height: 1rem;
+  width: 1rem;
+  line-height: .5rem;
+  padding: .5rem;
+  background-color: #eee;
+  border: 1px solid #bdc3c7;
+  margin-left: 1rem;
+  position: relative;
 
-    height: 1rem;
-    width: 1rem;
-    line-height: .5rem;
-    padding: .5rem;
-    background-color: #eee;
+  &:hover &_block {
+    visibility: visible;
+    opacity: 1;
+    z-index: 1000;
+  }
+
+  &_block {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    text-align: left;
+    line-height: 2rem;
+    font-size: 1.4rem;
+    left: 0;
+    top: 0;
+    padding: 1rem;
+    padding-left: 3rem;
     border: 1px solid #bdc3c7;
-    &:hover~.info_block {
+    background: #fff;
+    min-width: 5rem;
+    max-width: 30rem;
+    width: max-content;
+    z-index: 1;
+    transition: all .3s;
+
+    &:hover {
+      z-index: 1000;
       visibility: visible;
       opacity: 1;
-      z-index: 1000;
     }
+  }
+}
+
+.dropMenu {
+  border: none; 
+  background: #fff; 
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2rem;
+  transition: all .1s;
+  outline: none;
+  &:hover{
+    background: #f2f2f2
+  }
+  &_content {
+
+    outline: none;
+    background: #ccc;
+    position: relative;
+    width: 4px;
+    height: 4px;
+    cursor: pointer;
+
+
+    &::before {
+      content: '';
+      height: 4px;
+      width: 4px;
+      background: #ccc;
+      position: absolute;
+      top: 6px;
+      left: 0;
+    }
+
+    &::after {
+      content: '';
+      height: 4px;
+      width: 4px;
+      background: #ccc;
+      position: absolute;
+      top: -6px;
+      left: 0;
+    }
+  }
+
 }

@@ -9,19 +9,22 @@ class ListContainer extends Component {
     const {
       list,
       updateListItem,
-      modalHandler
+      modalHandler,
+      editMode
     } = this.props
     return <List
       list={list}
       updateListItem={updateListItem}
       modalHandler={modalHandler}
+      editMode={editMode}
     />
   }
 }
 
 const mapStateToProps = state => {
   return {
-    edit: state.modal.edit
+    edit: state.modal.edit,
+    editMode: state.modal.editMode
   }
 }
 

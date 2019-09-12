@@ -5,6 +5,7 @@ import style from './List.module.scss';
 const List = ({ 
   list, 
   edit,
+  editMode,
   updateListItem, 
   modalHandler, 
   fetchListItemTitleEdit, 
@@ -16,6 +17,7 @@ const List = ({
       key={item._id}
       item={item}
       edit={edit}
+      editMode={editMode}
       updateListItem={updateListItem}
       modalHandler={modalHandler}
       fetchListItemTitleEdit={fetchListItemTitleEdit}

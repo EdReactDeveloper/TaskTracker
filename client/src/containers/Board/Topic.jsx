@@ -15,11 +15,13 @@ class TopicContainer extends Component {
     const {
       topic,
       modalHandler,
+      editMode
     } = this.props
 
     return <Topic
         topic={topic}
         modalHandler={modalHandler}
+        editMode={editMode}
       /> 
    
   }
@@ -29,7 +31,8 @@ const mapStateToProps = state => {
   return {
     topic: state.board.topic,
     boards: state.board.boards,
-    board: state.board.board
+    board: state.board.board,
+    editMode: state.modal.editMode
   }
 }
 

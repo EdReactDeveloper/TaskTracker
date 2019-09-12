@@ -1,6 +1,6 @@
 import React from 'react';
 import List from './List';
-import Button from './Button'; 
+import Button from '../misc/Button/Button'; 
 import style from './DropMenu.module.scss';
 
 const DropDown = ({
@@ -13,7 +13,7 @@ const DropDown = ({
 }) => {
   return (
     <div className={style.wrapper}>
-      <Button />
+      <Button type='dropMenu'/>
       {isOpen &&
        <List 
         boardItems={boardItems}
