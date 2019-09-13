@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom'; 
 import style from './Auth.module.scss'; 
 
-const UnAuthorized = (props) => {
+const UnAuthorized = () => {
   return (
     <div className={style.auth__wrapper}>
       <div className={style.auth__item}>

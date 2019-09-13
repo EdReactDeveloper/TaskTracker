@@ -34,7 +34,6 @@ router.post(
 				topic.title = title;
 			}
 			await topic.save();
-			console.log(topic);
 			res.json(topic);
 		} catch (error) {
 			console.log(error);
@@ -67,7 +66,6 @@ router.post('/list/check/:id', async (req, res, next) => {
 
 router.post('/list/edit/:id', async (req, res, next) => {
 	const { payload } = req.body;
-	console.log(payload)
 	const title = payload.title
 	const description = payload.description
 	const id = payload._id

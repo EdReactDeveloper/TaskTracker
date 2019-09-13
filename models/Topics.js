@@ -36,7 +36,7 @@ Topic.methods.checkListItem = function(listItemId) {
 	const list = [ ...this.list ];
 	const index = list.findIndex((item) => item._id.toString() === listItemId.toString());
 	if(index < 0){
-		return 'item is not found'
+		return ({msg: 'item is not found'})
 	}
 	const updatedItem = !list[index].done;
 	list[index].done = updatedItem;
@@ -45,7 +45,6 @@ Topic.methods.checkListItem = function(listItemId) {
 };
 
 Topic.methods.editItem = function(title, desctiption, id){
-	console.log('reached')
 const list = [...this.list]
 const itemIndex = list.findIndex(item => item._id.toString() === id.toString())
 list[itemIndex].title = title
@@ -58,7 +57,7 @@ Topic.methods.removeItem = function(listItemId) {
 	const list = [...this.list]
 	const index = list.findIndex((item) => item._id.toString() === listItemId.toString());
 	if(index < 0){
-		return 'item is not found'
+		return ({msg: 'item is not found'})
 	}
 	list.splice(index, 1)
 	this.list = list

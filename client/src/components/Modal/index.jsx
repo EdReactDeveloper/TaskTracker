@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Modal.module.scss';
 
-const Dialog = ({ modalHandler, modalType, children }) => {
+const Modal = ({ modalHandler, modalType, children }) => { // rendered by containers/Boards.jsx
   return (
     <>
       <div className={style.background} onClick={() => modalHandler(modalType)}></div>
@@ -12,4 +12,4 @@ const Dialog = ({ modalHandler, modalType, children }) => {
   );
 };
 
-export default Dialog;
+export default Modal;

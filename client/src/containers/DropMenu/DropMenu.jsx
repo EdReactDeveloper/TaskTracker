@@ -31,18 +31,15 @@ class DropDownContainer extends Component {
   }
 
   render() {
-    const { modalHandler, dropdownHandler, removeBoard, removeTopic, topic, history, board, isOpen } = this.props
+    const { modalHandler, removeBoard, removeTopic, topic, history, board } = this.props
     const boardsItems = renderBoardSMenu(modalHandler)
     const boardItems = board && renderBoardMenu(removeBoard, modalHandler, board._id, history)
     const topicItems = topic && renderTopicMenu(removeTopic, modalHandler, topic._id)
     return <div ref={this.setWrapperRef}>
-      <DropDown isOpen={isOpen}
+      <DropDown {...this.props}
         boardItems={boardItems}
         topicItems={topicItems}
         boardsItems={boardsItems} 
-        dropdownHandler={dropdownHandler}
-        board={board}
-        topic={topic}
       />
     </div>;
   }

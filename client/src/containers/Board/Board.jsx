@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Board from '../../components/Board';
 import { connect } from 'react-redux';
-import { getBoard, fetchBoards, clearBoard, removeBoard, getTopic } from '../../store/actions/board';
-import { fetchTopicTitle } from '../../store/actions/forms';
+import { getBoard, fetchBoards, clearBoard } from '../../store/actions/board';
 import { addTopic } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 import Loader from '../../components/misc/Loader';
@@ -36,20 +35,9 @@ class BoardContainer extends Component {
 
 
   render() {
-    const { board, fetchTopicTitle, topicTitle, removeBoard, history, modalHandler, loading, getTopic } = this.props
+    const { board, loading } = this.props
     if(board && !loading){
-      return <Board
-        board={board}
-        boardId={this.props.match.params.id}
-        submitHandler={this.submitHandler}
-        fetchTopicTitle={fetchTopicTitle}
-        topicTitle={topicTitle}
-        removeBoard={removeBoard}
-        history={history}
-        getTopic={getTopic}
-        modalType={this.modalType}
-        modalHandler={modalHandler}
-        />
+      return <Board />
       }else if(!board && loading ){
         return <Loader />
       }else{
@@ -61,13 +49,9 @@ class BoardContainer extends Component {
 const mapStateToProps = state => {
   return {
     board: state.board.board,
-    boards: state.board.boards,
-    boardTitle: state.board.boardTilte,
     topicTitle: state.forms.topicTitle,
     loading: state.board.loading,
-
   }
 }
 
-
-export default connect(mapStateToProps, { getBoard, getTopic, fetchBoards, fetchTopicTitle, addTopic, clearBoard, modalHandler, removeBoard })(BoardContainer);
+export default connect(mapStateToProps, { getBoard, fetchBoards, addTopic, clearBoard, modalHandler })(BoardContainer);

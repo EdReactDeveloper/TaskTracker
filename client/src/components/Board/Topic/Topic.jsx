@@ -1,7 +1,7 @@
 import React from 'react';
-import List from '../../../../containers/Board/List';
+import List from '../../../containers/Board/List';
 import style from './Topic.module.scss';
-import Button from '../../../misc/Button/Button';
+import Button from '../../misc/Button/Button';
 
 const Topic = ({ topic, modalHandler, editMode }) => {
   return (

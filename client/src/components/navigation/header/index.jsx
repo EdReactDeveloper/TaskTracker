@@ -4,7 +4,7 @@ import style from './header.module.scss';
 import app from '../../../App.module.scss';
 import Auth from './auth';
 
-const Header = ({ isLoggedIn, logout }) => {
+const Header = (props) => {
 
   return (
     <header className={style.main}>
@@ -14,7 +14,7 @@ const Header = ({ isLoggedIn, logout }) => {
             <Link to="/">TaskTracker</Link>
           </h4>
         </nav>
-        <Auth isLoggedIn={isLoggedIn} logout={logout} />
+        <Auth {...props} />
       </div>
     </header>
   );

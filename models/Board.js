@@ -43,17 +43,3 @@ Board.methods.addTopic = function(title, list){
 
 module.exports = mongoose.model('Board', Board)
 
-/*
-board - react
-ref-USER
-topics - [
-	{
-		title: lifecylce, 
-		REF:BOARD
-		list: [
-		{...}
-		]
-	}
-] 
-
-*/ 
