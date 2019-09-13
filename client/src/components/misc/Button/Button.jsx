@@ -48,6 +48,15 @@ const Button = ({ payload = '', type }) => {
       return <button className={style.dropMenu}>
         <div className={style.dropMenu_content}></div>
       </button>
+
+    case 'addBoard': 
+    return <button 
+    type='button' 
+    onClick={() => modalHandler('boardsModal')}
+    className={style.add}
+    >create a board</button>
+
+
     default: return <button>what is this?</button>
   }
 

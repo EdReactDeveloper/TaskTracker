@@ -2,7 +2,16 @@ import React from 'react';
 import style from './Nav.module.scss';
 import DropMenu from '../../containers/DropMenu/DropMenu';
 import Button from '../misc/Button/Button';
-const Nav = ({ history, board, modalHandler, editHandler, editMode }) => {
+import NoBoard from './NoBoard'
+
+const Nav = ({ 
+  history, 
+  board, 
+  modalHandler, 
+  editHandler, 
+  editMode, 
+  boards, 
+  loading }) => {
   return (
     <nav className={style.nav}>
       {board ?
@@ -14,8 +23,7 @@ const Nav = ({ history, board, modalHandler, editHandler, editMode }) => {
           </h4>
           <Button type='editAll' payload={{ editHandler, editMode }} />
         </>
-        :
-        <h4>select a board</h4>
+        : <NoBoard boards={boards} modalHandler={modalHandler} loading={loading} board={board}/>
       }
       <DropMenu history={history} />
     </nav>

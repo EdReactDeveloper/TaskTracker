@@ -25,7 +25,8 @@ import {
 	UPDATE_BOARD_FAIL,
 	UPDATE_TOPIC_SUCCESS,
 	UPDATE_TOPIC_FAIL,
-	FETCH_LISTITEM_EDIT
+	FETCH_LISTITEM_EDIT,
+	END_SESSION
 } from './types';
 import axios from 'axios';
 import { clearFieldsHandler } from './forms';
@@ -143,7 +144,6 @@ export const getTopic = (topicId) => async (dispatch) => {
 export const addTopic = (title, id) => async (dispatch) => {
 	const config = { headers: { 'Content-Type': 'application/json' } };
 	const body = JSON.stringify({ title, id });
-	console.log('create')
 
 	try {
 		const result = await axios.post('/api/topics/create', body, config);
@@ -164,7 +164,7 @@ export const addTopic = (title, id) => async (dispatch) => {
 export const updateTopicAction = (title, id) => async dispatch => {
 	const config = {headers: {'Content-Type': 'application/json'}}
 	const body = JSON.stringify({title, id})
-	console.log('update')
+
 	try {
 		const result = await axios.post('/api/topics/create', body, config)
 		dispatch({
@@ -257,5 +257,11 @@ export const fetchListItemTitleEdit = (text, id, type) => dispatch => {
 	dispatch({
 		type: FETCH_LISTITEM_EDIT,
 		payload: ({text, id, type})
+	})
+}
+
+export const endSession = () => dispatch => {
+	dispatch({
+		type: END_SESSION
 	})
 }

@@ -6,9 +6,11 @@ import {
 	FETCH_EMAIL, 
 	FETCH_PASSWORD, 
 	FETCH_REENTERPASSWORD,
-	LOGOUT
+	LOGOUT_SUCCESS,
+	LOGOUT_FAIL
 } from './types';
 import axios from 'axios';
+import {endSession} from './board'; 
 
 export const fetchEmail = (data) => (dispatch) => {
 	dispatch({
@@ -91,11 +93,16 @@ export const register = (email, password, reenterPassword, history) => async (di
 
 export const logout = () => async dispatch => {
 	try {
-		axios.post('/api/auth/logout')
+		await axios.post('/api/auth/logout')
 		dispatch({
-			type: LOGOUT
+			type: LOGOUT_SUCCESS
 		}) 
+		dispatch(endSession())
 	} catch (error) {
-		
+		console.log(error)
+		dispatch({
+			type: LOGOUT_FAIL,
+			paylaod: error
+		})
 	}
 }

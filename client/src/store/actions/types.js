@@ -1,13 +1,16 @@
 // AUTH
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
-export const LOGOUT = 'LOGOUT';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAIL = 'LOGOUT_FAIL';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAIL = 'REGISTER_FAIL';
 
 export const FETCH_EMAIL = 'FETCH_EMAIL';
 export const FETCH_PASSWORD = 'FETCH_PASSWORD';
 export const FETCH_REENTERPASSWORD = 'FETCH_REENTERPASSWORD';
+
+export const END_SESSION = 'END_SESSION'
 
 // USER
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';

@@ -25,7 +25,8 @@ import {
 	FETCH_TOPICTITLE_EDIT,
 	UPDATE_TOPIC_SUCCESS,
 	UPDATE_TOPIC_FAIL,
-	FETCH_LISTITEM_EDIT
+	FETCH_LISTITEM_EDIT,
+	END_SESSION
 } from '../actions/types';
 
 const initialState = {
@@ -142,7 +143,7 @@ const board = function(state = initialState, action) {
 		case UPDATE_BOARD_SUCCESS: {
 			const boards = [ ...state.boards ];
 			const boardIndex = boards.findIndex((item) => item._id === payload._id);
-			boards[boardIndex] = payload;
+			boards[boardIndex].boardTitle = payload.boardTitle;
 			boards[boardIndex].active = true;
 			return {
 				...state,
@@ -253,6 +254,9 @@ const board = function(state = initialState, action) {
 
 		case FETCH_BOARDS_FAIL:
 			return { ...state, boards: null, loading: false };
+
+		case END_SESSION: 
+		return {...state, loading: false, boards: null, board: null, topic: null, message: null}
 
 		default:
 			return state;

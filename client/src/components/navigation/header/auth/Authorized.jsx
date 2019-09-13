@@ -10,7 +10,7 @@ const Authorized = ({logout}) => {
       <Icon d={Board.boards} className={style.icon} size='32' sizeX='1'/>
       <Link to="/boards">boards</Link>
       </div>
-      <button type="button" onClick={logout} className={style.auth__item} >
+      <button type="button" onClick={() => logout()} className={style.auth__item} >
       <Icon d={Auth.logout} className={style.icon} size='30' sizeX='1' />        
         logout</button>
     </div>

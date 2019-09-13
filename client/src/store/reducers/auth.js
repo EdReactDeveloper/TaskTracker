@@ -8,7 +8,8 @@ import {
 	GET_USER_SUCCESS,
 	GET_USER_FAIL,
 	FETCH_REENTERPASSWORD,
-	LOGOUT
+	LOGOUT_SUCCESS,
+	LOGOUT_FAIL
 } from '../actions/types';
 
 const initialState = {
@@ -18,7 +19,7 @@ const initialState = {
 	password: '',
 	reenterPassword: '',
 	loggedIn: false,
-	errors: ''
+	message: ''
 };
 
 const auth = function(state = initialState, action) {
@@ -38,8 +39,9 @@ const auth = function(state = initialState, action) {
 		case REGISTER_FAIL:
 		case GET_USER_FAIL:
 		case LOGIN_FAIL:
-		case LOGOUT:
-			return { ...state, loading: false, user: null, loggedIn: false, errors: payload };
+		case LOGOUT_FAIL:
+		case LOGOUT_SUCCESS:
+			return { ...state, loading: false, user: null, loggedIn: false, message: payload };
 		default:
 			return state;
 	}

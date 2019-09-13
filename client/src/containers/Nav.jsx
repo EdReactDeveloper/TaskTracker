@@ -5,14 +5,21 @@ import { modalHandler, editHandler } from '../store/actions/modal';
 
 class NavContainer extends Component {
   render() {
-    const { history, board, modalHandler, editHandler, editMode } = this.props
-    return <Nav
-      history={history}
-      board={board}
-      modalHandler={modalHandler}
-      editHandler={editHandler} 
-      editMode={editMode}
-      />
+    const { history, board, modalHandler, editHandler, editMode, loading, boards } = this.props
+    return <>
+      {
+        !loading &&
+        <Nav
+          history={history}
+          board={board}
+          modalHandler={modalHandler}
+          editHandler={editHandler}
+          editMode={editMode}
+          loading={loading}
+          boards={boards}
+        />
+      }
+    </>
   }
 }
 
@@ -20,7 +27,9 @@ const mapStateToProps = state => {
   return {
     history: state.board.history,
     board: state.board.board,
-    editMode: state.modal.editMode
+    editMode: state.modal.editMode,
+    boards: state.board.boards,
+    loading: state.board.loading
   }
 }
 
