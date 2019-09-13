@@ -1,53 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import TopicForm from '../../components/Modal/Froms/TopicForm';
 import BoardForm from '../../components/Modal/Froms/BoardForm'
 import BoardsForm from '../../components/Modal/Froms/BoardsForm';
 import { connect } from 'react-redux';
 import {
-  fetchTopicItemTitle,
-  fetchTopicItmeDescription,
-  fetchTopicTitle,
-  fetchBoardTitle
+  fetchTopicItemTitle, fetchTopicItmeDescription,
+  fetchTopicTitle, fetchBoardTitle
 } from '../../store/actions/forms';
 import {
-  addBoard,
-  addTopic,
-  addListItem,
-  fetchBoardTitleEdit,
-  fetchTopicTitleEdit,
-  updateBoardAction,
-  updateTopicAction,
-  updateListItem,
-  fetchListItemTitleEdit,
-  
+  addBoard, addTopic, addListItem, fetchBoardTitleEdit, fetchTopicTitleEdit,
+  updateBoardAction, updateTopicAction, updateListItem, fetchListItemTitleEdit,
 } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
-import submitData from './submitData'; 
+import submitData from './submitData';
 
-const Form = (props) => {
 
-const { modalType, topic, id } = props
+class Form extends Component {
 
-  const submitHandler = e => {
+  submitHandler = e => {
     e.preventDefault()
-   submitData({...props})
+    const item = this.fetchItem(this.props.id)
+    submitData({ ...this.props, item })
   }
 
-  const fetchItem = id => {
+  fetchItem = id => {
+    const { topic } = this.props
     const index = topic.list.findIndex(item => item._id === id)
     return topic.list[index]
   }
 
-  switch (modalType) {
-    case 'topicModal':
-      return <TopicForm {...props} item={fetchItem(id)} submitHandler={submitHandler} />
-    case 'boardModal':
-      return <BoardForm {...props} submitHandler={submitHandler} />
-    case 'boardsModal':
-      return <BoardsForm {...props} submitHandler={submitHandler} />
-    default: return 'what is this?'
+  render() {
+    const { modalType, id } = this.props
+
+    switch (modalType) {
+      case 'topicModal':
+        return <TopicForm {...this.props} item={this.fetchItem(id)} submitHandler={this.submitHandler} />
+      case 'boardModal':
+        return <BoardForm {...this.props} submitHandler={this.submitHandler} />
+      case 'boardsModal':
+        return <BoardsForm {...this.props} submitHandler={this.submitHandler} />
+      default: return 'what is this?'
+    }
   }
-};
+}
 
 const mapStateToProps = state => {
   return {
@@ -65,18 +60,8 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps,
   {
-    fetchTopicItemTitle,
-    fetchTopicItmeDescription,
-    fetchTopicTitle,
-    fetchBoardTitle,
-    addBoard,
-    addTopic,
-    addListItem,
-    modalHandler,
-    fetchBoardTitleEdit,
-    fetchTopicTitleEdit,
-    updateBoardAction,
-    updateTopicAction,
-    updateListItem,
-    fetchListItemTitleEdit
+    fetchTopicItemTitle, fetchTopicItmeDescription, fetchTopicTitle,
+    fetchBoardTitle, addBoard, addTopic, addListItem, modalHandler,
+    fetchBoardTitleEdit, fetchTopicTitleEdit, updateBoardAction,
+    updateTopicAction, updateListItem, fetchListItemTitleEdit
   })(Form);

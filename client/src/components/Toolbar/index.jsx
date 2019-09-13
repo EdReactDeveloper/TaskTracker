@@ -1,10 +1,10 @@
 import React from 'react';
-import style from './Nav.module.scss';
+import style from './Toolbar.module.scss';
 import DropMenu from '../../containers/DropMenu/DropMenu';
 import Button from '../misc/Button/Button';
 import NoBoard from './NoBoard'
 
-const Nav = ({ 
+const Toolbar = ({ 
   history, 
   board, 
   modalHandler, 
@@ -13,7 +13,7 @@ const Nav = ({
   boards, 
   loading }) => {
   return (
-    <nav className={style.nav}>
+    <div className={style.nav}>
       {board ?
         <>
           <h4>{board.boardTitle}
@@ -26,8 +26,8 @@ const Nav = ({
         : <NoBoard boards={boards} modalHandler={modalHandler} loading={loading} board={board}/>
       }
       <DropMenu history={history} />
-    </nav>
+    </div>
   );
 };
 
-export default Nav;
+export default Toolbar;

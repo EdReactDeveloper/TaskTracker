@@ -5,7 +5,6 @@ import { fetchEmail, fetchPassword, fetchReEterPassword, register } from '../sto
 
 class RegisterContainer extends Component {
 
-
   submitHandler = (e) => {
     const {email, password, reenterPassword, register, history} = this.props
 

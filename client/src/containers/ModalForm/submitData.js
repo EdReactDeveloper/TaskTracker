@@ -18,6 +18,7 @@ const submitData = ({
 	boardTitle
 }) => {
 	switch (modalType) {
+		// choose which type of data will be sent with the seleceted model form
 		case 'topicModal':
 			{
 				edit ? updateListItem(item, 'edit') : addListItem(topic._id, topicItemTitle, topicItemDescription);

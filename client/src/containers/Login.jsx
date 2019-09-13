@@ -6,7 +6,7 @@ import { fetchEmail, fetchPassword, login } from '../store/actions/auth';
 class LoginContainer extends Component {
 
   submitHandler = (e) => {
-    const {login, email, password} = this.props
+    const { login, email, password } = this.props
     e.preventDefault()
     login(email, password)
   }

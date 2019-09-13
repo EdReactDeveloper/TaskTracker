@@ -1,16 +1,16 @@
-import { 
-	LOGIN_SUCCESS, 
-	LOGIN_FAIL, 
-	REGISTER_SUCCESS, 
-	REGISTER_FAIL, 
-	FETCH_EMAIL, 
-	FETCH_PASSWORD, 
+import {
+	LOGIN_SUCCESS,
+	LOGIN_FAIL,
+	REGISTER_SUCCESS,
+	REGISTER_FAIL,
+	FETCH_EMAIL,
+	FETCH_PASSWORD,
 	FETCH_REENTERPASSWORD,
 	LOGOUT_SUCCESS,
 	LOGOUT_FAIL
 } from './types';
 import axios from 'axios';
-import {endSession} from './board'; 
+import { endSession } from './board';
 
 export const fetchEmail = (data) => (dispatch) => {
 	dispatch({
@@ -18,7 +18,6 @@ export const fetchEmail = (data) => (dispatch) => {
 		payload: data
 	});
 };
-
 
 export const fetchPassword = (data) => (dispatch) => {
 	dispatch({
@@ -34,10 +33,7 @@ export const fetchReEterPassword = (data) => (dispatch) => {
 	});
 };
 
-
-
 export const login = (email, password) => async (dispatch) => {
-
 	const config = {
 		headers: {
 			'Content-Type': 'application/json'
@@ -59,50 +55,48 @@ export const login = (email, password) => async (dispatch) => {
 	}
 };
 
-
 export const register = (email, password, reenterPassword, history) => async (dispatch) => {
-
-	if(password !== reenterPassword){
+	if (password !== reenterPassword) {
 		dispatch({
 			type: REGISTER_FAIL,
 			payload: 'passwords dont match'
-		})
-	}
-
-	const config = {headers: {
-		'Content-Type': 'application/json'
-	}
-	};
-	const body = JSON.stringify({ email, password });
-
-	try {
-		const result = await axios.post('/api/auth/register', body, config);
-		dispatch({
-			type: REGISTER_SUCCESS,
-			payload: result.data
 		});
-		history.push('/login')
+	} else {
+		const config = {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		};
+		const body = JSON.stringify({ email, password });
 
-	} catch (error) {
-		dispatch({
-			type: REGISTER_FAIL,
-			payload: error
-		});
+		try {
+			const result = await axios.post('/api/auth/register', body, config);
+			dispatch({
+				type: REGISTER_SUCCESS,
+				payload: result.data
+			});
+			history.push('/login');
+		} catch (error) {
+			dispatch({
+				type: REGISTER_FAIL,
+				payload: error
+			});
+		}
 	}
 };
 
-export const logout = () => async dispatch => {
+export const logout = () => async (dispatch) => {
 	try {
-		await axios.post('/api/auth/logout')
+		await axios.post('/api/auth/logout');
 		dispatch({
 			type: LOGOUT_SUCCESS
-		}) 
-		dispatch(endSession())
+		});
+		dispatch(endSession());
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 		dispatch({
 			type: LOGOUT_FAIL,
 			paylaod: error
-		})
+		});
 	}
-}
+};
