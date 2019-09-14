@@ -42,8 +42,6 @@ const board = function(state = initialState, action) {
 
 	switch (type) {
 
-		
-
 		case ADD_LISTITEM_SUCCESS:
 		case UPDATE_LIST_SUCCESS:
 			{

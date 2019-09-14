@@ -13,7 +13,8 @@ class ListContainer extends Component {
 const mapStateToProps = state => {
   return {
     edit: state.modal.edit,
-    editMode: state.modal.editMode
+    editMode: state.modal.editMode,
+    inProgress: state.inProgress.inProgress
   }
 }
 

@@ -23,11 +23,12 @@ import {
 	UPDATE_TOPIC_SUCCESS,
 	UPDATE_TOPIC_FAIL,
 	FETCH_LISTITEM_EDIT,
-	END_SESSION
+	END_SESSION,
 } from './types';
 import { clearFieldsHandler } from './forms';
 import { getBoards, updateBoard, removeBoard } from '../../api/board';
 import { getTopics, addTopic, removeTopic, addListItem, updateListItem } from '../../api/topics';
+import {inProgressAction} from './inprogress'; 
 
 export const fetchBoards = (history) => async (dispatch) => {
 	try {
@@ -168,8 +169,11 @@ export const addListItemAction = (topicId, title, description) => async (dispatc
 };
 
 export const updateListItemAction = (payload, type) => async (dispatch) => {
+	console.log(payload)
 	try {
+		dispatch(inProgressAction(true, payload.itemId))
 		const result = await updateListItem(payload, type)
+		dispatch(inProgressAction(false, payload.itemId))
 		dispatch({ type: UPDATE_LIST_SUCCESS, payload: result });
 	} catch (error) {
 		console.log(error);
@@ -203,3 +207,5 @@ export const endSession = () => (dispatch) => {
 		type: END_SESSION
 	});
 };
+
+

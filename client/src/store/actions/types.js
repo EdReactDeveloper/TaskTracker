@@ -75,3 +75,7 @@ export const MODAL = 'MODAL'
 export const DROPDOWN = 'DROPDOWN'
 export const CLEAR_FIELDS = 'CLEAR_FIELDS'
 export const EDIT = 'EDIT'
+
+//REST
+
+export const IN_PROGRESS ='IN_PROGRESS'
