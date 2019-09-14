@@ -19,7 +19,11 @@ class Form extends Component {
 
   submitHandler = e => {
     e.preventDefault()
-    const item = this.fetchItem(this.props.id)
+    const { topic, id } = this.props
+    let item = ''
+    if (topic) {
+      item = this.fetchItem(id)
+    }
     submitData({ ...this.props, item })
   }
 

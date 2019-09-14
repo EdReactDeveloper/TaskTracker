@@ -30,15 +30,19 @@ import {
 } from './types';
 import axios from 'axios';
 import { clearFieldsHandler } from './forms';
+import {getBoards} from '../../api/board'; 
+import {getTopics} from '../../api/topics'; 
+
 
 export const fetchBoards = (history) => async (dispatch) => {
 	try {
-		const result = await axios.get('/api/board/');
-		const boards = [ ...result.data ];
+		const result = await getBoards();
+		console.log(result)
+		const boards = [ ...result ];
 		for (let board of boards) {
 			board.active = false;
-			const topics = await axios.get(`/api/topics/${board._id}`);
-			board.topics = [ ...topics.data ];
+			const topics = await getTopics(board._id);
+			board.topics = [ ...topics ];
 		}
 		dispatch({
 			type: FETCH_BOARDS_SUCCESS,
@@ -104,10 +108,11 @@ export const updateBoardAction = (boardTitle, id) => async dispatch =>{
 
 export const removeBoard = (boardId, history) => async (dispatch) => {
 	try {
-		await axios.delete(`/api/board/remove/${boardId}`);
+		const id = await axios.delete(`/api/board/remove/${boardId}`);
+		console.log(id)
 		dispatch({
 			type: REMOVE_BOARD_SUCCESS,
-			paylaod: boardId
+			payload: boardId
 		});
 		history.push('/boards');
 	} catch (error) {
@@ -115,21 +120,6 @@ export const removeBoard = (boardId, history) => async (dispatch) => {
 		dispatch({
 			type: REMOVE_BOARD_FAIL,
 			paylaod: error
-		});
-	}
-};
-
-export const getTopics = (id) => async (disptch) => {
-	try {
-		const result = await axios.get(`/api/topics/${id}`);
-		disptch({
-			type: FETCH_TOPICS_SUCCESS,
-			payload: result.data
-		});
-	} catch (error) {
-		disptch({
-			type: FETCH_TOPICS_FAIL,
-			payload: error
 		});
 	}
 };

@@ -124,6 +124,7 @@ const board = function(state = initialState, action) {
 		case REMOVE_BOARD_SUCCESS: {
 			const boards = [ ...state.boards ];
 			const index = boards.findIndex((item) => item._id === payload);
+			console.log(index)
 			boards.splice(index, 1);
 			return {
 				...state,
