@@ -1,8 +1,36 @@
-import axios from 'axios'; 
+import axios from 'axios';
 
-const baseURL = '/api/topics/'
+const baseURL = '/api/topics';
 
-export const getTopics = async(id) => {
-  const result = await axios.get(`${baseURL}${id}`)
-  return result.data
+const body = (payload) => {
+	return JSON.stringify(payload)
+}
+
+const instance = axios.create({
+	headers: { 'Content-Type': 'application/json' }
+});
+
+export const getTopics = async (id) => {
+	const result = await axios.get(`${baseURL}/${id}`);
+	return result.data;
+};
+
+export const addTopic = async (payload) => {
+	const result = await instance.post(`${baseURL}/create`, body(payload));
+	return result.data;
+};
+
+export const removeTopic = async (id) =>{
+	const result = await axios.delete(`${baseURL}/remove/${id}`)
+	return result.data
+}
+
+export const addListItem = async(payload, topicId) => {
+	const result = await instance.post(`${baseURL}/list/add/${topicId}`, body(payload))
+	return result.data
+}
+
+export const updateListItem = async(payload, type)=> {
+	const result = await instance.post(`${baseURL}/list/${type}/${payload.topicId}`, body({payload}))
+	return result.data
 }

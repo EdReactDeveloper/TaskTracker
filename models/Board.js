@@ -35,11 +35,5 @@ const Board = new Schema({
 ]
 });
 
-Board.methods.addTopic = function(title, list){
-	const topics = [...this.topics]
-	topics.push(title, list)
-}
-
-
 module.exports = mongoose.model('Board', Board)
 

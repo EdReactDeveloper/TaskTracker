@@ -13,7 +13,6 @@ import {
 	ADD_TOPIC_FAIL,
 	REMOVE_TOPIC_SUCCESS,
 	REMOVE_TOPIC_FAIL,
-	LISTITEM_FIELDS,
 	ADD_LISTITEM_SUCCESS,
 	ADD_LISTITEM_FAIL,
 	UPDATE_LIST_SUCCESS,
@@ -42,18 +41,8 @@ const board = function(state = initialState, action) {
 	const { payload, type } = action;
 
 	switch (type) {
-		case LISTITEM_FIELDS: {
-			const topics = [ ...state.board.topics ];
-			const index = topics.findIndex((item) => item._id === payload.topicId);
-			topics[index][payload.type] = payload.text;
-			return {
-				...state,
-				board: {
-					...state.board,
-					topics
-				}
-			};
-		}
+
+		
 
 		case ADD_LISTITEM_SUCCESS:
 		case UPDATE_LIST_SUCCESS:

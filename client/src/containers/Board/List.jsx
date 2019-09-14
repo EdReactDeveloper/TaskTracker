@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import List from '../../components/Board/Topic/List';
 import { connect } from 'react-redux';
-import { updateListItem } from '../../store/actions/board';
+import { updateListItemAction } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 class ListContainer extends Component {
 
@@ -19,6 +19,6 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps,
   {
-    updateListItem,
+    updateListItemAction,
     modalHandler
   })(ListContainer);

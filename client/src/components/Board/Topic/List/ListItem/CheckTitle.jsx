@@ -3,7 +3,7 @@ import style from './ListItem.module.scss';
 import Button from '../../../../misc/Button/Button';
 
 const CheckTitle = (props) => {
-  const { item, updateListItem, editMode, modalHandler } = props
+  const { item, updateListItemAction, editMode, modalHandler } = props
   return <label htmlFor="checkbox" className={style.checkTitle}>
     <input
       name="checkbox"
@@ -12,7 +12,7 @@ const CheckTitle = (props) => {
       onChange={() => item.done = !item.done}
       className={style.checkbox}
     />
-    <span className={style.checkmark} onClick={() => updateListItem({ topicId: item.topicId, itemId: item._id }, 'check')}></span>
+    <span className={style.checkmark} onClick={() => updateListItemAction({ topicId: item.topicId, itemId: item._id }, 'check')}></span>
     <p> {item.title}</p>
     <Button type='info' payload={{ item }} />
     {editMode && <Button type='edit' payload={{ item, modalType: 'topicModal', modalHandler }} />}

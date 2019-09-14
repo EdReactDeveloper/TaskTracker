@@ -7,15 +7,12 @@ import {
 	ADD_BOARD_SUCCESS,
 	ADD_BOARD_FAIL,
 	CLEAR_BOARD,
-	FETCH_TOPICS_SUCCESS,
-	FETCH_TOPICS_FAIL,
 	ADD_TOPIC_SUCCESS,
 	ADD_TOPIC_FAIL,
 	REMOVE_TOPIC_SUCCESS,
 	REMOVE_TOPIC_FAIL,
 	UPDATE_LIST_SUCCESS,
 	UPDATE_LIST_FAIL,
-	LISTITEM_FIELDS,
 	ADD_LISTITEM_SUCCESS,
 	ADD_LISTITEM_FAIL,
 	FETCH_TOPIC_SUCCESS,
@@ -28,16 +25,13 @@ import {
 	FETCH_LISTITEM_EDIT,
 	END_SESSION
 } from './types';
-import axios from 'axios';
 import { clearFieldsHandler } from './forms';
-import {getBoards} from '../../api/board'; 
-import {getTopics} from '../../api/topics'; 
-
+import { getBoards, updateBoard, removeBoard } from '../../api/board';
+import { getTopics, addTopic, removeTopic, addListItem, updateListItem } from '../../api/topics';
 
 export const fetchBoards = (history) => async (dispatch) => {
 	try {
 		const result = await getBoards();
-		console.log(result)
 		const boards = [ ...result ];
 		for (let board of boards) {
 			board.active = false;
@@ -70,18 +64,17 @@ export const clearBoard = () => (dispatch) => {
 };
 
 export const addBoard = (boardTitle, history) => async (dispatch) => {
-	const config = { headers: { 'Content-Type': 'application/json' } };
-	const body = JSON.stringify({ boardTitle });
 	try {
-		const result = await axios.post('/api/board/add', body, config);
-		history.push(`/boards/${result.data._id}`);
+		const result = await updateBoard('add', { boardTitle });
+		history.push(`/boards/${result._id}`);
 		dispatch({
 			type: ADD_BOARD_SUCCESS,
-			payload: result.data
+			payload: result
 		});
-		dispatch(getBoard(result.data._id));
+		dispatch(getBoard(result._id));
 		dispatch(clearFieldsHandler());
 	} catch (error) {
+		console.log(error);
 		dispatch({
 			type: ADD_BOARD_FAIL,
 			payload: error
@@ -89,89 +82,65 @@ export const addBoard = (boardTitle, history) => async (dispatch) => {
 	}
 };
 
-export const updateBoardAction = (boardTitle, id) => async dispatch =>{
-	const config = { headers: { 'Content-Type': 'application/json' } };
-	const body = JSON.stringify({ boardTitle, id });
+export const eidtBoardTitleAction = (boardTitle, id) => async (dispatch) => {
 	try {
-		const result = await axios.post('/api/board/add', body, config)
+		const result = await updateBoard('add', { boardTitle, id });
 		dispatch({
 			type: UPDATE_BOARD_SUCCESS,
-			payload: result.data
-		})
-	} catch (error) {
-		console.log(error)
-		dispatch({
-			type: UPDATE_BOARD_FAIL
-		})
-	}
-}
-
-export const removeBoard = (boardId, history) => async (dispatch) => {
-	try {
-		const id = await axios.delete(`/api/board/remove/${boardId}`);
-		console.log(id)
-		dispatch({
-			type: REMOVE_BOARD_SUCCESS,
-			payload: boardId
+			payload: result
 		});
-		history.push('/boards');
 	} catch (error) {
 		console.log(error);
 		dispatch({
-			type: REMOVE_BOARD_FAIL,
-			paylaod: error
+			type: UPDATE_BOARD_FAIL
 		});
+	}
+};
+
+export const removeBoardAction = (boardId, history) => async (dispatch) => {
+	try {
+		const id = await removeBoard(boardId);
+		dispatch({ type: REMOVE_BOARD_SUCCESS, payload: id });
+		history.push('/boards');
+	} catch (error) {
+		console.log(error);
+		dispatch({ type: REMOVE_BOARD_FAIL, paylaod: error });
 	}
 };
 
 export const getTopic = (topicId) => async (dispatch) => {
-	dispatch({
-		type: FETCH_TOPIC_SUCCESS,
-		payload: topicId
-	});
+	dispatch({ type: FETCH_TOPIC_SUCCESS, payload: topicId });
 };
 
-export const addTopic = (title, id) => async (dispatch) => {
-	const config = { headers: { 'Content-Type': 'application/json' } };
-	const body = JSON.stringify({ title, id });
-
+export const addTopicAction = (title, boardId) => async (dispatch) => {
 	try {
-		const result = await axios.post('/api/topics/create', body, config);
-		dispatch({
-			type: ADD_TOPIC_SUCCESS,
-			payload: result.data
-		});
+		const result = await addTopic({ title, boardId });
+		dispatch({ type: ADD_TOPIC_SUCCESS, payload: result });
 		dispatch(clearFieldsHandler());
 	} catch (error) {
 		console.log(error);
+		dispatch({ type: ADD_TOPIC_FAIL, payload: error });
+	}
+};
+
+export const updateTopicAction = (title, id) => async (dispatch) => {
+	try {
+		const result = await addTopic({ title, id });
 		dispatch({
-			type: ADD_TOPIC_FAIL,
-			payload: error
+			type: UPDATE_TOPIC_SUCCESS,
+			payload: result
+		});
+	} catch (error) {
+		console.log(error);
+		dispatch({
+			type: UPDATE_TOPIC_FAIL
 		});
 	}
 };
 
-export const updateTopicAction = (title, id) => async dispatch => {
-	const config = {headers: {'Content-Type': 'application/json'}}
-	const body = JSON.stringify({title, id})
-
+export const removeTopicAction = (topicId) => async (dispatch) => {
 	try {
-		const result = await axios.post('/api/topics/create', body, config)
-		dispatch({
-			type: UPDATE_TOPIC_SUCCESS,
-			payload: result.data
-		})
-	} catch (error) {
-		console.log(error)
-		dispatch({
-			type: UPDATE_TOPIC_FAIL
-		})
-	}
-}
-
-export const removeTopic = (topicId) => async (dispatch) => {
-	try {
-		await axios.delete(`/api/topics/remove/${topicId}`);
+		await removeTopic(topicId);
 		dispatch({
 			type: REMOVE_TOPIC_SUCCESS,
 			payload: topicId
@@ -185,15 +154,10 @@ export const removeTopic = (topicId) => async (dispatch) => {
 	}
 };
 
-export const addListItem = (topicId, title, description) => async (dispatch) => {
-	const config = { headers: { 'Content-Type': 'application/json' } };
-	const body = JSON.stringify({ title, description });
+export const addListItemAction = (topicId, title, description) => async (dispatch) => {
 	try {
-		const result = await axios.post(`/api/topics/list/add/${topicId}`, body, config);
-		dispatch({
-			type: ADD_LISTITEM_SUCCESS,
-			payload: result.data
-		});
+		const result = await addListItem({title, description}, topicId)
+		dispatch({ type: ADD_LISTITEM_SUCCESS, payload: result });
 		dispatch(clearFieldsHandler());
 	} catch (error) {
 		dispatch({
@@ -203,55 +167,39 @@ export const addListItem = (topicId, title, description) => async (dispatch) => 
 	}
 };
 
-export const updateListItem = (payload, type) => async (dispatch) => {
-	const config = { headers: { 'Content-Type': 'application/json' } };
-	const body = JSON.stringify({ payload });
+export const updateListItemAction = (payload, type) => async (dispatch) => {
 	try {
-		const result = await axios.post(`/api/topics/list/${type}/${payload.topicId}`, body, config);
-		dispatch({
-			type: UPDATE_LIST_SUCCESS,
-			payload: result.data
-		});
+		const result = await updateListItem(payload, type)
+		dispatch({ type: UPDATE_LIST_SUCCESS, payload: result });
 	} catch (error) {
 		console.log(error);
-		dispatch({
-			type: UPDATE_LIST_FAIL,
-			payload: error
-		});
+		dispatch({ type: UPDATE_LIST_FAIL, payload: error });
 	}
 };
 
-export const addNewListData = (topicId, text, type) => (dispatch) => {
-	dispatch({
-		type: LISTITEM_FIELDS,
-		payload: { topicId, text, type }
-	});
-};
-
-
-export const fetchBoardTitleEdit = (title) => dispatch => {
+export const fetchBoardTitleEdit = (title) => (dispatch) => {
 	dispatch({
 		type: FETCH_BOARDTITLE_EDIT,
 		payload: title
-	})
-}
+	});
+};
 
-export const fetchTopicTitleEdit = (title) => dispatch => {
+export const fetchTopicTitleEdit = (title) => (dispatch) => {
 	dispatch({
-		type: FETCH_TOPICTITLE_EDIT, 
+		type: FETCH_TOPICTITLE_EDIT,
 		payload: title
-	})
-}
+	});
+};
 
-export const fetchListItemTitleEdit = (text, id, type) => dispatch => {
+export const fetchListItemTitleEdit = (text, id, type) => (dispatch) => {
 	dispatch({
 		type: FETCH_LISTITEM_EDIT,
-		payload: ({text, id, type})
-	})
-}
+		payload: { text, id, type }
+	});
+};
 
-export const endSession = () => dispatch => {
+export const endSession = () => (dispatch) => {
 	dispatch({
 		type: END_SESSION
-	})
-}
+	});
+};

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { dropdownHandler } from '../../store/actions/dropdown';
 import DropDown from '../../components/DropMenu'
 import { renderBoardSMenu, renderBoardMenu, renderTopicMenu } from './menuData';
-import { removeBoard, removeTopic } from '../../store/actions/board';
+import { removeBoardAction, removeTopicAction } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 import {withRouter} from 'react-router-dom'; 
 
@@ -31,10 +31,10 @@ class DropDownContainer extends Component {
   }
 
   render() {
-    const { modalHandler, removeBoard, removeTopic, topic, history, board } = this.props
+    const { modalHandler, removeBoardAction, removeTopicAction, topic, history, board } = this.props
     const boardsItems = renderBoardSMenu(modalHandler)
-    const boardItems = board && renderBoardMenu(removeBoard, modalHandler, board._id, history)
-    const topicItems = topic && renderTopicMenu(removeTopic, modalHandler, topic._id)
+    const boardItems = board && renderBoardMenu(removeBoardAction, modalHandler, board._id, history)
+    const topicItems = topic && renderTopicMenu(removeTopicAction, modalHandler, topic._id)
     return <div ref={this.setWrapperRef}>
       <DropDown {...this.props}
         boardItems={boardItems}
@@ -53,5 +53,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { dropdownHandler, removeBoard, removeTopic, modalHandler })(withRouter(DropDownContainer))
+export default connect(mapStateToProps, { dropdownHandler, removeBoardAction, removeTopicAction, modalHandler })(withRouter(DropDownContainer))
 

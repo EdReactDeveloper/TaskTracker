@@ -32,7 +32,6 @@ Topic.methods.addItem = function(title, description) {
 };
 
 Topic.methods.checkListItem = function(listItemId) {
-
 	const list = [ ...this.list ];
 	const index = list.findIndex((item) => item._id.toString() === listItemId.toString());
 	if(index < 0){

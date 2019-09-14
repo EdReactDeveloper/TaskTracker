@@ -8,8 +8,8 @@ import {
   fetchTopicTitle, fetchBoardTitle
 } from '../../store/actions/forms';
 import {
-  addBoard, addTopic, addListItem, fetchBoardTitleEdit, fetchTopicTitleEdit,
-  updateBoardAction, updateTopicAction, updateListItem, fetchListItemTitleEdit,
+  addBoard, addTopicAction, addListItemAction, fetchBoardTitleEdit, fetchTopicTitleEdit,
+  eidtBoardTitleAction, updateTopicAction, updateListItemAction, fetchListItemTitleEdit,
 } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 import submitData from './submitData';
@@ -65,7 +65,7 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps,
   {
     fetchTopicItemTitle, fetchTopicItmeDescription, fetchTopicTitle,
-    fetchBoardTitle, addBoard, addTopic, addListItem, modalHandler,
-    fetchBoardTitleEdit, fetchTopicTitleEdit, updateBoardAction,
-    updateTopicAction, updateListItem, fetchListItemTitleEdit
+    fetchBoardTitle, addBoard, addTopicAction, addListItemAction, modalHandler,
+    fetchBoardTitleEdit, fetchTopicTitleEdit, eidtBoardTitleAction,
+    updateTopicAction, updateListItemAction, fetchListItemTitleEdit
   })(Form);

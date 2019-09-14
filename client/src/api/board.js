@@ -15,3 +15,8 @@ export const updateBoard = async(type, payload)=> {
   const result = await instance.post(`${baseURL}${type}`, body)
   return result.data
 }
+
+export const removeBoard = async(id) => {
+  const result = await axios.delete(`${baseURL}/remove/${id}`)
+  return result.data
+}

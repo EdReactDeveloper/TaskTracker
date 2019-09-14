@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Board from '../../components/Board';
 import { connect } from 'react-redux';
 import { getBoard, fetchBoards, clearBoard } from '../../store/actions/board';
-import { addTopic } from '../../store/actions/board';
+import { addTopicAction } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 import Loader from '../../components/misc/Loader';
 
@@ -27,9 +27,9 @@ class BoardContainer extends Component {
 
   submitHandler = (e) => {
     const id = this.props.match.params.id
-    const { addTopic, topicTitle, modalHandler } = this.props
+    const { addTopicAction, topicTitle, modalHandler } = this.props
     e.preventDefault()
-    addTopic(topicTitle, id)
+    addTopicAction(topicTitle, id)
     modalHandler(this.modalType)
   }
 
@@ -54,4 +54,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getBoard, fetchBoards, addTopic, clearBoard, modalHandler })(BoardContainer);
+export default connect(mapStateToProps, { getBoard, fetchBoards, addTopicAction, clearBoard, modalHandler })(BoardContainer);

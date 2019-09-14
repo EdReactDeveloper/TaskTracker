@@ -7,13 +7,13 @@ const submitData = ({
 	topicItemTitle,
 	topicItemDescription,
 	topicTitle,
-	updateBoardAction,
+	eidtBoardTitleAction,
 	updateTopicAction,
-	updateListItem,
+	updateListItemAction,
 	item,
 	modalHandler,
-	addTopic,
-	addListItem,
+	addTopicAction,
+	addListItemAction,
 	addBoard,
 	boardTitle
 }) => {
@@ -21,21 +21,21 @@ const submitData = ({
 		// choose which type of data will be sent with the seleceted model form
 		case 'topicModal':
 			{
-				edit ? updateListItem(item, 'edit') : addListItem(topic._id, topicItemTitle, topicItemDescription);
+				edit ? updateListItemAction(item, 'edit') : addListItemAction(topic._id, topicItemTitle, topicItemDescription);
 			}
 			modalHandler(modalType);
 			break;
 
 		case 'boardModal':
 			{
-				edit ? updateTopicAction(topic.title, topic._id) : addTopic(topicTitle, board._id);
+				edit ? updateTopicAction(topic.title, topic._id) : addTopicAction(topicTitle, board._id);
 			}
 			modalHandler(modalType);
 			break;
 
 		case 'boardsModal':
 			{
-				edit ? updateBoardAction(board.boardTitle, board._id) : addBoard(boardTitle, history);
+				edit ? eidtBoardTitleAction(board.boardTitle, board._id) : addBoard(boardTitle, history);
 			}
 			modalHandler(modalType);
 			break;

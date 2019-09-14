@@ -7,7 +7,7 @@ const Button = ({ payload = '', type }) => {
   const {
     item,
     modalHandler,
-    updateListItem,
+    updateListItemAction,
     modalType,
     editHandler,
     editMode } = payload
@@ -26,7 +26,7 @@ const Button = ({ payload = '', type }) => {
     case 'delete':
       return <button
         type="button"
-        onClick={() => updateListItem({ topicId: item.topicId, itemId: item._id }, 'remove')}
+        onClick={() => updateListItemAction({ topicId: item.topicId, itemId: item._id }, 'remove')}
         className={style.delete}
       >
         <Icon className={style.btn_delete_icon} d={Item.delete} />

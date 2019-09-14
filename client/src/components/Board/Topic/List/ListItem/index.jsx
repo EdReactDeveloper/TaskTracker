@@ -4,10 +4,10 @@ import Button from '../../../../misc/Button/Button';
 import CheckTitle from './CheckTitle';
 
 const ListItem = (props) => {
-  const { item, updateListItem, editMode } = props
+  const { item, updateListItemAction, editMode } = props
   return (
     <div className={style.wrapper}>
-      {editMode && <Button type='delete' payload={{ item, updateListItem }} />}
+      {editMode && <Button type='delete' payload={{ item, updateListItemAction }} />}
       <div className={style.container}>
         <CheckTitle {...props} />
         <div className={style.info_container}>
