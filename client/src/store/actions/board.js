@@ -169,7 +169,6 @@ export const addListItemAction = (topicId, title, description) => async (dispatc
 };
 
 export const updateListItemAction = (payload, type) => async (dispatch) => {
-	console.log(payload)
 	try {
 		dispatch(inProgressAction(true, payload.itemId))
 		const result = await updateListItem(payload, type)
