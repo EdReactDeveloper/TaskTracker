@@ -1,14 +1,14 @@
 import React from 'react';
 import style from './Auth.module.scss'; 
 
-const Login = ({email, password, submitHandler, fetchEmail, fetchPassword}) => {
+const Login = ({email, password, submitHandler, fetchCredentials}) => {
   return (
     <form onSubmit={submitHandler} className={style.form}>
       <label htmlFor="email" className={style.heading}>email
-        <input type="email" className={style.input} name="email" value={email} onChange={(e)=> fetchEmail(e.target.value) }/>
+        <input type="email" className={style.input} name="email" value={email} onChange={(e)=> fetchCredentials(e) }/>
       </label>
       <label htmlFor="password" className={style.heading}>password
-        <input type="text" name="password" className={style.input} value={password} onChange={(e)=> fetchPassword(e.target.value) } />
+        <input type="text" name="password" className={style.input} value={password} onChange={(e)=> fetchCredentials(e) } />
       </label>
       <button type="submit" className={style.submit}>login</button>
     </form>

@@ -12,22 +12,6 @@ import {
 import { endSession } from './board';
 import { auth } from '../../api/auth';
 
-
-export const fetchEmail = (data) => (dispatch) => {
-	dispatch({ type: FETCH_EMAIL, payload: data });
-};
-
-
-export const fetchPassword = (data) => (dispatch) => {
-	dispatch({ type: FETCH_PASSWORD, payload: data });
-};
-
-
-export const fetchReEterPassword = (data) => (dispatch) => {
-	dispatch({ type: FETCH_REENTERPASSWORD, payload: data });
-};
-
-
 export const login = (email, password) => (dispatch) => {
 	const payload = { email, password };
 
@@ -39,22 +23,16 @@ export const login = (email, password) => (dispatch) => {
 	}
 };
 
-
 export const register = (email, password, reenterPassword, history) => (dispatch) => {
-	if (password !== reenterPassword) {
-		dispatch({ type: REGISTER_FAIL, payload: 'passwords dont match' });
-	} else {
-		const payload = { email, password };
-		try {
-			const result = auth('register', payload);
-			dispatch({ type: REGISTER_SUCCESS, payload: result });
-			history.push('/login');
-		} catch (error) {
-			dispatch({ type: REGISTER_FAIL, payload: error });
-		}
+	const payload = { email, password };
+	try {
+		const result = auth('register', payload);
+		dispatch({ type: REGISTER_SUCCESS, payload: result });
+		history.push('/login');
+	} catch (error) {
+		dispatch({ type: REGISTER_FAIL, payload: error });
 	}
 };
-
 
 export const logout = () => (dispatch) => {
 	try {
