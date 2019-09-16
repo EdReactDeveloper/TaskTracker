@@ -2,45 +2,37 @@ import React, { Component } from 'react';
 import Register from '../components/Auth/Register';
 import { connect } from 'react-redux';
 import { register } from '../store/actions/auth';
+import { reduxForm } from 'redux-form';
+import { compose } from 'recompose';
 
 class RegisterContainer extends Component {
 
-  state = {
-    email: '',
-    password: '',
-    rePassword: ''
-  }
-
   submitHandler = (e) => {
     e.preventDefault()
-    const { register, history } = this.props
-    const { email, password, rePassword } = this.state
-    if (password === rePassword) {
-      register(email, password, rePassword, history)
+    const { form, history, register } = this.props
+    const { email, password } = form.values
+    if (form.values.password === form.values.rePassword) {
+      register({ email, password, history })
     } else {
       alert('passwords should match')
     }
   }
 
-  fetchCredentialsHandler = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
   render() {
 
-    return <Register
-      {...this.props}
-      {...this.state}
-      fetchCredentialsHandler={this.fetchCredentialsHandler}
-      submitHandler={this.submitHandler}
+    return <Register handleSubmit={this.submitHandler}
     />
   }
 }
 
 const mapStateToProps = state => {
   return {
-    errors: state.auth.errors
+    errors: state.auth.errors,
+    form: state.form.register
   }
 }
 
-export default connect(mapStateToProps, { register })(RegisterContainer);
+export default compose(
+  reduxForm({ form: 'register' }),
+  connect(mapStateToProps, { register })
+)(RegisterContainer)

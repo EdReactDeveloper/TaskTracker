@@ -2,37 +2,32 @@ import React, { Component } from 'react';
 import Login from '../components/Auth/Login';
 import { connect } from 'react-redux';
 import { login } from '../store/actions/auth';
+import { compose } from 'recompose';
+import { reduxForm } from 'redux-form';
 
 class LoginContainer extends Component {
 
-  state={
-    email: '',
-    password: ''
-  }
-
   submitHandler = (e) => {
-    const { login } = this.props
-    const {email, password } = this.state
     e.preventDefault()
-    login(email, password)
-  }
-
-  fetchCredentials=(e)=>{
-    this.setState({[e.target.name]: e.target.value})
+    const { login, form } = this.props
+    login(form.values)
   }
 
   render() {
-
-    return <Login {...this.props} {...this.state}
-    fetchCredentials={this.fetchCredentials}
-      submitHandler={this.submitHandler} />
+    return <Login {...this.props}
+      handleSubmit={this.submitHandler}
+    />
   }
 }
 
 const mapStateToProps = state => {
   return {
-    errors: state.auth.errors
+    errors: state.auth.errors,
+    form: state.form.login
   }
 }
 
-export default connect(mapStateToProps, { login })(LoginContainer);
+export default compose(
+  reduxForm({ form: 'login' }),
+  connect(mapStateToProps, { login })
+)(LoginContainer);

@@ -1,14 +1,17 @@
 import React from 'react';
 import style from './Auth.module.scss'; 
+import { Field } from 'redux-form'; 
 
-const Login = ({email, password, submitHandler, fetchCredentials}) => {
+const Login = ({handleSubmit}) => {
   return (
-    <form onSubmit={submitHandler} className={style.form}>
+    <form onSubmit={handleSubmit} className={style.form}>
       <label htmlFor="email" className={style.heading}>email
-        <input type="email" className={style.input} name="email" value={email} onChange={(e)=> fetchCredentials(e) }/>
+        <Field  component={"input"}
+        type="email" className={style.input} name="email" />
       </label>
       <label htmlFor="password" className={style.heading}>password
-        <input type="text" name="password" className={style.input} value={password} onChange={(e)=> fetchCredentials(e) } />
+        <Field component={"input"}
+        type="text" name="password" className={style.input} />
       </label>
       <button type="submit" className={style.submit}>login</button>
     </form>
