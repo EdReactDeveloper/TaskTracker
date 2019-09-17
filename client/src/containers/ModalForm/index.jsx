@@ -4,8 +4,8 @@ import BoardForm from '../../components/Modal/Froms/BoardForm'
 import BoardsForm from '../../components/Modal/Froms/BoardsForm';
 import { connect } from 'react-redux';
 import {
-  addBoard, addTopicAction, addListItemAction, fetchBoardTitleEdit, fetchTopicTitleEdit,
-  eidtBoardTitleAction, updateTopicAction, updateListItemAction, fetchListItemTitleEdit,
+  addBoard, addTopicAction, addListItemAction,
+  eidtBoardTitleAction, updateTopicAction, updateListItemAction
 } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 import submitData from './submitData';
@@ -21,8 +21,8 @@ class Form extends Component {
 
   initializeFields = () => {
     const { initialValues, board, topic, id, modalType } = this.props
-    initialValues.boardTitle = board.boardTitle
-    initialValues.topicTitle = topic.title
+    initialValues.boardTitle = board && board.boardTitle
+    initialValues.topicTitle = topic && topic.title
     if (modalType === 'topicModal' && id) {
       initialValues.itemTitle = this.fetchItem(id).title
       initialValues.itemDescription = this.fetchItem(id).description
@@ -43,7 +43,7 @@ class Form extends Component {
 
   render() {
     const { modalType, id } = this.props
-    console.log(this.props)
+
     switch (modalType) {
       case 'topicModal':
         return <TopicForm {...this.props} item={this.fetchItem(id)} handleSubmit={this.submitHandler} />
@@ -74,8 +74,7 @@ export default compose(
   connect(mapStateToProps,
     {
       addBoard, addTopicAction, addListItemAction, modalHandler,
-      fetchBoardTitleEdit, fetchTopicTitleEdit, eidtBoardTitleAction,
-      updateTopicAction, updateListItemAction, fetchListItemTitleEdit
+      eidtBoardTitleAction, updateTopicAction, updateListItemAction
     })
 )
   (Form);

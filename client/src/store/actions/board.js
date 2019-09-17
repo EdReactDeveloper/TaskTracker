@@ -16,16 +16,12 @@ import {
 	ADD_LISTITEM_SUCCESS,
 	ADD_LISTITEM_FAIL,
 	FETCH_TOPIC_SUCCESS,
-	FETCH_BOARDTITLE_EDIT,
-	FETCH_TOPICTITLE_EDIT,
 	UPDATE_BOARD_SUCCESS,
 	UPDATE_BOARD_FAIL,
 	UPDATE_TOPIC_SUCCESS,
 	UPDATE_TOPIC_FAIL,
-	FETCH_LISTITEM_EDIT,
 	END_SESSION
 } from './types';
-import { clearFieldsHandler } from './forms';
 import { getBoards, updateBoard, removeBoard } from '../../api/board';
 import { getTopics, addTopic, removeTopic, addListItem, updateListItem } from '../../api/topics';
 import { inProgressAction } from './inprogress';
@@ -73,7 +69,6 @@ export const addBoard = (boardTitle, history) => async (dispatch) => {
 			payload: result
 		});
 		dispatch(getBoard(result._id));
-		dispatch(clearFieldsHandler());
 	} catch (error) {
 		console.log(error);
 		dispatch({
@@ -84,7 +79,6 @@ export const addBoard = (boardTitle, history) => async (dispatch) => {
 };
 
 export const eidtBoardTitleAction = (boardTitle, id) => async (dispatch) => {
-	console.log(boardTitle);
 	try {
 		const result = await updateBoard('add', { boardTitle, id });
 		dispatch({
@@ -118,7 +112,6 @@ export const addTopicAction = (title, id) => async (dispatch) => {
 	try {
 		const result = await addTopic({ title, id });
 		dispatch({ type: ADD_TOPIC_SUCCESS, payload: result });
-		dispatch(clearFieldsHandler());
 	} catch (error) {
 		console.log(error);
 		dispatch({ type: ADD_TOPIC_FAIL, payload: error });
@@ -126,7 +119,6 @@ export const addTopicAction = (title, id) => async (dispatch) => {
 };
 
 export const updateTopicAction = (title, id) => async (dispatch) => {
-	console.log(title, id);
 	try {
 		const result = await addTopic({ title, id });
 		dispatch({
@@ -161,7 +153,6 @@ export const addListItemAction = (topicId, title, description) => async (dispatc
 	try {
 		const result = await addListItem({ title, description }, topicId);
 		dispatch({ type: ADD_LISTITEM_SUCCESS, payload: result });
-		dispatch(clearFieldsHandler());
 	} catch (error) {
 		dispatch({
 			type: ADD_LISTITEM_FAIL,
@@ -180,27 +171,6 @@ export const updateListItemAction = (payload, type) => async (dispatch) => {
 		console.log(error);
 		dispatch({ type: UPDATE_LIST_FAIL, payload: error });
 	}
-};
-
-export const fetchBoardTitleEdit = (title) => (dispatch) => {
-	dispatch({
-		type: FETCH_BOARDTITLE_EDIT,
-		payload: title
-	});
-};
-
-export const fetchTopicTitleEdit = (title) => (dispatch) => {
-	dispatch({
-		type: FETCH_TOPICTITLE_EDIT,
-		payload: title
-	});
-};
-
-export const fetchListItemTitleEdit = (text, id, type) => (dispatch) => {
-	dispatch({
-		type: FETCH_LISTITEM_EDIT,
-		payload: { text, id, type }
-	});
 };
 
 export const endSession = () => (dispatch) => {

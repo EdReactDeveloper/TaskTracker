@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Boards from '../components/Boards';
 import { connect } from 'react-redux';
 import { fetchBoards, addBoard, getTopic, getBoard } from '../store/actions/board';
-import { fetchBoardTitle } from '../store/actions/forms'
 import Loader from '../components/misc/Loader';
 import Modal from '../components/Modal';
 import { modalHandler } from '../store/actions/modal';
@@ -36,7 +35,6 @@ const mapStateToProps = state => {
   return {
     boards: state.board.boards,
     loading: state.board.loading,
-    boardTitle: state.forms.boardTitle,
     isOpen: state.modal.isOpen,
     board: state.board.board
   }
@@ -47,6 +45,5 @@ export default connect(mapStateToProps, {
   getBoard,
   getTopic,
   addBoard,
-  fetchBoardTitle,
   modalHandler
 })(BoardsContainer);

@@ -102,11 +102,6 @@ const board = function(state = initialState, action) {
 				topic: payload
 			};
 
-		case FETCH_TOPICTITLE_EDIT:
-			return {
-				...state,
-				topic: { ...state.topic, title: payload }
-			};
 
 		case REMOVE_BOARD_SUCCESS: {
 			const boards = [ ...state.boards ];
@@ -118,13 +113,6 @@ const board = function(state = initialState, action) {
 				boards,
 				board: null,
 				topic: null
-			};
-		}
-
-		case FETCH_BOARDTITLE_EDIT: {
-			return {
-				...state,
-				board: { ...state.board, boardTitle: payload }
 			};
 		}
 
@@ -192,7 +180,7 @@ const board = function(state = initialState, action) {
 				...state, boards, board, topic
 			}
 		}
-
+		
 
 		case ADD_BOARD_SUCCESS:
 			return {

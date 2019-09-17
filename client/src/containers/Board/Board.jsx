@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Board from '../../components/Board';
 import { connect } from 'react-redux';
 import { getBoard, fetchBoards, clearBoard } from '../../store/actions/board';
-import { addTopicAction } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 import Loader from '../../components/misc/Loader';
 
@@ -24,16 +23,6 @@ class BoardContainer extends Component {
     this.props.clearBoard()
   }
 
-
-  submitHandler = (e) => {
-    const id = this.props.match.params.id
-    const { addTopicAction, topicTitle, modalHandler } = this.props
-    e.preventDefault()
-    addTopicAction(topicTitle, id)
-    modalHandler(this.modalType)
-  }
-
-
   render() {
     const { board, loading } = this.props
     if(board && !loading){
@@ -49,9 +38,8 @@ class BoardContainer extends Component {
 const mapStateToProps = state => {
   return {
     board: state.board.board,
-    topicTitle: state.forms.topicTitle,
     loading: state.board.loading,
   }
 }
 
-export default connect(mapStateToProps, { getBoard, fetchBoards, addTopicAction, clearBoard, modalHandler })(BoardContainer);
+export default connect(mapStateToProps, { getBoard, fetchBoards, clearBoard, modalHandler })(BoardContainer);
