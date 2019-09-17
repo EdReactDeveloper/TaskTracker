@@ -23,7 +23,7 @@ class Form extends Component {
     const { initialValues, board, topic, id, modalType } = this.props
     initialValues.boardTitle = board.boardTitle
     initialValues.topicTitle = topic.title
-    if (modalType === 'topicModal') {
+    if (modalType === 'topicModal' && id) {
       initialValues.itemTitle = this.fetchItem(id).title
       initialValues.itemDescription = this.fetchItem(id).description
     }

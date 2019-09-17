@@ -11,14 +11,14 @@ const Create = () => {
           type="text"
           component={Input}
           className={style.input}
-          name='itemTitle'
+          name='title'
         />
       </label>
       <label className={style.heading}>description
     <Field
           component={'textarea'}
           className={style.textarea}
-          name='itemDescription'
+          name='description'
         />
       </label>
     </>
