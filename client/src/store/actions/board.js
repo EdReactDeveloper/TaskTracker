@@ -23,12 +23,12 @@ import {
 	UPDATE_TOPIC_SUCCESS,
 	UPDATE_TOPIC_FAIL,
 	FETCH_LISTITEM_EDIT,
-	END_SESSION,
+	END_SESSION
 } from './types';
 import { clearFieldsHandler } from './forms';
 import { getBoards, updateBoard, removeBoard } from '../../api/board';
 import { getTopics, addTopic, removeTopic, addListItem, updateListItem } from '../../api/topics';
-import {inProgressAction} from './inprogress'; 
+import { inProgressAction } from './inprogress';
 
 export const fetchBoards = (history) => async (dispatch) => {
 	try {
@@ -84,6 +84,7 @@ export const addBoard = (boardTitle, history) => async (dispatch) => {
 };
 
 export const eidtBoardTitleAction = (boardTitle, id) => async (dispatch) => {
+	console.log(boardTitle);
 	try {
 		const result = await updateBoard('add', { boardTitle, id });
 		dispatch({
@@ -113,9 +114,9 @@ export const getTopic = (topicId) => async (dispatch) => {
 	dispatch({ type: FETCH_TOPIC_SUCCESS, payload: topicId });
 };
 
-export const addTopicAction = (title, boardId) => async (dispatch) => {
+export const addTopicAction = (title, id) => async (dispatch) => {
 	try {
-		const result = await addTopic({ title, boardId });
+		const result = await addTopic({ title, id });
 		dispatch({ type: ADD_TOPIC_SUCCESS, payload: result });
 		dispatch(clearFieldsHandler());
 	} catch (error) {
@@ -125,6 +126,7 @@ export const addTopicAction = (title, boardId) => async (dispatch) => {
 };
 
 export const updateTopicAction = (title, id) => async (dispatch) => {
+	console.log(title, id);
 	try {
 		const result = await addTopic({ title, id });
 		dispatch({
@@ -157,7 +159,7 @@ export const removeTopicAction = (topicId) => async (dispatch) => {
 
 export const addListItemAction = (topicId, title, description) => async (dispatch) => {
 	try {
-		const result = await addListItem({title, description}, topicId)
+		const result = await addListItem({ title, description }, topicId);
 		dispatch({ type: ADD_LISTITEM_SUCCESS, payload: result });
 		dispatch(clearFieldsHandler());
 	} catch (error) {
@@ -170,9 +172,9 @@ export const addListItemAction = (topicId, title, description) => async (dispatc
 
 export const updateListItemAction = (payload, type) => async (dispatch) => {
 	try {
-		dispatch(inProgressAction(true, payload.itemId))
-		const result = await updateListItem(payload, type)
-		dispatch(inProgressAction(false, payload.itemId))
+		dispatch(inProgressAction(true, payload.itemId));
+		const result = await updateListItem(payload, type);
+		dispatch(inProgressAction(false, payload.itemId));
 		dispatch({ type: UPDATE_LIST_SUCCESS, payload: result });
 	} catch (error) {
 		console.log(error);
@@ -206,5 +208,3 @@ export const endSession = () => (dispatch) => {
 		type: END_SESSION
 	});
 };
-
-

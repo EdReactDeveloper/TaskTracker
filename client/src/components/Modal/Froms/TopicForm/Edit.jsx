@@ -1,23 +1,18 @@
 import React from 'react';
 import style from '../Forms.module.scss';
+import { Field } from 'redux-form';
+import Input from '../../../misc/Elements/Input';
 
-const Edit = ({ fetchListItemTitleEdit, item }) => {
+const Edit = ({ item }) => {
   return (
     <>
-      <label className={style.heading}>title
-      <input
-          type="text"
-          value={item.title}
-          onChange={(e) => fetchListItemTitleEdit(e.target.value, item._id, 'title')}
-          className={style.input}
-        />
+      <label className={style.heading}>
+        title
+        <Field type="text" component={Input} name='title' className={style.input} />
       </label>
-      <label className={style.heading}>description
-      <textarea
-          value={item.description}
-          onChange={(e) => fetchListItemTitleEdit(e.target.value, item._id, 'description')}
-          className={style.textarea}
-        />
+      <label className={style.heading}>
+        description
+        <Field component={"textarea"} className={style.textarea} name="description" />
       </label>
     </>
   );

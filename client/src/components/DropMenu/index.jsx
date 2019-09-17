@@ -1,6 +1,6 @@
 import React from 'react';
 import List from './List';
-import Button from '../misc/Button/Button'; 
+import Button from '../misc/Elements/Button'; 
 import style from './DropMenu.module.scss';
 
 const DropDown = (props) => {

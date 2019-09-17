@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Button.module.scss';
-import Icon from '../icon/Icon';
-import { Item } from '../icon/Selection';
+import Icon from '../../icon/Icon';
+import { Item } from '../../icon/Selection';
 
 const Button = ({ payload = '', type }) => {
   const {

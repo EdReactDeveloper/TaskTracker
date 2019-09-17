@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './ListItem.module.scss';
-import Button from '../../../../misc/Button/Button';
+import Button from '../../../../misc/Elements/Button';
 import CheckTitle from './CheckTitle';
 
 const ListItem = (props) => {

@@ -3,15 +3,15 @@ import style from '../Forms.module.scss';
 import Add from './Add';
 import Edit from './Edit';
 
-const BoardForm = ({ topicTitle, fetchTopicTitle, submitHandler, edit, topic, fetchTopicTitleEdit }) => {
+const BoardForm = ({ handleSubmit, edit, topic }) => {
   return (
-    <form className={style.form} onSubmit={submitHandler}>
+    <form className={style.form} onSubmit={handleSubmit}>
       <label htmlFor="title" className={style.heading}>
         topic tiltle
         {edit ?
-          < Edit topic={topic} fetchTopicTitleEdit={fetchTopicTitleEdit} />
+          < Edit topic={topic} />
           :
-          <Add topicTitle={topicTitle} fetchTopicTitle={fetchTopicTitle} />
+          <Add />
         }
       </label>
       <button className={style.submit} type="submit">add topic</button>

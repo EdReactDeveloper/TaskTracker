@@ -14,18 +14,19 @@ router.get('/:id', async (req, res, next) => {
 
 router.post(
 	'/create',
-	[ check('title', 'should not be empty').not().isEmpty(), check('boardId', 'no id was passed').not().isEmpty() ],
+	[ check('title', 'should not be empty').not().isEmpty(), check('id', 'no id was passed').not().isEmpty() ],
 	async (req, res, next) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			res.status(400).json({ errors: errors.array() });
 		}
-		const { title, boardId } = req.body;
-		let topic = await Topic.findById(boardId);
+		const { title, id } = req.body;
+		console.log(req.body)
+		let topic = await Topic.findById(id);
 		try {
 			if (!topic) {
 				topic = new Topic({
-					boardId,
+					boardId: id,
 					title,
 					list: []
 				});
@@ -70,7 +71,7 @@ router.post('/list/edit/:id', async (req, res, next) => {
 	const { payload } = req.body;
 	const title = payload.title
 	const description = payload.description
-	const id = payload._id
+	const id = payload.itemId
 	try {
 		const topic = await Topic.findById(req.params.id);
 

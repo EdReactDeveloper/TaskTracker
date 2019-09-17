@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Toolbar.module.scss';
 import DropMenu from '../../containers/DropMenu/DropMenu';
-import Button from '../misc/Button/Button';
+import Button from '../misc/Elements/Button';
 import NoBoard from './NoBoard'
 
 const Toolbar = ({ 

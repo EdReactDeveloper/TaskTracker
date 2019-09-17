@@ -4,27 +4,19 @@ import BoardForm from '../../components/Modal/Froms/BoardForm'
 import BoardsForm from '../../components/Modal/Froms/BoardsForm';
 import { connect } from 'react-redux';
 import {
-  fetchTopicItemTitle, fetchTopicItmeDescription,
-  fetchTopicTitle, fetchBoardTitle
-} from '../../store/actions/forms';
-import {
   addBoard, addTopicAction, addListItemAction, fetchBoardTitleEdit, fetchTopicTitleEdit,
   eidtBoardTitleAction, updateTopicAction, updateListItemAction, fetchListItemTitleEdit,
 } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 import submitData from './submitData';
-
+import {reduxForm} from 'redux-form'; 
+import {compose} from 'recompose'; 
 
 class Form extends Component {
 
   submitHandler = e => {
     e.preventDefault()
-    const { topic, id } = this.props
-    let item = ''
-    if (topic) {
-      item = this.fetchItem(id)
-    }
-    submitData({ ...this.props, item })
+    submitData({...this.props })
   }
 
   fetchItem = id => {
@@ -38,11 +30,11 @@ class Form extends Component {
 
     switch (modalType) {
       case 'topicModal':
-        return <TopicForm {...this.props} item={this.fetchItem(id)} submitHandler={this.submitHandler} />
+        return <TopicForm {...this.props} item={this.fetchItem(id)} handleSubmit={this.submitHandler} />
       case 'boardModal':
-        return <BoardForm {...this.props} submitHandler={this.submitHandler} />
+        return <BoardForm {...this.props} handleSubmit={this.submitHandler} />
       case 'boardsModal':
-        return <BoardsForm {...this.props} submitHandler={this.submitHandler} />
+        return <BoardsForm {...this.props} handleSubmit={this.submitHandler} />
       default: return 'what is this?'
     }
   }
@@ -50,22 +42,22 @@ class Form extends Component {
 
 const mapStateToProps = state => {
   return {
-    topicItemTitle: state.forms.topicItemTitle,
-    topicItemDescription: state.forms.topicItemDescription,
-    topicTitle: state.forms.topicTitle,
-    boardTitle: state.forms.boardTitle,
     modalType: state.modal.modalType,
     board: state.board.board,
     topic: state.board.topic,
     edit: state.modal.edit,
-    id: state.modal.id
+    id: state.modal.id,
+    form: state.form.modal
   }
 }
 
-export default connect(mapStateToProps,
-  {
-    fetchTopicItemTitle, fetchTopicItmeDescription, fetchTopicTitle,
-    fetchBoardTitle, addBoard, addTopicAction, addListItemAction, modalHandler,
-    fetchBoardTitleEdit, fetchTopicTitleEdit, eidtBoardTitleAction,
-    updateTopicAction, updateListItemAction, fetchListItemTitleEdit
-  })(Form);
+export default compose(
+  reduxForm({form: 'modal'}),
+  connect(mapStateToProps,
+    {
+      addBoard, addTopicAction, addListItemAction, modalHandler,
+      fetchBoardTitleEdit, fetchTopicTitleEdit, eidtBoardTitleAction,
+      updateTopicAction, updateListItemAction, fetchListItemTitleEdit
+    })
+)
+  (Form);

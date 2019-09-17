@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './ListItem.module.scss';
-import Button from '../../../../misc/Button/Button';
+import Button from '../../../../misc/Elements/Button';
 import Loader from '../../../../misc/Loader/Circle';
 
 const CheckTitle = (props) => {

@@ -1,26 +1,24 @@
 import React from 'react';
 import style from '../Forms.module.scss';
-const Create = ({
-  fetchTopicItemTitle,
-  fetchTopicItmeDescription,
-  topicItemTitle,   
-  topicItemDescription,
-}) => {
+import { Field } from 'redux-form';
+import Input from '../../../misc/Elements/Input';
+
+const Create = () => {
   return (
     <>
       <label className={style.heading}>title
-    <input
+    <Field
           type="text"
-          value={topicItemTitle}
-          onChange={(e) => fetchTopicItemTitle(e.target.value)}
+          component={Input}
           className={style.input}
+          name='title'
         />
       </label>
       <label className={style.heading}>description
-    <textarea
-          value={topicItemDescription}
-          onChange={(e) => fetchTopicItmeDescription(e.target.value)}
+    <Field
+          component={'textarea'}
           className={style.textarea}
+          name='description'
         />
       </label>
     </>

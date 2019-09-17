@@ -1,32 +1,17 @@
 import React from 'react';
 import style from '../Forms.module.scss'
 import Edit from './Edit';
-import Create from './Add';
+import Add from './Add';
 
 const TopicForm = ({
-  submitHandler,
-  fetchTopicItemTitle,
-  fetchTopicItmeDescription,
-  topicItemTitle,
-  topicItemDescription,
-  fetchListItemTitleEdit,
+  handleSubmit,
   edit,
   item
 }) => {
   return (
-    <form className={style.form} onSubmit={submitHandler}>
+    <form className={style.form} onSubmit={handleSubmit}>
       {edit ?
-        <Edit
-          fetchListItemTitleEdit={fetchListItemTitleEdit}
-          item={item}
-        />
-        :
-        <Create
-          fetchTopicItemTitle={fetchTopicItemTitle}
-          fetchTopicItmeDescription={fetchTopicItmeDescription}
-          topicItemTitle={topicItemTitle}
-          topicItemDescription={topicItemDescription}
-        />
+        <Edit item={item} /> : <Add />
       }
       <button
         type="submit"

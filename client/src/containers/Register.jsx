@@ -20,7 +20,7 @@ class RegisterContainer extends Component {
 
   render() {
 
-    return <Register handleSubmit={this.submitHandler}
+    return <Register handleSubmit={this.submitHandler} {...this.props}
     />
   }
 }

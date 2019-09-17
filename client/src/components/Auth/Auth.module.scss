@@ -85,3 +85,11 @@
     }
   }
 }
+
+.invalid{
+  background: #ccc;
+  cursor: not-allowed;
+  &:hover{
+    background: #ccc
+  }
+}

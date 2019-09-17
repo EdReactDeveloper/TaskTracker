@@ -1,11 +1,13 @@
 import React from 'react';
 import style from '../Forms.module.scss'; 
-
-const Edit = ({board, fetchBoardTitleEdit}) => {
-  return <input
+import {Field} from 'redux-form'; 
+import Input from '../../../misc/Elements/Input'
+const Edit = ({board}) => {
+  return <Field
+  component={Input}
   type="text"
-  value={board.boardTitle}
-  onChange={(e) => fetchBoardTitleEdit(e.target.value)}
+  name='title'
+  board={board}
   className={style.input}
 />
 };
