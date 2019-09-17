@@ -14,29 +14,28 @@ const submitData = ({
 	modalType,
 	id
 }) => {
-	const title = form.values.title;
-	const description = form.values.description;
+	const {boardTitle, topicTitle, itemTitle, itemDescription} = form.values
 
 	switch (modalType) {
 		case 'topicModal':
 			{
 				edit 
-					? updateListItemAction({itemId: id, topicId: topic._id, title, description}, 'edit')
-					: addListItemAction(topic._id, title, description);
+					? updateListItemAction({itemId: id, topicId: topic._id, itemTitle, itemDescription}, 'edit')
+					: addListItemAction(topic._id, itemTitle, itemDescription);
 			}
 			modalHandler(modalType);
 			break;
 
 		case 'boardModal':
 			{
-				edit ? updateTopicAction(title, topic._id) : addTopicAction(title, board._id);
+				edit ? updateTopicAction(topicTitle, topic._id) : addTopicAction(topicTitle, board._id);
 			}
 			modalHandler(modalType);
 			break;
 
 		case 'boardsModal':
 			{
-				edit ? eidtBoardTitleAction(title, board._id) : addBoard(title, history);
+				edit ? eidtBoardTitleAction(boardTitle, board._id) : addBoard(boardTitle, history);
 			}
 			modalHandler(modalType);
 			break;

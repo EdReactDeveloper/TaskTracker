@@ -68,14 +68,11 @@ router.post('/list/check/:id', async (req, res, next) => {
 });
 
 router.post('/list/edit/:id', async (req, res, next) => {
-	const { payload } = req.body;
-	const title = payload.title
-	const description = payload.description
-	const id = payload.itemId
+	const { payload:{itemTitle, itemDescription, itemId} } = req.body;
 	try {
 		const topic = await Topic.findById(req.params.id);
 
-		const result = await topic.editItem(title, description, id);
+		const result = await topic.editItem(itemTitle, itemDescription, itemId);
 		res.json(result);
 	} catch (error) {
 		res.status(404).json({ msg: error });

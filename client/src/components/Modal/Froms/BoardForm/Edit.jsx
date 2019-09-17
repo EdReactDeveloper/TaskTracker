@@ -7,7 +7,7 @@ const Edit = () => {
     component={Input}
     type="text"
     className={style.input}
-    name="title"
+    name="topicTitle"
   />
 };
 

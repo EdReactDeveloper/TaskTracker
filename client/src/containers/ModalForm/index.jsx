@@ -9,14 +9,30 @@ import {
 } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 import submitData from './submitData';
-import {reduxForm} from 'redux-form'; 
-import {compose} from 'recompose'; 
+import { reduxForm, initialize } from 'redux-form';
+import { compose } from 'recompose';
 
 class Form extends Component {
 
+  componentDidMount() {
+    const initialValues = this.initializeFields()
+    this.props.dispatch(initialize('modal', initialValues))
+  }
+
+  initializeFields = () => {
+    const { initialValues, board, topic, id, modalType } = this.props
+    initialValues.boardTitle = board.boardTitle
+    initialValues.topicTitle = topic.title
+    if (modalType === 'topicModal') {
+      initialValues.itemTitle = this.fetchItem(id).title
+      initialValues.itemDescription = this.fetchItem(id).description
+    }
+    return initialValues
+  }
+
   submitHandler = e => {
     e.preventDefault()
-    submitData({...this.props })
+    submitData({ ...this.props })
   }
 
   fetchItem = id => {
@@ -27,7 +43,7 @@ class Form extends Component {
 
   render() {
     const { modalType, id } = this.props
-
+    console.log(this.props)
     switch (modalType) {
       case 'topicModal':
         return <TopicForm {...this.props} item={this.fetchItem(id)} handleSubmit={this.submitHandler} />
@@ -47,12 +63,14 @@ const mapStateToProps = state => {
     topic: state.board.topic,
     edit: state.modal.edit,
     id: state.modal.id,
-    form: state.form.modal
+    form: state.form.modal,
+    initialValues: {}
   }
 }
 
 export default compose(
-  reduxForm({form: 'modal'}),
+  reduxForm({ form: 'modal', enableReinitialize: true }),
+
   connect(mapStateToProps,
     {
       addBoard, addTopicAction, addListItemAction, modalHandler,

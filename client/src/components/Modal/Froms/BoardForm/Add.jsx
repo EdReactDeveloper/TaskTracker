@@ -8,7 +8,7 @@ const Add = () => {
     type="text"
     className={style.input}
     component={Input}
-    name="title"
+    name="topicTitle"
   />
 };
 

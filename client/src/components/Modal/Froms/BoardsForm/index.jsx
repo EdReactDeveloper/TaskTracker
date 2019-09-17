@@ -3,13 +3,14 @@ import style from '../Forms.module.scss';
 import Add from './Add';
 import Edit from './Edit';
 
-const BoardsForm = ({  handleSubmit, edit, board }) => {
+const BoardsForm = ({  handleSubmit, edit, ...props }) => {
+  
   return (
     <form className={style.form} onSubmit={handleSubmit}>
       <label className={style.heading}>
         board name
       {edit ?
-          <Edit board={board} />
+          <Edit {...props} />
           :
           <Add />
         }

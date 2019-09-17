@@ -2,12 +2,13 @@ import React from 'react';
 import style from '../Forms.module.scss'; 
 import {Field} from 'redux-form'; 
 import Input from '../../../misc/Elements/Input'
-const Edit = ({board}) => {
+const Edit = ({initialValues, ...props}) => {
+  console.log(initialValues)
+
   return <Field
-  component={Input}
+  component={'input'}
   type="text"
-  name='title'
-  board={board}
+  name='boardTitle'
   className={style.input}
 />
 };
