@@ -15,8 +15,8 @@ export const getTopics = async (id) => {
 	return result.data;
 };
 
-export const addTopic = async (payload) => {
-	const result = await instance.post(`${baseURL}/create`, body(payload));
+export const postTopic = async (payload) => {
+	const result = await instance.post(`${baseURL}/`, body(payload));
 	return result.data;
 };
 

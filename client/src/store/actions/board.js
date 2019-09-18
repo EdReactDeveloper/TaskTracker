@@ -23,7 +23,7 @@ import {
 	END_SESSION
 } from './types';
 import { getBoards, postBoard, removeBoard } from '../../api/board';
-import { getTopics, addTopic, removeTopic, addListItem, updateListItem } from '../../api/topics';
+import { getTopics, postTopic, removeTopic, addListItem, updateListItem } from '../../api/topics';
 import { inProgressAction } from './inprogress';
 
 export const fetchBoards = (history) => async (dispatch) => {
@@ -110,8 +110,9 @@ export const getTopic = (topicId) => async (dispatch) => {
 };
 
 export const addTopicAction = (title, id) => async (dispatch) => {
+	// the id is the board's id
 	try {
-		const result = await addTopic({ title, id });
+		const result = await postTopic({ title, id });
 		dispatch({ type: ADD_TOPIC_SUCCESS, payload: result });
 	} catch (error) {
 		console.log(error);
@@ -120,8 +121,9 @@ export const addTopicAction = (title, id) => async (dispatch) => {
 };
 
 export const updateTopicAction = (title, id) => async (dispatch) => {
+	// the id is the topic's id
 	try {
-		const result = await addTopic({ title, id });
+		const result = await postTopic({ title, id });
 		dispatch({
 			type: UPDATE_TOPIC_SUCCESS,
 			payload: result

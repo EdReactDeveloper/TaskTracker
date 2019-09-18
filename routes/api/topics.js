@@ -13,21 +13,25 @@ router.get('/:id', async (req, res, next) => {
 });
 
 router.post(
-	'/create',
-	[ check('title', 'should not be empty').not().isEmpty(), check('id', 'no id was passed').not().isEmpty() ],
+	'/',
+	[ check('title', 'should not be empty').not().isEmpty(), check('id', 'no board is found by id').not().isEmpty() ],
 	async (req, res, next) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			res.status(400).json({ errors: errors.array() });
 		}
 		const { title, id } = req.body;
-
+		// 1. when we create a new topic we pass boardId as the id argument, 
+		// thus there is no such topic id the if condition works for a new topic
+		// 2.when we update an existing topic, we need to pass its id as the id argument  
+		// thus the topic can be found and modified
 		try {
 			let topic = null;
-			if (id) {
+		
 				topic = await Topic.findById(id);
-				topic.title = title;
-			}else{
+				if(topic){
+					topic.title = title;
+				}else{
 				topic = new Topic({
 					boardId: id,
 					title,
