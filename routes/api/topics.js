@@ -94,7 +94,7 @@ router.post('/list/remove/:id', async (req, res, next) => {
 	}
 });
 
-router.delete('/remove/:id', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
 	const id = req.params.id;
 	try {
 		const topic = await Topic.findById(id);

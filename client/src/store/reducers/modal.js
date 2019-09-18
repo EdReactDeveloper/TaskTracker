@@ -17,8 +17,10 @@ const formData = function(state = initialState, action) {
 				edit = true;
 			}
 			return { ...state, modalType: payload, id: id, isOpen: !state.isOpen, edit };
+
 		case EDIT:
 			return { ...state, editMode: !state.editMode };
+
 		default:
 			return state;
 	}

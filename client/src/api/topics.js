@@ -10,6 +10,7 @@ const instance = axios.create({
 	headers: { 'Content-Type': 'application/json' }
 });
 
+// TOPIC
 export const getTopics = async (id) => {
 	const result = await axios.get(`${baseURL}/${id}`);
 	return result.data;
@@ -21,10 +22,11 @@ export const postTopic = async (payload) => {
 };
 
 export const removeTopic = async (id) =>{
-	const result = await axios.delete(`${baseURL}/remove/${id}`)
+	const result = await axios.delete(`${baseURL}/${id}`)
 	return result.data
 }
 
+// LIST ITEM
 export const addListItem = async(payload, topicId) => {
 	const result = await instance.post(`${baseURL}/list/add/${topicId}`, body(payload))
 	return result.data

@@ -17,6 +17,6 @@ export const postBoard = async(payload)=> {
 }
 
 export const removeBoard = async(id) => {
-  const result = await axios.delete(`${baseURL}/remove/${id}`)
+  const result = await axios.delete(`${baseURL}/${id}`)
   return result.data
 }

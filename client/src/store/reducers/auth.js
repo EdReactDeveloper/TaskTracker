@@ -19,17 +19,21 @@ const initialState = {
 const auth = function(state = initialState, action) {
 	const { payload, type } = action;
 	switch (type) {
+
 		case LOGIN_SUCCESS:
 		case GET_USER_SUCCESS:
 			return { ...state, loading: false, user: payload, loggedIn: true };
+
 		case REGISTER_SUCCESS:
 			return { ...state, loading: false };
+
 		case REGISTER_FAIL:
 		case GET_USER_FAIL:
 		case LOGIN_FAIL:
 		case LOGOUT_FAIL:
 		case LOGOUT_SUCCESS:
 			return { ...state, loading: false, user: null, loggedIn: false, message: payload };
+			
 		default:
 			return state;
 	}

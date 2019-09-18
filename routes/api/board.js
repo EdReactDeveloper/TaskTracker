@@ -44,7 +44,7 @@ router.post('/', [ check('title', 'title is missing').not().isEmpty() ], async (
 	}
 });
 
-router.delete('/remove/:id', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
 	try {
 		await Topics.deleteMany({ boardId: req.params.id });
 		await Board.findByIdAndRemove(req.params.id);

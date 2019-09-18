@@ -27,9 +27,9 @@ export const register = ({email, password, history}) => async (dispatch) => {
 	}
 };
 
-export const logout = () => (dispatch) => {
+export const logout = () => async (dispatch) => {
 	try {
-		auth('logout');
+		await auth('logout');
 		dispatch({ type: LOGOUT_SUCCESS });
 	} catch (error) {
 		console.log(error);
