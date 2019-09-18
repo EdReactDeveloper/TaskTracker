@@ -21,18 +21,19 @@ router.post(
 			res.status(400).json({ errors: errors.array() });
 		}
 		const { title, id } = req.body;
-		console.log(req.body)
-		let topic = await Topic.findById(id);
+
 		try {
-			if (!topic) {
+			let topic = null;
+			if (id) {
+				topic = await Topic.findById(id);
+				topic.title = title;
+			}else{
 				topic = new Topic({
 					boardId: id,
 					title,
 					list: []
 				});
-			} else {
-				topic.title = title;
-			}
+			}		
 			await topic.save();
 			res.json(topic);
 		} catch (error) {
@@ -59,8 +60,7 @@ router.post('/list/check/:id', async (req, res, next) => {
 		const topic = await Topic.findById(req.params.id);
 
 		const result = await topic.checkListItem(payload.itemId);
-		
-		
+
 		res.json(result);
 	} catch (error) {
 		res.status(404).json({ msg: error });
@@ -68,7 +68,7 @@ router.post('/list/check/:id', async (req, res, next) => {
 });
 
 router.post('/list/edit/:id', async (req, res, next) => {
-	const { payload:{itemTitle, itemDescription, itemId} } = req.body;
+	const { payload: { itemTitle, itemDescription, itemId } } = req.body;
 	try {
 		const topic = await Topic.findById(req.params.id);
 

@@ -14,12 +14,12 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
-router.post('/add', [ check('boardTitle', 'title is missing').not().isEmpty() ], async (req, res, next) => {
+router.post('/', [ check('title', 'title is missing').not().isEmpty() ], async (req, res, next) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		return res.status(400).json({ errors: errors.array() });
 	}
-	const { boardTitle, id } = req.body;
+	const { title, id } = req.body;
 	try {
 		const user = await User.findById(req.session.user._id).select('-password');
 		if (!user) {
@@ -28,14 +28,13 @@ router.post('/add', [ check('boardTitle', 'title is missing').not().isEmpty() ],
 		let board = null
 		if(id){
 			board = await Board.findById(id)
-			board.boardTitle = boardTitle
+			board.title = title
 		}else {
-			const newBoard = new Board({
-				boardTitle,
+			board = new Board({
+				title,
 				userId: req.session.user._id,
 				topics: []
 			});
-			board = newBoard
 		}
 
 		const result = await board.save();

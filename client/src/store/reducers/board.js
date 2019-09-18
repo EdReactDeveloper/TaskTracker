@@ -18,10 +18,8 @@ import {
 	UPDATE_LIST_SUCCESS,
 	UPDATE_LIST_FAIL,
 	FETCH_TOPIC_SUCCESS,
-	FETCH_BOARDTITLE_EDIT,
 	UPDATE_BOARD_SUCCESS,
 	UPDATE_BOARD_FAIL,
-	FETCH_TOPICTITLE_EDIT,
 	UPDATE_TOPIC_SUCCESS,
 	UPDATE_TOPIC_FAIL,
 	FETCH_LISTITEM_EDIT,
@@ -119,7 +117,7 @@ const board = function(state = initialState, action) {
 		case UPDATE_BOARD_SUCCESS: {
 			const boards = [ ...state.boards ];
 			const boardIndex = boards.findIndex((item) => item._id === payload._id);
-			boards[boardIndex].boardTitle = payload.boardTitle;
+			boards[boardIndex].title = payload.title;
 			boards[boardIndex].active = true;
 			return {
 				...state,

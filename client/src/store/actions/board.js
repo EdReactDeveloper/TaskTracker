@@ -22,7 +22,7 @@ import {
 	UPDATE_TOPIC_FAIL,
 	END_SESSION
 } from './types';
-import { getBoards, updateBoard, removeBoard } from '../../api/board';
+import { getBoards, postBoard, removeBoard } from '../../api/board';
 import { getTopics, addTopic, removeTopic, addListItem, updateListItem } from '../../api/topics';
 import { inProgressAction } from './inprogress';
 
@@ -60,9 +60,10 @@ export const clearBoard = () => (dispatch) => {
 	});
 };
 
-export const addBoard = (boardTitle, history) => async (dispatch) => {
+export const addBoard = (title, history) => async (dispatch) => {
 	try {
-		const result = await updateBoard('add', { boardTitle });
+		const result = await postBoard({ title });
+		console.log(result)
 		history.push(`/boards/${result._id}`);
 		dispatch({
 			type: ADD_BOARD_SUCCESS,
@@ -78,9 +79,9 @@ export const addBoard = (boardTitle, history) => async (dispatch) => {
 	}
 };
 
-export const eidtBoardTitleAction = (boardTitle, id) => async (dispatch) => {
+export const eidtBoardTitleAction = (title, id) => async (dispatch) => {
 	try {
-		const result = await updateBoard('add', { boardTitle, id });
+		const result = await postBoard({ title, id });
 		dispatch({
 			type: UPDATE_BOARD_SUCCESS,
 			payload: result

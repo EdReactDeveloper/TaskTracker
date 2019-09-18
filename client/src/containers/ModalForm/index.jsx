@@ -21,7 +21,7 @@ class Form extends Component {
 
   initializeFields = () => {
     const { initialValues, board, topic, id, modalType } = this.props
-    initialValues.boardTitle = board && board.boardTitle
+    initialValues.boardTitle = board && board.title
     initialValues.topicTitle = topic && topic.title
     if (modalType === 'topicModal' && id) {
       initialValues.itemTitle = this.fetchItem(id).title

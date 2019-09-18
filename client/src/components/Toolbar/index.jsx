@@ -16,7 +16,7 @@ const Toolbar = ({
     <div className={style.nav}>
       {board ?
         <>
-          <h4>{board.boardTitle}
+          <h4>{board.title}
             {editMode &&
               <Button type='edit' payload={{ modalHandler, modalType: 'boardsModal', item: board }} />
             }

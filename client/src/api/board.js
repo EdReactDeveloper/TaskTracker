@@ -10,9 +10,9 @@ export const getBoards = async() => {
   return result.data
 }
 
-export const updateBoard = async(type, payload)=> {
+export const postBoard = async(payload)=> {
   const body = JSON.stringify(payload);
-  const result = await instance.post(`${baseURL}${type}`, body)
+  const result = await instance.post(baseURL, body)
   return result.data
 }
 

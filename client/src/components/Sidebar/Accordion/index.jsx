@@ -12,7 +12,7 @@ class Accordion extends Component {
           boards.map(item => (
             <li key={item._id}>
               <Link to={`/boards/${item._id}`} className={style.item} onClick={() => getBoard(item._id)}>
-                <div className={`${style.btnAc} ${item.active ? style.board_background : ''}`}> {item.boardTitle} </div>
+                <div className={`${style.btnAc} ${item.active ? style.board_background : ''}`}> {item.title} </div>
               </Link>
 
               <ul className={style.smenu}
