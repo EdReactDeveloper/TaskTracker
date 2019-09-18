@@ -1,26 +1,25 @@
 import {
 	FETCH_BOARDS_SUCCESS,
 	FETCH_BOARDS_FAIL,
-	GET_BOARD,
-	REMOVE_BOARD_SUCCESS,
-	REMOVE_BOARD_FAIL,
 	ADD_BOARD_SUCCESS,
 	ADD_BOARD_FAIL,
+	GET_BOARD,
+	UPDATE_BOARD_SUCCESS,
+	UPDATE_BOARD_FAIL,
+	REMOVE_BOARD_SUCCESS,
+	REMOVE_BOARD_FAIL,
 	CLEAR_BOARD,
+	FETCH_TOPIC_SUCCESS,
 	ADD_TOPIC_SUCCESS,
 	ADD_TOPIC_FAIL,
+	UPDATE_TOPIC_SUCCESS,
+	UPDATE_TOPIC_FAIL,
 	REMOVE_TOPIC_SUCCESS,
 	REMOVE_TOPIC_FAIL,
 	UPDATE_LIST_SUCCESS,
 	UPDATE_LIST_FAIL,
 	ADD_LISTITEM_SUCCESS,
-	ADD_LISTITEM_FAIL,
-	FETCH_TOPIC_SUCCESS,
-	UPDATE_BOARD_SUCCESS,
-	UPDATE_BOARD_FAIL,
-	UPDATE_TOPIC_SUCCESS,
-	UPDATE_TOPIC_FAIL,
-	END_SESSION
+	ADD_LISTITEM_FAIL
 } from './types';
 import { getBoards, postBoard, removeBoard } from '../../api/board';
 import { getTopics, postTopic, removeTopic, addListItem, updateListItem } from '../../api/topics';
@@ -63,7 +62,7 @@ export const clearBoard = () => (dispatch) => {
 export const addBoard = (title, history) => async (dispatch) => {
 	try {
 		const result = await postBoard({ title });
-		console.log(result)
+		console.log(result);
 		history.push(`/boards/${result._id}`);
 		dispatch({
 			type: ADD_BOARD_SUCCESS,
@@ -104,6 +103,8 @@ export const removeBoardAction = (boardId, history) => async (dispatch) => {
 		dispatch({ type: REMOVE_BOARD_FAIL, paylaod: error });
 	}
 };
+
+// TOPICS
 
 export const getTopic = (topicId) => async (dispatch) => {
 	dispatch({ type: FETCH_TOPIC_SUCCESS, payload: topicId });
@@ -152,6 +153,8 @@ export const removeTopicAction = (topicId) => async (dispatch) => {
 	}
 };
 
+// TOPIC'S LIST ITEMS
+
 export const addListItemAction = (topicId, title, description) => async (dispatch) => {
 	try {
 		const result = await addListItem({ title, description }, topicId);
@@ -165,6 +168,8 @@ export const addListItemAction = (topicId, title, description) => async (dispatc
 };
 
 export const updateListItemAction = (payload, type) => async (dispatch) => {
+	// type ( check, edit, remove )
+	// payload ( itemId, title )
 	try {
 		dispatch(inProgressAction(true, payload.itemId));
 		const result = await updateListItem(payload, type);
@@ -174,10 +179,4 @@ export const updateListItemAction = (payload, type) => async (dispatch) => {
 		console.log(error);
 		dispatch({ type: UPDATE_LIST_FAIL, payload: error });
 	}
-};
-
-export const endSession = () => (dispatch) => {
-	dispatch({
-		type: END_SESSION
-	});
 };

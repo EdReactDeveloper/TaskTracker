@@ -6,7 +6,6 @@ import {
 	LOGOUT_SUCCESS,
 	LOGOUT_FAIL
 } from './types';
-import { endSession } from './board';
 import { auth } from '../../api/auth';
 
 export const login = ({email, password}) => async (dispatch) => {
@@ -32,7 +31,6 @@ export const logout = () => (dispatch) => {
 	try {
 		auth('logout');
 		dispatch({ type: LOGOUT_SUCCESS });
-		dispatch(endSession());
 	} catch (error) {
 		console.log(error);
 		dispatch({ type: LOGOUT_FAIL, paylaod: error });
