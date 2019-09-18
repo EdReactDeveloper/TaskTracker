@@ -65,6 +65,11 @@ export const MODAL = 'MODAL';
 export const DROPDOWN = 'DROPDOWN';
 export const EDIT = 'EDIT';
 
+// ALERTS
+
+export const SET_ALERT = 'SET_ALERT'
+export const REMOVE_ALERT = 'REMOVE_ALERT'
+
 //REST
 
 export const IN_PROGRESS = 'IN_PROGRESS';

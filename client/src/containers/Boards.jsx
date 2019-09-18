@@ -22,11 +22,11 @@ class BoardsContainer extends Component {
   render() {
     const { boards, loading, modalHandler, isOpen, history, match } = this.props
     return <>
-      {boards && !loading ? <Boards {...this.props}/> : <Loader />}
-      {isOpen && 
-      <Modal modalHandler={modalHandler}>
-        <Form boardId={match.params.id} history={history} />
-      </Modal>}
+      {boards && !loading ? <Boards {...this.props} /> : <Loader />}
+      {isOpen &&
+        <Modal modalHandler={modalHandler}>
+          <Form boardId={match.params.id} history={history} />
+        </Modal>}
     </>
   }
 }

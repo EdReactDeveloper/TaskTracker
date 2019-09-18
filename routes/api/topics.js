@@ -8,7 +8,7 @@ router.get('/:id', async (req, res, next) => {
 		const result = await Topic.find({ boardId: req.params.id });
 		return res.json(result);
 	} catch (error) {
-		res.status(404).json({ msg: error });
+		res.status(404).json({errors: [{msg: error }]});
 	}
 });
 
@@ -41,8 +41,7 @@ router.post(
 			await topic.save();
 			res.json(topic);
 		} catch (error) {
-			console.log(error);
-			res.status(404).json({ msg: error });
+			res.status(404).json({errors: [{msg: error }]});
 		}
 	}
 );
@@ -54,7 +53,7 @@ router.post('/list/add/:id', async (req, res, next) => {
 		const result = await topic.addItem(title, description);
 		return res.json(result);
 	} catch (error) {
-		res.status(404).json({ msg: error });
+		res.status(404).json({errors: [{msg: error }]});
 	}
 });
 
@@ -67,7 +66,7 @@ router.post('/list/check/:id', async (req, res, next) => {
 
 		res.json(result);
 	} catch (error) {
-		res.status(404).json({ msg: error });
+		res.status(404).json({errors: [{msg: error }]});
 	}
 });
 
@@ -79,7 +78,7 @@ router.post('/list/edit/:id', async (req, res, next) => {
 		const result = await topic.editItem(itemTitle, itemDescription, itemId);
 		res.json(result);
 	} catch (error) {
-		res.status(404).json({ msg: error });
+		res.status(404).json({errors: [{msg: error }]});
 	}
 });
 
@@ -90,7 +89,7 @@ router.post('/list/remove/:id', async (req, res, next) => {
 		const result = await topic.removeItem(payload.itemId);
 		res.json(result);
 	} catch (error) {
-		res.status(404).json({ msg: error });
+		res.status(404).json({errors: [{msg: error }]});
 	}
 });
 
@@ -101,7 +100,7 @@ router.delete('/:id', async (req, res, next) => {
 		await topic.remove();
 		return res.json(id);
 	} catch (error) {
-		res.status(404).json({ msg: error });
+		res.status(404).json({errors: [{msg: error }]});
 	}
 });
 

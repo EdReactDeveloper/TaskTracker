@@ -8,11 +8,10 @@ const maxLength30 = maxLengthCreator(30)
 const minLength6 = minLengthCreator(6)
 
 const Register = ({
-  handleSubmit, ...props
+  onSubmit, ...props
 }) => {
-  console.log(props)
   return (
-    <form onSubmit={handleSubmit} className={style.form}>
+    <form onSubmit={onSubmit} className={style.form}>
       <label htmlFor="email" className={style.heading}>email
         <Field
         component={Input}
@@ -40,7 +39,7 @@ const Register = ({
           validate={[required, maxLength30, minLength6]}
           />
       </label>
-      <button type="submit" disabled={!props.value} className={`${style.submit} ${props.valid ? '' : style.invalid}`}>submit</button>
+      <button type="submit" disabled={!props.valid} className={`${style.submit} ${props.valid ? '' : style.invalid}`}>submit</button>
     </form>
   );
 };

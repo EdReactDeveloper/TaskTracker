@@ -10,7 +10,8 @@ import {connect} from 'react-redux';
 import Board from '../containers/Board/Board'; 
 import Boards from '../containers/Boards'; 
 import style from '../App.module.scss';
-import Nav from '../containers/Toolbar'; 
+import Toolbar from '../containers/Toolbar'; 
+import Alert from '../containers/Alert'; 
 
 const Routes = ({loading}) => {
   
@@ -18,13 +19,14 @@ const Routes = ({loading}) => {
     <Router>
       {!loading && (
       <HeaderFooter>
+        <Alert />
         <Switch>
           <Route exact path="/" component={Home}/>
           <AuthRoute exact path="/login" component={Login}/>
           <Route exact path="/register" component={Register}/>
         </Switch>
         <div className={`${style.container} ${style.board}`}>
-          <PrivateRoute path="/boards" component={Nav}/>
+          <PrivateRoute path="/boards" component={Toolbar}/>
           <PrivateRoute path="/boards" component={Boards}/>
           <PrivateRoute exact path="/boards/:id" component={Board}/>
         </div>

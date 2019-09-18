@@ -8,9 +8,11 @@ import modal from './reducers/modal';
 import dropdown from './reducers/dropdown';
 import inProgress from './reducers/inprogress';
 import { reducer as formReducer } from 'redux-form';
+import alerts from './reducers/alert'; 
 
 const reducers = combineReducers({
 	auth,
+	alerts,
 	board,
 	modal,
 	dropdown,

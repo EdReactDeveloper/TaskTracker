@@ -21,9 +21,10 @@ import {
 	ADD_LISTITEM_SUCCESS,
 	ADD_LISTITEM_FAIL
 } from './types';
-import { getBoards, postBoard, removeBoard } from '../../api/board';
-import { getTopics, postTopic, removeTopic, addListItem, updateListItem } from '../../api/topics';
+import { getBoards, postBoard, removeBoard } from '../api/board';
+import { getTopics, postTopic, removeTopic, addListItem, updateListItem } from '../api/topics';
 import { inProgressAction } from './inprogress';
+import { setAlert } from './alerts';
 
 export const fetchBoards = (history) => async (dispatch) => {
 	try {
@@ -39,6 +40,10 @@ export const fetchBoards = (history) => async (dispatch) => {
 			payload: { boards, history }
 		});
 	} catch (error) {
+		const errors = error.response.data;
+		if (errors) {
+			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+		}
 		dispatch({
 			type: FETCH_BOARDS_FAIL,
 			error
@@ -62,15 +67,18 @@ export const clearBoard = () => (dispatch) => {
 export const addBoard = (title, history) => async (dispatch) => {
 	try {
 		const result = await postBoard({ title });
-		console.log(result);
 		history.push(`/boards/${result._id}`);
 		dispatch({
 			type: ADD_BOARD_SUCCESS,
 			payload: result
 		});
 		dispatch(getBoard(result._id));
+		dispatch(setAlert('board has been created', 'success'));
 	} catch (error) {
-		console.log(error);
+		const { errors } = error.response.data;
+		if (errors) {
+			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+		}
 		dispatch({
 			type: ADD_BOARD_FAIL,
 			payload: error
@@ -86,7 +94,10 @@ export const eidtBoardTitleAction = (title, id) => async (dispatch) => {
 			payload: result
 		});
 	} catch (error) {
-		console.log(error);
+		const { errors } = error.response.data;
+		if (errors) {
+			errors.forEach((error) => dispatch(error.msg, 'danger'));
+		}
 		dispatch({
 			type: UPDATE_BOARD_FAIL
 		});
@@ -98,8 +109,12 @@ export const removeBoardAction = (boardId, history) => async (dispatch) => {
 		const id = await removeBoard(boardId);
 		dispatch({ type: REMOVE_BOARD_SUCCESS, payload: id });
 		history.push('/boards');
+		dispatch(setAlert('board has removed', 'success'));
 	} catch (error) {
-		console.log(error);
+		const { errors } = error.response.data;
+		if (errors) {
+			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+		}
 		dispatch({ type: REMOVE_BOARD_FAIL, paylaod: error });
 	}
 };
@@ -114,9 +129,14 @@ export const addTopicAction = (title, id) => async (dispatch) => {
 	// the id is the board's id
 	try {
 		const result = await postTopic({ title, id });
+		console.log(result);
 		dispatch({ type: ADD_TOPIC_SUCCESS, payload: result });
+		dispatch(setAlert('topic has been created', 'success'));
 	} catch (error) {
-		console.log(error);
+		const { errors } = error.response.data;
+		if (errors) {
+			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+		}
 		dispatch({ type: ADD_TOPIC_FAIL, payload: error });
 	}
 };
@@ -130,7 +150,10 @@ export const updateTopicAction = (title, id) => async (dispatch) => {
 			payload: result
 		});
 	} catch (error) {
-		console.log(error);
+		const { errors } = error.response.data;
+		if (errors) {
+			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+		}
 		dispatch({
 			type: UPDATE_TOPIC_FAIL
 		});
@@ -144,8 +167,12 @@ export const removeTopicAction = (topicId) => async (dispatch) => {
 			type: REMOVE_TOPIC_SUCCESS,
 			payload: topicId
 		});
+		dispatch(setAlert('topic has been removed', 'success'));
 	} catch (error) {
-		console.log(error);
+		const { errors } = error.response.data;
+		if (errors) {
+			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+		}
 		dispatch({
 			type: REMOVE_TOPIC_FAIL,
 			payload: error
@@ -176,7 +203,10 @@ export const updateListItemAction = (payload, type) => async (dispatch) => {
 		dispatch(inProgressAction(false, payload.itemId));
 		dispatch({ type: UPDATE_LIST_SUCCESS, payload: result });
 	} catch (error) {
-		console.log(error);
+		const { errors } = error.response.data;
+		if (errors) {
+			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+		}
 		dispatch({ type: UPDATE_LIST_FAIL, payload: error });
 	}
 };
