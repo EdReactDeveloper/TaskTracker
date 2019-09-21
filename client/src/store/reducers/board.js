@@ -24,6 +24,7 @@ import {
 	UPDATE_TOPIC_FAIL,
 	LOGOUT_SUCCESS
 } from '../actions/types';
+import { changeProps, findItem, setActive, findAndRemoveItem } from './utils';
 
 const initialState = {
 	boards: null,
@@ -44,23 +45,13 @@ const board = function(state = initialState, action) {
 		// BOARD
 
 		case GET_BOARD: {
-			// 1. get the board data
-			const boards = [ ...state.boards ];
-			const index = state.boards.findIndex((item) => item._id === payload);
-			if (index < 0) {
+			let boards = [ ...state.boards ];
+			let board = findItem(boards, payload)
+			if (!board) {
 				return { ...state, boards, board: null, topic: null, laoding: false };
 			}
-			const board = boards[index];
-			// 2. add active: true to the board in the list of board, and false to the rest
-			board.active = true;
-			boards[index] = board;
-			for (let board of boards) {
-				if (board._id === payload) {
-					board.active = true;
-				} else {
-					board.active = false;
-				}
-			}
+			boards = setActive(boards, payload);
+			board.topics = setActive(board.topics, null)
 			return { ...state, boards, board, topic: null };
 		}
 
@@ -68,12 +59,8 @@ const board = function(state = initialState, action) {
 			return { ...state, boards: [ ...state.boards, { ...payload } ] };
 
 		case UPDATE_BOARD_SUCCESS: {
-			const boards = [ ...state.boards ];
-			const boardIndex = boards.findIndex((item) => item._id === payload._id);
-			boards[boardIndex].title = payload.title;
-			// make the board active on the boards list
-			boards[boardIndex].active = true;
-			return { ...state, board: payload, boards };
+			const { boards, board } = changeProps(state.boards, payload);
+			return { ...state, board, boards };
 		}
 
 		case REMOVE_BOARD_SUCCESS: {
@@ -101,50 +88,27 @@ const board = function(state = initialState, action) {
 
 		case FETCH_TOPIC_SUCCESS: {
 			const boards = [ ...state.boards ];
-			const boardIndex = boards.findIndex((board) => board._id === state.board._id);
-			const topics = boards[boardIndex].topics;
-			for (let topic of topics) {
-				// make the topic active on the ui topics list
-				if (topic._id === payload) {
-					topic.active = true;
-				} else {
-					topic.active = false;
-				}
-			}
-			const topic = topics.find((topic) => topic._id === payload);
-
+			const board = findItem(boards, state.board._id);
+			board.topics = setActive(board.topics, payload);
+			const topic = findItem(board.topics, payload);
 			return { ...state, boards, topic };
 		}
 
 		case ADD_TOPIC_SUCCESS:
-			const boards = [ ...state.boards ];
-			const index = boards.findIndex((item) => item._id === payload.boardId);
-			const board = boards[index];
-			board.topics = [ payload, ...board.topics ];
-			for (let topic of board.topics) {
-				if (topic._id === payload._id) {
-					topic.active = true;
-				} else {
-					topic.active = false;
-				}
-			}
-			boards[index] = board;
+			const { boards, board } = changeProps(
+				state.boards,
+				{ _id: payload.boardId, title: state.board.title },
+				payload
+			);
+			board.topics = setActive(board.topics, payload._id);
 			return {
 				...state,
-				boards,
+				boards: [ ...boards ],
 				topic: payload
 			};
 
 		case UPDATE_TOPIC_SUCCESS: {
-			const boards = [ ...state.boards ];
-			const boardIndex = boards.findIndex((item) => item._id === state.board._id);
-			const board = boards[boardIndex];
-			const topics = board.topics;
-			const topicIndex = topics.findIndex((item) => item._id === payload._id);
-			topics[topicIndex] = payload;
-			topics[topicIndex].active = true;
-			board.topics = topics;
-			boards[boardIndex] = board;
+			const { boards, board } = changeProps(state.boards, state.board, payload);
 			return {
 				...state,
 				boards,
@@ -154,14 +118,9 @@ const board = function(state = initialState, action) {
 		}
 
 		case REMOVE_TOPIC_SUCCESS: {
-			const boards = [ ...state.boards ];
-			const boardIndex = boards.findIndex((item) => item._id === state.board._id);
-			const board = boards[boardIndex];
-			const topics = [ ...state.board.topics ];
-			const topicIndex = topics.findIndex((item) => item._id === payload);
-			topics.splice(topicIndex, 1);
-			board.topics = topics;
-			boards[boardIndex] = board;
+			const boards = [ ...state.boards ];			
+			let board = findItem(boards, state.board._id);
+			board.topics = findAndRemoveItem(board.topics, payload)
 			return {
 				...state,
 				boards,
@@ -175,12 +134,10 @@ const board = function(state = initialState, action) {
 		case ADD_LISTITEM_SUCCESS:
 		case UPDATE_LIST_SUCCESS: {
 			const boards = [ ...state.boards ];
-			const boardIndex = boards.findIndex((item) => item._id === state.board._id);
-			const board = boards[boardIndex];
-			const topicIndex = board.topics.findIndex((item) => item._id === payload._id);
-			board.topics[topicIndex] = payload;
-			board.topics[topicIndex].active = true;
-			boards[boardIndex] = board;
+			const board = findItem(boards, state.board._id)
+			let topic = findItem(board.topics, payload._id)
+			topic = payload;
+			board.topics = setActive(board.topics, topic._id)
 			return {
 				...state,
 				boards,
