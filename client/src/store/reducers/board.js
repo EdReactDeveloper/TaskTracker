@@ -40,7 +40,8 @@ const board = function(state = initialState, action) {
 	switch (type) {
 		// BOARDS
 		case FETCH_BOARDS_SUCCESS:
-			return { ...state, boards: payload.boards, loading: false };
+			
+			return { ...state, boards: payload, loading: false };
 
 		// BOARD
 
@@ -72,7 +73,9 @@ const board = function(state = initialState, action) {
 		}
 
 		case CLEAR_BOARD:
-			return { ...state, board: null };
+			let boards = [...state.boards]
+			boards = setActive(boards, null)
+			return { ...state, boards, board: null };
 
 		// TOPICS
 
@@ -149,10 +152,8 @@ const board = function(state = initialState, action) {
 		}
 
 		// FAIL
-
+		
 		case FETCH_BOARDS_FAIL:
-			return { ...state, boards: null, loading: false };
-
 		case FETCH_TOPICS_FAIL:
 		case ADD_TOPIC_FAIL:
 		case ADD_LISTITEM_FAIL:

@@ -7,16 +7,16 @@ import Loader from '../../components/misc/Loader';
 
 class BoardContainer extends Component {
 
-  constructor(props) {
-    super(props)
-    this.modalType = 'boardModal'
-  }
-
   componentDidMount() {
-    this.props.fetchBoards().then(() => {
-      const id = this.props.match.params.id
-      this.props.getBoard(id)
-    })
+    const { boards, fetchBoards, getBoard, match } = this.props
+    const id = match.params.id
+    if (!boards) {
+      fetchBoards().then(() => {
+        getBoard(id)
+      })
+    } else {
+      getBoard(id)
+    }
   }
 
   componentWillUnmount() {
@@ -25,13 +25,13 @@ class BoardContainer extends Component {
 
   render() {
     const { board, loading } = this.props
-    if(board && !loading){
+    if (board && !loading) {
       return <Board />
-      }else if(!board && loading ){
-        return <Loader />
-      }else{
-        return 'no board'
-      }        
+    } else if (!board && loading) {
+      return <Loader />
+    } else {
+      return 'no board'
+    }
   }
 }
 
@@ -39,6 +39,7 @@ const mapStateToProps = state => {
   return {
     board: state.board.board,
     loading: state.board.loading,
+    boards: state.board.boards
   }
 }
 

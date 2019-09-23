@@ -26,7 +26,7 @@ import { getTopics, postTopic, removeTopic, addListItem, updateListItem } from '
 import { inProgressAction } from './inprogress';
 import { setAlert } from './alerts';
 
-export const fetchBoards = (history) => async (dispatch) => {
+export const fetchBoards = () => async (dispatch) => {
 	try {
 		const result = await getBoards();
 		const boards = [ ...result ];
@@ -37,7 +37,7 @@ export const fetchBoards = (history) => async (dispatch) => {
 		}
 		dispatch({
 			type: FETCH_BOARDS_SUCCESS,
-			payload: { boards, history }
+			payload: boards
 		});
 	} catch (error) {
 		const errors = error.response.data;
@@ -73,7 +73,6 @@ export const addBoard = (title, history) => async (dispatch) => {
 			payload: result
 		});
 		dispatch(getBoard(result._id));
-		dispatch(setAlert('board has been created', 'success'));
 	} catch (error) {
 		const { errors } = error.response.data;
 		if (errors) {
@@ -129,9 +128,7 @@ export const addTopicAction = (title, id) => async (dispatch) => {
 	// the id is the board's id
 	try {
 		const result = await postTopic({ title, id });
-		console.log(result);
 		dispatch({ type: ADD_TOPIC_SUCCESS, payload: result });
-		dispatch(setAlert('topic has been created', 'success'));
 	} catch (error) {
 		const { errors } = error.response.data;
 		if (errors) {

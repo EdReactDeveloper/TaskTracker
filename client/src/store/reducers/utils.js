@@ -10,13 +10,12 @@ export const setActive = (item, id) => {
 	return item;
 };
 
-export const findItem = function(where, id){
-  const index = where.findIndex(i=> i._id === id)
-  return where[index]
+export const findItem = function(array, id){
+  const index = array.findIndex(i=> i._id === id)
+  return array[index]
 }
 
-export const findAndRemoveItem = function(where, id){
-  const array = [...where]
+export const findAndRemoveItem = function(array, id){
   const index = array.findIndex(i=> i._id === id)
   array.splice(index, 1)
   return array
