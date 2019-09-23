@@ -24,7 +24,7 @@ import {
 	UPDATE_TOPIC_FAIL,
 	LOGOUT_SUCCESS
 } from '../actions/types';
-import { findItem, setActive, findAndRemoveItem } from './utils';
+import { findItem, findAndRemoveItem } from './utils';
 
 const initialState = {
 	boards: null,
@@ -39,8 +39,7 @@ const board = function(state = initialState, action) {
 
 	switch (type) {
 		// BOARDS
-		case FETCH_BOARDS_SUCCESS:
-			
+		case FETCH_BOARDS_SUCCESS:			
 			return { ...state, boards: payload, loading: false };
 
 		// BOARD
@@ -51,8 +50,6 @@ const board = function(state = initialState, action) {
 			if (!board) {
 				return { ...state, boards, board: null, topic: null, laoding: false };
 			}
-			boards = setActive(boards, payload);
-			board.topics = setActive(board.topics, null);
 			return { ...state, boards, board, topic: null };
 		}
 
@@ -74,7 +71,6 @@ const board = function(state = initialState, action) {
 
 		case CLEAR_BOARD:
 			let boards = [...state.boards]
-			boards = setActive(boards, null)
 			return { ...state, boards, board: null };
 
 		// TOPICS
@@ -93,7 +89,6 @@ const board = function(state = initialState, action) {
 		case FETCH_TOPIC_SUCCESS: {
 			const boards = [ ...state.boards ];
 			const board = findItem(boards, state.board._id);
-			board.topics = setActive(board.topics, payload);
 			const topic = findItem(board.topics, payload);
 			return { ...state, boards, topic };
 		}
@@ -102,7 +97,6 @@ const board = function(state = initialState, action) {
 			const boards = [ ...state.boards ];
 			let board = findItem(boards, payload.boardId);
 			board.topics = [ payload, ...board.topics ];
-			board.topics = setActive(board.topics, payload._id);
 			return {
 				...state,
 				boards,
@@ -143,7 +137,6 @@ const board = function(state = initialState, action) {
 			const board = findItem(boards, state.board._id);
 			let topic = findItem(board.topics, payload._id);
 			topic = payload;
-			board.topics = setActive(board.topics, topic._id);
 			return {
 				...state,
 				boards,

@@ -31,7 +31,6 @@ export const fetchBoards = () => async (dispatch) => {
 		const result = await getBoards();
 		const boards = [ ...result ];
 		for (let board of boards) {
-			board.active = false;
 			const topics = await getTopics(board._id);
 			board.topics = [ ...topics ];
 		}

@@ -36,7 +36,8 @@ const mapStateToProps = state => {
     boards: state.board.boards,
     loading: state.board.loading,
     isOpen: state.modal.isOpen,
-    board: state.board.board
+    board: state.board.board,
+    topic: state.board.topic
   }
 }
 
