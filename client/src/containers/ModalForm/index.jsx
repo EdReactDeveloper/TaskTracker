@@ -76,5 +76,4 @@ export default compose(
       addBoard, addTopicAction, addListItemAction, modalHandler,
       eidtBoardTitleAction, updateTopicAction, updateListItemAction
     })
-)
-  (Form);
+)(Form);

@@ -83,11 +83,13 @@
     top: 0;
     padding: 1rem;
     padding-left: 3rem;
-    white-space: pre-line;
+    white-space: pre-wrap;
     border: 1px solid #bdc3c7;
     background: #fff;
     min-width: 5rem;
     max-width: 30rem;
+    max-height: 20rem;
+    overflow-y: auto;
     width: max-content;
     z-index: 1;
     transition: all .3s;

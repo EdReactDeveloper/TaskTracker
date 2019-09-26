@@ -58,8 +58,8 @@ const board = function(state = initialState, action) {
 
 		case UPDATE_BOARD_SUCCESS: {
 			const boards = [ ...state.boards ];
-			const board = findItem(boards, payload._id);
-			board.title = payload.title;
+			let board = findItem(boards, payload._id);
+			board.title = payload.title;			
 			return { ...state, board, boards };
 		}
 
@@ -140,7 +140,7 @@ const board = function(state = initialState, action) {
 			return {
 				...state,
 				boards,
-				topic: payload
+				topic
 			};
 		}
 

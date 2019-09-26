@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import style from './Accordion.module.scss'
 import { Link } from 'react-router-dom';
-import board from "../../../store/reducers/board";
 
 class Accordion extends Component {
 

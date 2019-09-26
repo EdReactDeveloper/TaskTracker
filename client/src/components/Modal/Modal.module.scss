@@ -25,12 +25,9 @@
   border: 1px solid #ccc;
   box-shadow: 1px 1px 1px black;
   padding: 16px;
-  left: 50%;
+  left: 45%;
   top: 30%;
-  min-height: 10rem;
-  transform: translate(-50%, -30%);
-  -webkit-font-smoothing: antialiased; // для сглаживания побочного эффекта вызванного центрированием через transform translate
-  
+   
   box-sizing: border-box;
   transition: all 0.3s ease-out;
 }
