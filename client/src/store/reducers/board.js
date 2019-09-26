@@ -136,11 +136,11 @@ const board = function(state = initialState, action) {
 			const boards = [ ...state.boards ];
 			const board = findItem(boards, state.board._id);
 			let topic = findItem(board.topics, payload._id);
-			topic = payload;
+			topic.list = payload.list;
 			return {
 				...state,
 				boards,
-				topic
+				topic: payload
 			};
 		}
 

@@ -11,10 +11,7 @@ class DropDownContainer extends Component {
 
   constructor(props) {
     super(props);
-
-    this.state = { isOpen: false };
     this.toggleContainer = React.createRef();
-
     this.onClickHandler = this.onClickHandler.bind(this);
     this.onClickOutsideHandler = this.onClickOutsideHandler.bind(this);
   }
