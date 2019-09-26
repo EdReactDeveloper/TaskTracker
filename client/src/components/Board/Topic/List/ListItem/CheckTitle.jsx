@@ -2,15 +2,16 @@ import React from 'react';
 import style from './ListItem.module.scss';
 import Button from '../../../../misc/Elements/Button';
 import Loader from '../../../../misc/Loader/Circle';
-import {formatTitle} from '../../../../misc/utilFuncs'; 
+import { formatTitle } from '../../../../misc/utilFuncs';
 
 const CheckTitle = (props) => {
   const { item, updateListItemAction, editMode, modalHandler, inProgress } = props
-  return <label htmlFor="checkbox" className={style.checkTitle}>
-
+  return <>
+    <label htmlFor="checkbox" className={style.checkTitle}></label>
     {inProgress.some(id => id === item._id) ? <Loader /> :
       <>
         <input
+          id="checkbox"
           name="checkbox"
           type="checkbox"
           checked={item.done}
@@ -26,7 +27,7 @@ const CheckTitle = (props) => {
     <div className={style.title}> {formatTitle(item.title)}</div>
     {item.description && <Button type='info' payload={{ item }} />}
     {editMode && <Button type='edit' payload={{ item, modalType: 'topicModal', modalHandler }} />}
-  </label>
+  </>
 };
 
 export default CheckTitle;

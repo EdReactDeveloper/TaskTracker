@@ -32,10 +32,12 @@ const Button = ({ payload = '', type, onClick }) => {
         <Icon className={style.btn_delete_icon} d={Item.delete} />
       </button>
 
-    case 'info': return <button className={style.info}>
-      i
-      <div className={style.info_block}>{item.description}</div>
+    case 'info': return <div className={style.info}>
+      <button className={style.info_btn}>
+        i
     </button>
+      <p className={style.info_block}>{item.description}</p>
+    </div>
 
     case 'editAll': return <button
       onClick={() => editHandler()}
@@ -49,12 +51,12 @@ const Button = ({ payload = '', type, onClick }) => {
         <div className={style.dropMenu_content}></div>
       </button>
 
-    case 'addBoard': 
-    return <button 
-    type='button' 
-    onClick={() => modalHandler('boardsModal')}
-    className={style.add}
-    >create a board</button>
+    case 'addBoard':
+      return <button
+        type='button'
+        onClick={() => modalHandler('boardsModal')}
+        className={style.add}
+      >create a board</button>
 
 
     default: return <button>what is this?</button>
