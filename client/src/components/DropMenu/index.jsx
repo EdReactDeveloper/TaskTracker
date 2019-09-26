@@ -4,10 +4,10 @@ import Button from '../misc/Elements/Button';
 import style from './DropMenu.module.scss';
 
 const DropDown = (props) => {
-  const {isOpen} = props
+  const {isOpen, onClickHandler} = props
   return (
-    <div className={style.wrapper}>
-      <Button type='dropMenu'/>
+    <div className={style.wrapper} ref={props.toggleContainer}>
+      <Button type='dropMenu' onClick={onClickHandler}/>
       {isOpen &&
        <List {...props}   />
       }

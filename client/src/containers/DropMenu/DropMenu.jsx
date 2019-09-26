@@ -5,28 +5,35 @@ import DropDown from '../../components/DropMenu'
 import { renderBoardSMenu, renderBoardMenu, renderTopicMenu } from './menuData';
 import { removeBoardAction, removeTopicAction } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
-import {withRouter} from 'react-router-dom'; 
+import { withRouter } from 'react-router-dom';
 
 class DropDownContainer extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = { isOpen: false };
+    this.toggleContainer = React.createRef();
+
+    this.onClickHandler = this.onClickHandler.bind(this);
+    this.onClickOutsideHandler = this.onClickOutsideHandler.bind(this);
+  }
+
   componentDidMount() {
-    document.addEventListener('mousedown', this.handleClickOutside);
+    window.addEventListener('click', this.onClickOutsideHandler);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
+    window.removeEventListener('click', this.onClickOutsideHandler);
   }
 
-  setWrapperRef = (node) => {
-    this.wrapperRef = node;
+  onClickHandler() {
+    this.props.dropdownHandler(!this.props.isOpen)
   }
 
-  handleClickOutside = (event) => {
-    const { dropdownHandler } = this.props
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      dropdownHandler(false)
-    } else {
-      dropdownHandler(true)
+  onClickOutsideHandler(event) {
+    if (this.props.isOpen && !this.toggleContainer.current.contains(event.target)) {
+      this.props.dropdownHandler(false)
     }
   }
 
@@ -35,13 +42,13 @@ class DropDownContainer extends Component {
     const boardsItems = renderBoardSMenu(modalHandler)
     const boardItems = board && renderBoardMenu(removeBoardAction, modalHandler, board._id, history)
     const topicItems = topic && renderTopicMenu(removeTopicAction, modalHandler, topic._id)
-    return <div ref={this.setWrapperRef}>
-      <DropDown {...this.props}
-        boardItems={boardItems}
-        topicItems={topicItems}
-        boardsItems={boardsItems} 
-      />
-    </div>;
+    return <DropDown {...this.props}
+      boardItems={boardItems}
+      topicItems={topicItems}
+      boardsItems={boardsItems}
+      onClickHandler={this.onClickHandler}
+      toggleContainer={this.toggleContainer}
+    />
   }
 }
 

@@ -3,7 +3,7 @@ import style from './Button.module.scss';
 import Icon from '../../icon/Icon';
 import { Item } from '../../icon/Selection';
 
-const Button = ({ payload = '', type }) => {
+const Button = ({ payload = '', type, onClick }) => {
   const {
     item,
     modalHandler,
@@ -45,7 +45,7 @@ const Button = ({ payload = '', type }) => {
     </button>
 
     case 'dropMenu':
-      return <button className={style.dropMenu}>
+      return <button className={style.dropMenu} onClick={onClick}>
         <div className={style.dropMenu_content}></div>
       </button>
 
