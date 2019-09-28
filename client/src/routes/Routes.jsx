@@ -12,6 +12,7 @@ import Boards from '../containers/Boards';
 import style from '../App.module.scss';
 import Toolbar from '../containers/Toolbar'; 
 import Alert from '../containers/Alert'; 
+import ErrorBoundry from '../containers/ErrorBoundry'; 
 
 const Routes = ({loading}) => {
   
@@ -25,11 +26,13 @@ const Routes = ({loading}) => {
           <AuthRoute exact path="/login" component={Login}/>
           <Route exact path="/register" component={Register}/>
         </Switch>
+        <ErrorBoundry>
         <div className={`${style.container} ${style.board}`}>
           <PrivateRoute path="/boards" component={Toolbar}/>
           <PrivateRoute path="/boards" component={Boards}/>
           <PrivateRoute exact path="/boards/:id" component={Board}/>
         </div>
+        </ErrorBoundry>
       </HeaderFooter>
       )}
     </Router>
