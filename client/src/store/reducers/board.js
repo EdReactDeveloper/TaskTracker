@@ -6,7 +6,6 @@ import {
 	REMOVE_BOARD_FAIL,
 	ADD_BOARD_SUCCESS,
 	ADD_BOARD_FAIL,
-	CLEAR_BOARD,
 	FETCH_TOPICS_SUCCESS,
 	FETCH_TOPICS_FAIL,
 	ADD_TOPIC_SUCCESS,
@@ -68,10 +67,6 @@ const board = function(state = initialState, action) {
 			boards = findAndRemoveItem(boards, payload);
 			return { ...state, boards, board: null, topic: null };
 		}
-
-		case CLEAR_BOARD:
-			let boards = [...state.boards]
-			return { ...state, boards, board: null };
 
 		// TOPICS
 

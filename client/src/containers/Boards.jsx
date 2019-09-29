@@ -11,12 +11,8 @@ import Form from './ModalForm';
 class BoardsContainer extends Component {
 
   componentDidMount() {
-    const { fetchBoards, getBoard, history, board, boards } = this.props
-    if (!boards && !board) {
-      fetchBoards(history)
-    } else {
-      getBoard(board._id)
-    }
+    const { fetchBoards } = this.props
+      fetchBoards()
   }
 
   render() {

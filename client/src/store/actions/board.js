@@ -57,12 +57,6 @@ export const getBoard = (id) => (dispatch) => {
 	});
 };
 
-export const clearBoard = () => (dispatch) => {
-	dispatch({
-		type: CLEAR_BOARD
-	});
-};
-
 export const addBoard = (title, history) => async (dispatch) => {
 	try {
 		const result = await postBoard({ title });
