@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Board from '../../components/Board';
 import { connect } from 'react-redux';
-import { getBoard, fetchBoards } from '../../store/actions/board';
+import { getBoard, fetchBoards, clearBoard } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 import Loader from '../../components/misc/Loader';
 
@@ -14,7 +14,7 @@ class BoardContainer extends Component {
   }
 
   componentWillUnmount() {
-    this.props.getBoard()
+    this.props.clearBoard()
   }
 
   render() {
@@ -37,4 +37,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getBoard, fetchBoards, modalHandler })(BoardContainer);
+export default connect(mapStateToProps, { getBoard, fetchBoards, modalHandler, clearBoard })(BoardContainer);

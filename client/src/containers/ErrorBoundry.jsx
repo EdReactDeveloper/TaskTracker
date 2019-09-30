@@ -28,9 +28,9 @@ class ErrorBoundary extends Component {
           {this.state.errorInfo.componentStack}
         </details>
       </div>
+    }else{
+      return this.props.children;
     }
-
-    return this.props.children;
   }
 }
 

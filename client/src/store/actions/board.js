@@ -5,6 +5,7 @@ import {
 	ADD_BOARD_FAIL,
 	GET_BOARD,
 	UPDATE_BOARD_SUCCESS,
+	CLEAR_BOARD,
 	UPDATE_BOARD_FAIL,
 	REMOVE_BOARD_SUCCESS,
 	REMOVE_BOARD_FAIL,
@@ -38,6 +39,7 @@ export const fetchBoards = () => async (dispatch) => {
 			payload: boards
 		});
 	} catch (error) {
+		console.log(error);
 		const errors = error.response.data;
 		if (errors) {
 			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
@@ -53,6 +55,12 @@ export const getBoard = (id) => (dispatch) => {
 	dispatch({
 		type: GET_BOARD,
 		payload: id
+	});
+};
+
+export const clearBoard = () => (dispatch) => {
+	dispatch({
+		type: CLEAR_BOARD
 	});
 };
 

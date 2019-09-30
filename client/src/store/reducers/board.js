@@ -2,6 +2,7 @@ import {
 	FETCH_BOARDS_SUCCESS,
 	FETCH_BOARDS_FAIL,
 	GET_BOARD,
+	CLEAR_BOARD,
 	REMOVE_BOARD_SUCCESS,
 	REMOVE_BOARD_FAIL,
 	ADD_BOARD_SUCCESS,
@@ -38,7 +39,7 @@ const board = function(state = initialState, action) {
 
 	switch (type) {
 		// BOARDS
-		case FETCH_BOARDS_SUCCESS:			
+		case FETCH_BOARDS_SUCCESS:
 			return { ...state, boards: payload, loading: false };
 
 		// BOARD
@@ -52,13 +53,22 @@ const board = function(state = initialState, action) {
 			return { ...state, boards, board, topic: null };
 		}
 
+		case CLEAR_BOARD: {
+			return {
+				...state,
+				board: null,
+				topic: null,
+				loading: false
+			};
+		}
+
 		case ADD_BOARD_SUCCESS:
 			return { ...state, boards: [ ...state.boards, { ...payload } ] };
 
 		case UPDATE_BOARD_SUCCESS: {
 			const boards = [ ...state.boards ];
 			let board = findItem(boards, payload._id);
-			board.title = payload.title;			
+			board.title = payload.title;
 			return { ...state, board, boards };
 		}
 
@@ -140,7 +150,7 @@ const board = function(state = initialState, action) {
 		}
 
 		// FAIL
-		
+
 		case FETCH_BOARDS_FAIL:
 		case FETCH_TOPICS_FAIL:
 		case ADD_TOPIC_FAIL:

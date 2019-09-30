@@ -29,7 +29,7 @@ const Routes = ({ loading }) => {
               <div className={`${style.container} ${style.board}`}>
                 <PrivateRoute path="/" component={Toolbar} />
                 <PrivateRoute path="/" component={Boards} />
-                <PrivateRoute exact path="/board/:id" component={Board} />
+                <PrivateRoute path="/board/:id" component={Board} />
               </div>
           </ErrorBoundry>
         </HeaderFooter>
