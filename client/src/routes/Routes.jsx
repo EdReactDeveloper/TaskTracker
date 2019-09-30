@@ -22,15 +22,17 @@ const Routes = ({ loading }) => {
         <HeaderFooter>
           <Alert />
           <ErrorBoundry>
+            <div className={style.wrapper}>
             <Switch>
               <AuthRoute exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
-            </Switch>
-              <div className={`${style.container} ${style.board}`}>
+              <div className={style.board}>
                 <PrivateRoute path="/" component={Toolbar} />
                 <PrivateRoute path="/" component={Boards} />
                 <PrivateRoute path="/board/:id" component={Board} />
               </div>
+            </Switch>
+            </div>
           </ErrorBoundry>
         </HeaderFooter>
       )}

@@ -8,9 +8,11 @@ import Loader from '../../components/misc/Loader';
 class BoardContainer extends Component {
 
   componentDidMount() {
-    const { getBoard, match } = this.props
+    const { getBoard, match, boards } = this.props
     const id = match.params.id
-    getBoard(id)
+    if(id && boards ) {
+      getBoard(id)
+    }
   }
 
   componentWillUnmount() {
