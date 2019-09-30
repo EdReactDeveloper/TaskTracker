@@ -6,17 +6,13 @@ const Sidebar = ({ boards, getTopic, getBoard, topic, board }) => {
   return (
     <aside className={style.wrapper}>
       <div className={style.NoBoard}>
-        {boards ?
-          <Accordion 
-          boards={boards} 
+        <Accordion
+          boards={boards}
           getTopic={getTopic}
-          getBoard={getBoard} 
+          getBoard={getBoard}
           topic={topic}
           board={board}
-          />
-          :
-          <NoBoards />
-        }
+        />
       </div>
     </aside>
   );

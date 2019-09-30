@@ -3,7 +3,7 @@ import style from './Accordion.module.scss'
 import { Link } from 'react-router-dom';
 import TopicsList from './List/TopicsList';
 
-const Boards = ({ getTopic, boards, getBoard, topic, board, }) => {
+const Boards = ({ getTopic, boards=[], getBoard, topic, board, }) => {
   return (
     <ul className={style.menu}>
       {

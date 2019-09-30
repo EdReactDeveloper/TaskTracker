@@ -1,14 +1,19 @@
 import React, { Component } from "react";
-import BoardsList from './BoardsList'; 
-import TopicsList from './List/TopicsList'; 
+import BoardsList from './BoardsList';
+import TopicsList from './List/TopicsList';
+import Loader from '../../misc/Loader';
 
-class Accordion extends Component {
-
-  render() {   
-    return (
-    <BoardsList topicsList={TopicsList} {...this.props}/>    
-    );
-  }
+const Accordion = (props) => {
+  const { boards } = props
+  return (
+    <>
+      {boards ?
+        <BoardsList topicsList={TopicsList} {...props} />
+        :
+        <Loader />
+      }
+    </>
+  );
 }
 
 export default Accordion;

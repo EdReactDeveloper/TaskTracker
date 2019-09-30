@@ -2,7 +2,6 @@ import React from 'react';
 import style from './List.module.scss';
 
 const Counter = ({list}) => {
-  console.log(list)
   let count = 0
   for (let i = 0; i < list.length; i++) {
     if (list[i].done) {

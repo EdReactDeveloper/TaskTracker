@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Boards from '../components/Boards';
 import { connect } from 'react-redux';
 import { fetchBoards, addBoard, getTopic, getBoard } from '../store/actions/board';
-import Loader from '../components/misc/Loader';
 import Modal from '../components/Modal';
 import { modalHandler } from '../store/actions/modal';
 import Form from './ModalForm';
@@ -16,9 +15,9 @@ class BoardsContainer extends Component {
   }
 
   render() {
-    const { boards, loading, modalHandler, isOpen, history, match } = this.props
+    const { modalHandler, isOpen, history, match } = this.props
     return <>
-      {boards && !loading ? <Boards {...this.props} /> : <Loader />}
+     <Boards {...this.props} />
       {isOpen &&
         <Modal modalHandler={modalHandler}>
           <Form boardId={match.params.id} history={history} />
