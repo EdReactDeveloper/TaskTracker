@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HeaderFooter from '../components/HeaderFooter';
-import Home from '../components/Home';
 import Login from '../containers/Login';
 import Register from '../containers/Register';
 import PrivateRoute from './PrivateRoute';
@@ -14,7 +13,19 @@ import Toolbar from '../containers/Toolbar';
 import Alert from '../containers/Alert';
 import ErrorBoundry from '../containers/ErrorBoundry';
 
-const Routes = ({ loading }) => {
+const BoardsContainer = ({ boards }) => {
+  return (
+    <div className={style.board}>
+      <PrivateRoute path="/" component={Toolbar} />
+      <PrivateRoute path="/" component={Boards} />
+      {boards &&
+        <PrivateRoute exact path="/board/:id" component={Board} />
+      }
+    </div>
+  )
+}
+
+const Routes = ({ loading, boards }) => {
 
   return (
     <Router>
@@ -23,15 +34,11 @@ const Routes = ({ loading }) => {
           <Alert />
           <ErrorBoundry>
             <div className={style.wrapper}>
-            <Switch>
-              <AuthRoute exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
-              <div className={style.board}>
-                <PrivateRoute path="/" component={Toolbar} />
-                <PrivateRoute path="/" component={Boards} />
-                <PrivateRoute path="/board/:id" component={Board} />
-              </div>
-            </Switch>
+              <Switch>
+                <AuthRoute exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Route render={() => <BoardsContainer boards={boards} />} />
+              </Switch>
             </div>
           </ErrorBoundry>
         </HeaderFooter>
@@ -42,7 +49,8 @@ const Routes = ({ loading }) => {
 
 const mapStateToProps = state => {
   return {
-    loading: state.auth.loading
+    loading: state.auth.loading,
+    boards: state.board.boards
   }
 }
 

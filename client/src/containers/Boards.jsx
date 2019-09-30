@@ -14,11 +14,6 @@ class BoardsContainer extends Component {
       fetchBoards()
   }
 
-  componentWillUnmount(){
-    const { fetchBoards } = this.props
-      // fetchBoards()
-  }
-
   render() {
     const { modalHandler, isOpen, history, match } = this.props
     return <>
