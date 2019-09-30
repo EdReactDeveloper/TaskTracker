@@ -2,7 +2,7 @@ import React from 'react';
 import style from '../Accordion.module.scss'
 import Counter from './Counter';
 
-const Topics = ({ getTopic, item, board, topic, calculateDone }) => {
+const Topics = ({ getTopic, item, board, topic }) => {
   return (
     <ul className={style.smenu}
       style={{ maxHeight: (board && item._id === board._id) ? item.topics.length * 3.5 + 'em' : '' }}

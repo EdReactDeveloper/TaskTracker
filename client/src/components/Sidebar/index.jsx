@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Sidebar.module.scss';
 import Accordion from './Accordion'
-import NoBoards from './NoBoards'
+
 const Sidebar = ({ boards, getTopic, getBoard, topic, board }) => {
   return (
     <aside className={style.wrapper}>

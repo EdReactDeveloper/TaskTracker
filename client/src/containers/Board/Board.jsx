@@ -8,15 +8,13 @@ import Loader from '../../components/misc/Loader';
 class BoardContainer extends Component {
 
   componentDidMount() {
-    const { boards, fetchBoards, getBoard, match } = this.props
+    const { getBoard, match } = this.props
     const id = match.params.id
-    if (!boards) {
-      fetchBoards().then(() => {
-        getBoard(id)
-      })
-    } else {
-      getBoard(id)
-    }
+    getBoard(id)
+  }
+
+  componentWillUnmount() {
+    this.props.getBoard()
   }
 
   render() {
