@@ -14,7 +14,7 @@ const Topics = ({ getTopic, item, board, topic }) => {
           onClick={() => getTopic(item._id)}>
           <div className={style.smenuItemIitle}>
             {item.title}
-            <Counter list={item.list} />
+            {item.list.length > 0 && <Counter list={item.list} />}
           </div>
         </li>
       ))}
