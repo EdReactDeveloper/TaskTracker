@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Loader.module.scss';
 
-const Loader = () => <div className={style.loader}>loading ...</div>;
+const Loader = (props) => <div className={`${props.className} ${style.loader}`}>loading ...</div>;
 
 export default Loader;

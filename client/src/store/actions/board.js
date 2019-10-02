@@ -181,8 +181,10 @@ export const removeTopicAction = (topicId) => async (dispatch) => {
 
 export const addListItemAction = (topicId, title, description) => async (dispatch) => {
 	try {
+		dispatch(inProgressAction(true, 'addListItem'));
 		const result = await addListItem({ title, description }, topicId);
 		dispatch({ type: ADD_LISTITEM_SUCCESS, payload: result });
+		dispatch(inProgressAction(false, 'addListItem'));
 	} catch (error) {
 		dispatch({
 			type: ADD_LISTITEM_FAIL,
