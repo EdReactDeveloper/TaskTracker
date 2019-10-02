@@ -51,7 +51,7 @@
     width: 2rem;
   }
 
-  &:hover~div label {
+  &:hover~div div {
     color: #ff4757;
   }
 }
@@ -123,7 +123,6 @@
   }
 
   &_content {
-
     outline: none;
     background: #ccc;
     position: relative;
