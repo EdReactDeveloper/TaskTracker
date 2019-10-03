@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import style from './header.module.scss';
+import style from './Header.module.scss';
 import app from '../../../App.module.scss';
 import Auth from './auth';
 
