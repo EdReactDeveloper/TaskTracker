@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Board from '../../components/Board';
+import Topic from './Topic';
 import { getBoard, fetchBoards, clearBoard } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 import Loader from '../../components/misc/Loader/Lines';
@@ -8,24 +8,19 @@ import Loader from '../../components/misc/Loader/Lines';
 class BoardContainer extends Component {
 
   componentDidMount() {
-    const { match } = this.props
+    const { match, getBoard } = this.props
     const { id } = match.params
     getBoard(id)
   }
 
   componentWillUnmount() {
+    const {clearBoard } = this.props
     clearBoard()
   }
 
   render() {
     const { board, loading } = this.props
-    if (board && !loading) {
-      return <Board />
-    } if (!board && loading) {
-      return <Loader />
-    }
-    return 'no board'
-
+    return (board && !loading) ? <Topic {...this.props} /> : <Loader />    
   }
 }
 

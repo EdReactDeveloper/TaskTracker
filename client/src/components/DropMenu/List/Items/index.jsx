@@ -7,12 +7,12 @@ const MenuItems = ({ items, dropdownHandler }) => {
   return (
     <ul className={style.list}>
       {items.map(item => {
-        function func() {
+        function openModal() {
           dropdownHandler(false)
           item.onClick()
         }
         return (
-          <button type="button" onClick={() => func()} key={item.name} className={style.item}>
+          <button type="button" onClick={openModal} key={item.name} className={style.item}>
             <Icon d={Item[item.icon]} className={style.icon} />
             <p>{item.name}</p>
           </button>

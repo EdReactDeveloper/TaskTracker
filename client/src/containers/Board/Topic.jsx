@@ -8,7 +8,8 @@ const TopicContainer =(props)=> <Topic {...props} />
 const mapStateToProps = state => {
   return {
     topic: state.board.topic,
-    editMode: state.modal.editMode
+    editMode: state.modal.editMode,
+    board: state.board.board
   }
 }
 

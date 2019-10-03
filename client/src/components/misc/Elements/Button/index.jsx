@@ -1,17 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import style from './Button.module.scss';
 import Icon from '../../icon/Icon';
 import { Item } from '../../icon/Selection';
+import { modalHandler, editHandler } from '../../../../store/actions/modal';
+import { updateListItemAction } from '../../../../store/actions/board';
 
-const Button = ({ payload = '', type, onClick }) => {
-  const {
-    item,
-    modalHandler,
-    updateListItemAction,
-    modalType,
-    editHandler,
-    editMode } = payload
 
+const Button = ({ type,
+  payload='',
+  modalHandler,
+  updateListItemAction,
+  editMode,
+  editHandler, onClick, ...props }) => {
+   const {item, modalType} = payload  
   switch (type) {
 
     case 'edit':
@@ -54,17 +56,20 @@ const Button = ({ payload = '', type, onClick }) => {
         <div className={style.dropMenu_content} />
       </button>
 
-    case 'addBoard':
+    case 'add':
       return <button
         type='button'
-        onClick={() => modalHandler('boardsModal')}
+        onClick={() => modalHandler(modalType)}
         className={style.add}
-      >create a board</button>
-
+      >{props.children}</button>
 
     default: return <button type="button">no type specified</button>
   }
 
 }
 
-export default Button
+const mapStateToProps = state => ({
+  editMode: state.modal.editMode
+})
+
+export default connect(mapStateToProps, { modalHandler, updateListItemAction, editHandler })(Button)

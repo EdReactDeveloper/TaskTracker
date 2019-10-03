@@ -107,7 +107,7 @@ export const removeBoardAction = (boardId, history) => async (dispatch) => {
 		const id = await removeBoard(boardId);
 		dispatch({ type: REMOVE_BOARD_SUCCESS, payload: id });
 		history.push('/boards');
-		dispatch(setAlert('board has removed', 'success'));
+		dispatch(setAlert('board has been removed', 'success'));
 	} catch (error) {
 		const { errors } = error.response.data;
 		if (errors) {

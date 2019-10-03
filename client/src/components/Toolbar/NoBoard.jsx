@@ -1,10 +1,10 @@
 import React from 'react';
 import Button from '../misc/Elements/Button';
 
-const NoBoard = ({ boards, modalHandler }) => {
+const NoBoard = ({ boards }) => {
   return <>
     {boards && boards.length < 1 ?
-      <Button type='addBoard' payload={{ modalHandler }}>
+      <Button type='add' payload={{ modalType: 'boardsModal' }}>
         create a board
       </Button>
       :

@@ -5,7 +5,7 @@ import Loader from '../../../../misc/Loader/Circle';
 import formatTitle from '../../../../misc/utilFuncs';
 
 const CheckTitle = (props) => {
-  const { item, updateListItemAction, editMode, modalHandler, inProgress } = props
+  const { item, updateListItemAction, editMode, inProgress } = props
   const checkHandler = () => {
     item.done = !item.done
   }
@@ -30,7 +30,7 @@ const CheckTitle = (props) => {
 
     <div className={style.title}> {formatTitle(item.title)}</div>
     {item.description && <Button type='info' payload={{ item }} />}
-    {editMode && <Button type='edit' payload={{ item, modalType: 'topicModal', modalHandler }} />}
+    {editMode && <Button type='edit' payload={{ item, modalType: 'topicModal' }} />}
   </>
 };
 
