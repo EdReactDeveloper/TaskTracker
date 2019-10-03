@@ -4,7 +4,7 @@ const initialState = {
 	inProgress: []
 };
 
-const inProgress = function(state = initialState, action) {
+const reducer = (state = initialState, action) => {
 	const { payload, type } = action;
 	switch (type) {
 		case IN_PROGRESS:
@@ -19,4 +19,4 @@ const inProgress = function(state = initialState, action) {
 	}
 };
 
-export default inProgress;
+export default reducer;

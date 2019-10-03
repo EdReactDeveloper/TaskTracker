@@ -12,10 +12,10 @@ const MenuItems = ({ items, dropdownHandler }) => {
           item.onClick()
         }
         return (
-          <li onClick={() => func()} key={item.name} className={style.item}>
+          <button type="button" onClick={() => func()} key={item.name} className={style.item}>
             <Icon d={Item[item.icon]} className={style.icon} />
             <p>{item.name}</p>
-          </li>
+          </button>
         )
       })}
     </ul>

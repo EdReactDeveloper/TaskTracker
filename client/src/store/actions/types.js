@@ -70,6 +70,6 @@ export const EDIT = 'EDIT';
 export const SET_ALERT = 'SET_ALERT'
 export const REMOVE_ALERT = 'REMOVE_ALERT'
 
-//REST
+// REST
 
 export const IN_PROGRESS = 'IN_PROGRESS';

@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import HeaderFooter from '../components/HeaderFooter';
 import Login from '../containers/Login';
 import Register from '../containers/Register';
 import PrivateRoute from './PrivateRoute';
 import AuthRoute from './AuthRoute';
-import { connect } from 'react-redux';
 import Board from '../containers/Board/Board';
 import Boards from '../containers/Boards';
 import style from '../App.module.scss';

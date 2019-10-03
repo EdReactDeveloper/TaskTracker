@@ -1,21 +1,22 @@
-
-html{
+html {
   font-size: 62.5%
 }
 
-*, *::before, *::after{
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
-  box-sizing: inherit; 
+  box-sizing: inherit;
 }
 
-ul{
-  list-style: none; 
+ul {
+  list-style: none;
 }
 
-a{
-  text-decoration: none; 
-  outline: none; 
+a {
+  text-decoration: none;
+  outline: none;
   color: inherit
 }
 
@@ -27,18 +28,14 @@ body {
   color: #666;
 }
 
-.app{
-  
-}
-
-.board{ 
-  display: grid; 
-  grid-template-columns: 30rem 1fr; 
+.board {
+  display: grid;
+  grid-template-columns: 30rem 1fr;
   grid-template-rows: 7rem 1fr;
   height: 100%;
 }
 
-.wrapper{
+.wrapper {
   min-height: calc(100vh - 20rem);
   display: grid;
   align-items: baseline;
@@ -46,6 +43,7 @@ body {
 
 .container {
   margin: 0 auto;
+
   @media (max-width: 1240px) {
     padding: 0 2rem;
     margin: 0;

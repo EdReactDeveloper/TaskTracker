@@ -1,15 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
 import Topic from '../../components/Board/Topic';
 import { modalHandler } from '../../store/actions/modal';
 
-class TopicContainer extends Component {
-
-  render() {
-    return <Topic {...this.props}  /> 
-  }
-}
-
+const TopicContainer =(props)=> <Topic {...props} />
+  
 const mapStateToProps = state => {
   return {
     topic: state.board.topic,

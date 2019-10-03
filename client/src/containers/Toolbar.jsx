@@ -1,18 +1,9 @@
-import React, { Component } from 'react';
-import Nav from '../components/Toolbar'
+import React from 'react';
 import { connect } from 'react-redux';
+import Nav from '../components/Toolbar'
 import { modalHandler, editHandler } from '../store/actions/modal';
 
-class NavContainer extends Component {
-  render() {
-    const { loading } = this.props
-    return <>
-      {
-        !loading && <Nav {...this.props} />
-      }
-    </>
-  }
-}
+const NavContainer = ({loading, ...props}) => <>{!loading && <Nav {...props} /> }</>
 
 const mapStateToProps = state => {
   return {

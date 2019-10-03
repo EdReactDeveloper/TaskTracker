@@ -1,10 +1,11 @@
 const express = require('express');
+
 const router = express.Router();
 const User = require('../../models/User');
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
 	try {
-		let user = await User.findById(req.session.user._id).select('-password');
+		const user = await User.findById(req.session.user._id).select('-password');
 		if (!user) {
 			return res.status(400).json('unauthorized');
 		}

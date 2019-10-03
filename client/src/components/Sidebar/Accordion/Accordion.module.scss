@@ -59,7 +59,6 @@
     margin-bottom: 1rem;
   }
   display: block; 
-  padding: 1.6rem 2.6rem; 
   color: white; 
   font-size: 1.4rem; 
   position: relative;
@@ -70,6 +69,14 @@
 .smenuItemIitle{
   position: relative;
   z-index: 100; 
+  width: 100%;
+  padding: 1.6rem 2.6rem; 
+  display: flex;
+  align-items: center;
+  background: transparent; 
+  outline: none; 
+  border: none;
+  color: #fff;
 }
 
 .smenuItem::before{

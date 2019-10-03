@@ -1,7 +1,7 @@
 import { GET_USER_SUCCESS, GET_USER_FAIL } from './types';
-import {getUser} from '../api/user'; 
+import getUser from '../api/user'; 
 
-export const getUserAction = () => async (dispatch) => {
+const getUserAction = () => async (dispatch) => {
 	try {
 		const result = await getUser()
 		dispatch({
@@ -15,3 +15,5 @@ export const getUserAction = () => async (dispatch) => {
 		});
 	}
 };
+
+export default getUserAction

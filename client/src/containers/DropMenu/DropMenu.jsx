@@ -1,11 +1,12 @@
+/* eslint-disable no-shadow */
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { dropdownHandler } from '../../store/actions/dropdown';
+import dropdownHandler from '../../store/actions/dropdown';
 import DropDown from '../../components/DropMenu'
 import { renderBoardSMenu, renderBoardMenu, renderTopicMenu } from './menuData';
 import { removeBoardAction, removeTopicAction } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
-import { withRouter } from 'react-router-dom';
 
 class DropDownContainer extends Component {
 
@@ -25,12 +26,14 @@ class DropDownContainer extends Component {
   }
 
   onClickHandler() {
-    this.props.dropdownHandler(!this.props.isOpen)
+    const {isOpen, dropdownHandler} = this.props
+    dropdownHandler(!isOpen)
   }
 
   onClickOutsideHandler(event) {
-    if (this.props.isOpen && !this.toggleContainer.current.contains(event.target)) {
-      this.props.dropdownHandler(false)
+    const {isOpen, dropdownHandler} = this.props
+    if (isOpen && !this.toggleContainer.current.contains(event.target)) {
+    dropdownHandler(false)
     }
   }
 

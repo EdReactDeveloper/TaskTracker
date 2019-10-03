@@ -4,7 +4,7 @@ const initialState = {
 	isOpen: false
 };
 
-const dropdown = function(state = initialState, action) {
+const reducer = (state = initialState, action) => {
 	const { payload, type } = action;
 	switch (type) {
 		case DROPDOWN:
@@ -13,4 +13,4 @@ const dropdown = function(state = initialState, action) {
 	}
 }
 
-export default dropdown
+export default reducer

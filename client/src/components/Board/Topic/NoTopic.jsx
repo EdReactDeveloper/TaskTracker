@@ -1,5 +1,6 @@
 import React from 'react';
-import style from './Topic.module.scss'
+import style from './Topic.module.scss';
+
 const NoTopic = () => {
   return (
     <div className={style.noTopic}>

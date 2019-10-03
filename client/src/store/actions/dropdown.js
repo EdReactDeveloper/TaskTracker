@@ -1,8 +1,10 @@
 import {DROPDOWN} from './types'; 
 
-export const dropdownHandler = (isOpen) => dispatch => {
+const dropdownHandler = (isOpen) => dispatch => {
   dispatch({
     type: DROPDOWN,
     payload: isOpen
   })
 }
+
+export default dropdownHandler;

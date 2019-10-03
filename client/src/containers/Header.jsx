@@ -1,14 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/HeaderFooter/header';
 import { logout } from '../store/actions/auth';
 
-class HeaderContainer extends Component {
-
-  render() {
-    return <Header {...this.props} />
-  }
-}
+const HeaderContainer = (props) => <Header {...props} />
 
 const mapStateToProps = state => {
   return {

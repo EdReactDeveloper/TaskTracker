@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import style from './Modal.module.scss';
 import ReactDOM from 'react-dom';
+import style from './Modal.module.scss';
 
 class Modal extends Component {
+
   componentWillMount() {
     this.root = document.createElement('div')
     document.body.appendChild(this.root)
@@ -11,12 +12,12 @@ class Modal extends Component {
   componentWillUnmount() {
     document.body.removeChild(this.root)
   }
+  
   render() {
-
     const { modalHandler, modalType, children } = this.props // rendered by containers/Boards.jsx
     return ReactDOM.createPortal(
       <>
-        <div className={style.background} onClick={() => modalHandler(modalType)}></div>
+        <input type="button" className={style.background} onClick={() => modalHandler(modalType)} />
         <div className={style.content}>
           {children}
         </div>

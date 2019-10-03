@@ -1,13 +1,14 @@
 const express = require('express');
-const app = express();
-const connectDB = require('./config/db');
-const User = require('./models/User');
+const config = require('config');
 
+const app = express();
 // initializing the session
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const config = require('config');
+
 const MONGODB_URI = config.get('mongoURI');
+const connectDB = require('./config/db');
+const User = require('./models/User');
 
 // create session
 const store = new MongoDBStore({

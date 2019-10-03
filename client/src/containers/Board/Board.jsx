@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
-import Board from '../../components/Board';
 import { connect } from 'react-redux';
+import Board from '../../components/Board';
 import { getBoard, fetchBoards, clearBoard } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
-import Loader from '../../components/misc/Loader';
+import Loader from '../../components/misc/Loader/Lines';
 
 class BoardContainer extends Component {
 
   componentDidMount() {
-    const { getBoard, match } = this.props
-    const id = match.params.id
+    const { match } = this.props
+    const { id } = match.params
     getBoard(id)
   }
 
   componentWillUnmount() {
-    this.props.clearBoard()
+    clearBoard()
   }
 
   render() {
     const { board, loading } = this.props
     if (board && !loading) {
       return <Board />
-    } else if (!board && loading) {
+    } if (!board && loading) {
       return <Loader />
-    } else {
-      return 'no board'
     }
+    return 'no board'
+
   }
 }
 

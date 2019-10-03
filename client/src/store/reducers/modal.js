@@ -6,18 +6,22 @@ const initialState = {
 	id: null,
 	edit: false,
 	editMode: false
-};
+};	
 
-const formData = function(state = initialState, action) {
+const isEdit = (id)=>{
+		if(id){
+			return true
+		}
+		return false
+	}
+
+const reducer =  (state = initialState, action) => {
 	const { payload = 'topicModal', type, id } = action;
+
 	switch (type) {
 		case MODAL:
-			let edit = false;
-			if (id) {
-				edit = true;
-			}
-			return { ...state, modalType: payload, id: id, isOpen: !state.isOpen, edit };
-
+			return { ...state, modalType: payload, id, isOpen: !state.isOpen, edit: isEdit(id) };
+	
 		case EDIT:
 			return { ...state, editMode: !state.editMode };
 
@@ -26,4 +30,4 @@ const formData = function(state = initialState, action) {
 	}
 };
 
-export default formData;
+export default reducer;

@@ -7,13 +7,18 @@
 .item{
   display: flex;
   padding: 1rem;
+  align-items: center;
   transition: all .1s;
+  background: #fff;
+  border: none; 
+  width: 100%;
   &:hover{
     background: #ccc;
   }
 }
 
 .list{
+  box-sizing: border-box; 
   &:not(:last-child){
     border-bottom: 1px solid #ccc;
   }

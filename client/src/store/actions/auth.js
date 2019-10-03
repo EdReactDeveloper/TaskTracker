@@ -6,8 +6,8 @@ import {
 	LOGOUT_SUCCESS,
 	LOGOUT_FAIL
 } from './types';
-import { auth } from '../api/auth';
-import {setAlert} from './alerts'; 
+import auth from '../api/auth';
+import setAlert from './alerts'; 
 
 export const login = ({email, password}) => async (dispatch) => {
 	try {
@@ -16,7 +16,7 @@ export const login = ({email, password}) => async (dispatch) => {
 	} catch (error) {
 		const {errors} = error.response.data
 		if(errors){
-			errors.forEach(error=> dispatch(setAlert(error.msg, 'danger')))
+			errors.forEach(err => dispatch(setAlert(err.msg, 'danger')))
 		}
 		dispatch({ type: LOGIN_FAIL, payload: error });
 	}
@@ -30,7 +30,7 @@ export const register = ({email, password, history}) => async (dispatch) => {
 	} catch (error) {
 		const {errors} = error.response.data
 		if(errors){
-			errors.forEach(error=> dispatch(setAlert(error.msg, 'danger')))
+			errors.forEach(err=> dispatch(setAlert(err.msg, 'danger')))
 		}
 		dispatch({ type: REGISTER_FAIL, payload: error });
 	}
@@ -41,7 +41,6 @@ export const logout = () => async (dispatch) => {
 		await auth('logout');
 		dispatch({ type: LOGOUT_SUCCESS });
 	} catch (error) {
-		console.log(error);
 		dispatch({ type: LOGOUT_FAIL, paylaod: error });
 	}
 };

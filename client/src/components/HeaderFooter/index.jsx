@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from '../../containers/Header';
-import Footer from './footer'; 
+import Footer from './footer';
 
-const Navigation = (props) => {
+const Navigation = ({ children }) => {
   return (
     <div>
       <Header />
-      {props.children}
+      {children}
       <Footer />
     </div>
   );

@@ -1,17 +1,17 @@
-import React, {useEffect} from 'react';
-import Routes from './routes/Routes';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
+import Routes from './routes/Routes';
 import store from './store';
-import style from './App.module.scss'; 
-import {getUserAction} from './store/actions/user'; 
-function App() {
+import getUserAction from './store/actions/user';
 
-	useEffect(()=> {
+const App =()=> {
+
+	useEffect(() => {
 		store.dispatch(getUserAction())
 	}, [])
 
 	return (
-		<div className={style.app}>
+		<div>
 			<Provider store={store}>
 				<Routes />
 			</Provider>

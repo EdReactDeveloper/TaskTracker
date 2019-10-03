@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-import Register from '../components/Auth/Register';
+import React from 'react';
 import { connect } from 'react-redux';
-import { register } from '../store/actions/auth';
 import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
-import { setAlert } from '../store/actions/alerts';
+import { register } from '../store/actions/auth';
+import Register from '../components/Auth/Register';
+import setAlert from '../store/actions/alerts';
 
-class RegisterContainer extends Component {
+const RegisterContainer = ({form, history, register, setAlert, ...props}) => {
 
-  submitHandler = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault()
-    const { form, history, register, setAlert } = this.props
     const { email, password } = form.values
     if (form.values.password === form.values.rePassword) {
       register({ email, password, history })
@@ -19,11 +18,8 @@ class RegisterContainer extends Component {
     }
   }
 
-  render() {
-
-    return <Register onSubmit={this.submitHandler} {...this.props}
+    return <Register onSubmit={submitHandler} {...props}
     />
-  }
 }
 
 const mapStateToProps = state => {

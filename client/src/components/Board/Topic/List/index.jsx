@@ -1,7 +1,8 @@
 import React from 'react';
 import ListItem from './ListItem'
 import style from './List.module.scss';
-import Loader from '../../../misc/Loader'
+import Loader from '../../../misc/Loader/Lines';
+
 const List = (props) => {
   const { list, inProgress } = props
   const renderList = list.map(item => {

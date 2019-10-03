@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
-import List from '../../components/Board/Topic/List';
+import React from 'react';
 import { connect } from 'react-redux';
+import List from '../../components/Board/Topic/List';
 import { updateListItemAction } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
-class ListContainer extends Component {
 
-  render() {
-    return <List {...this.props}  />
-  }
-}
+const ListContainer = (props) => <List {...props} />
 
 const mapStateToProps = state => {
   return {

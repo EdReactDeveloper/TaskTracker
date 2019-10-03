@@ -1,6 +1,9 @@
-export const formatTitle = function(title, maxLength=50){
+const formatTitle = (title, maxLength=50) =>{
   if(title.length >= maxLength){
-    return title.slice(0, maxLength)+'...'
+    const dots = '...'
+    return title.slice(0, maxLength) + dots
   }
   return title
 }
+
+export default formatTitle

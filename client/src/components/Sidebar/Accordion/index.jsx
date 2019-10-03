@@ -1,7 +1,7 @@
 import React from "react";
 import BoardsList from './BoardsList';
 import TopicsList from './List/TopicsList';
-import Loader from '../../misc/Loader';
+import Loader from '../../misc/Loader/Lines';
 import style from './Accordion.module.scss'; 
 
 const Accordion = (props) => {

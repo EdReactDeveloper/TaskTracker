@@ -33,13 +33,14 @@ const Button = ({ payload = '', type, onClick }) => {
       </button>
 
     case 'info': return <div className={style.info}>
-      <button className={style.info_btn}>
+      <button type="button" className={style.info_btn}>
         i
     </button>
       <p className={style.info_block}>{item.description}</p>
     </div>
 
     case 'editAll': return <button
+      type="button"
       onClick={() => editHandler()}
       className={`${style.editAll} ${editMode ? style.yellow : ''}`}
     >
@@ -47,8 +48,10 @@ const Button = ({ payload = '', type, onClick }) => {
     </button>
 
     case 'dropMenu':
-      return <button className={style.dropMenu} onClick={onClick}>
-        <div className={style.dropMenu_content}></div>
+      return <button
+        type="button"
+        className={style.dropMenu} onClick={onClick}>
+        <div className={style.dropMenu_content} />
       </button>
 
     case 'addBoard':
@@ -59,7 +62,7 @@ const Button = ({ payload = '', type, onClick }) => {
       >create a board</button>
 
 
-    default: return <button>what is this?</button>
+    default: return <button type="button">no type specified</button>
   }
 
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import style from '../Forms.module.scss';
 import { Field } from 'redux-form';
+import style from '../Forms.module.scss';
 import Input from '../../../misc/Elements/Input'
 
 const Add = () => {

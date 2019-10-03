@@ -2,6 +2,7 @@ import React from 'react';
 import style from './Auth.module.scss';
 import Icon from '../../../misc/icon/Icon';
 import { Auth } from '../../../misc/icon/Selection';
+
 const Authorized = ({ logout }) => {
   return (
     <div className={style.auth__wrapper}>

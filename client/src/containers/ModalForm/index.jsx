@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import { reduxForm, initialize } from 'redux-form';
 import TopicForm from '../../components/Modal/Froms/TopicForm';
 import BoardForm from '../../components/Modal/Froms/BoardForm'
 import BoardsForm from '../../components/Modal/Froms/BoardsForm';
-import { connect } from 'react-redux';
 import {
   addBoard, addTopicAction, addListItemAction,
   eidtBoardTitleAction, updateTopicAction, updateListItemAction
 } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 import submitData from './submitData';
-import { reduxForm, initialize } from 'redux-form';
-import { compose } from 'recompose';
 
 class Form extends Component {
 
   componentDidMount() {
     const initialValues = this.initializeFields()
-    this.props.dispatch(initialize('modal', initialValues))
+    const {dispatch} = this.props
+    dispatch(initialize('modal', initialValues))
   }
 
   initializeFields = () => {

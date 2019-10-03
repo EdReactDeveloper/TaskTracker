@@ -1,11 +1,12 @@
 const express = require('express');
+
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const Board = require('../../models/Board');
 const User = require('../../models/User');
 const Topics = require('../../models/Topics');
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
 	try {
 		const boards = await Board.find({ userId: req.session.user._id });
 		res.json(boards);
@@ -14,7 +15,7 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
-router.post('/', [ check('title', 'title is missing').not().isEmpty() ], async (req, res, next) => {
+router.post('/', [ check('title', 'title is missing').not().isEmpty() ], async (req, res) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		return res.status(400).json({ errors: errors.array() });
@@ -38,13 +39,13 @@ router.post('/', [ check('title', 'title is missing').not().isEmpty() ], async (
 		}
 
 		const result = await board.save();
-		res.json(result);
+		return res.json(result);
 	} catch (error) {
 		res.status(404).json({ msg: error });
 	}
 });
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', async (req, res) => {
 	try {
 		await Topics.deleteMany({ boardId: req.params.id });
 		await Board.findByIdAndRemove(req.params.id);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Boards from '../components/Boards';
 import { connect } from 'react-redux';
+import Boards from '../components/Boards';
 import { fetchBoards, addBoard, getTopic, getBoard } from '../store/actions/board';
 import Modal from '../components/Modal';
 import { modalHandler } from '../store/actions/modal';

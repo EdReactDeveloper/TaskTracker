@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const Topic = new Schema({
 	boardId: { type: Schema.Types.ObjectId, ref: 'Board', required: true },
@@ -34,33 +35,33 @@ Topic.methods.addItem = function(title, description) {
 Topic.methods.checkListItem = function(listItemId) {
 	const list = [ ...this.list ];
 	const index = list.findIndex((item) => item._id.toString() === listItemId.toString());
-	if(index < 0){
-		return ({msg: 'item is not found'})
+	if (index < 0) {
+		return { msg: 'item is not found' };
 	}
 	const updatedItem = !list[index].done;
 	list[index].done = updatedItem;
-	this.list = list
+	this.list = list;
 	return this.save();
 };
 
-Topic.methods.editItem = function(title, desctiption, id){
-const list = [...this.list]
-const itemIndex = list.findIndex(item => item._id.toString() === id.toString())
-list[itemIndex].title = title
-list[itemIndex].description = desctiption
-this.list = list
-return this.save()
-}
+Topic.methods.editItem = function(title, desctiption, id) {
+	const list = [ ...this.list ];
+	const itemIndex = list.findIndex((item) => item._id.toString() === id.toString());
+	list[itemIndex].title = title;
+	list[itemIndex].description = desctiption;
+	this.list = list;
+	return this.save();
+};
 
 Topic.methods.removeItem = function(listItemId) {
-	const list = [...this.list]
+	const list = [ ...this.list ];
 	const index = list.findIndex((item) => item._id.toString() === listItemId.toString());
-	if(index < 0){
-		return ({msg: 'item is not found'})
+	if (index < 0) {
+		return { msg: 'item is not found' };
 	}
-	list.splice(index, 1)
-	this.list = list
-	return this.save()
-}
+	list.splice(index, 1);
+	this.list = list;
+	return this.save();
+};
 
 module.exports = mongoose.model('Topic', Topic);

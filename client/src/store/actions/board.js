@@ -23,8 +23,8 @@ import {
 } from './types';
 import { getBoards, postBoard, removeBoard } from '../api/board';
 import { getTopics, postTopic, removeTopic, addListItem, updateListItem } from '../api/topics';
-import { inProgressAction } from './inprogress';
-import { setAlert } from './alerts';
+import inProgressAction from './inprogress';
+import setAlert from './alerts';
 
 export const fetchBoards = () => async (dispatch) => {
 	try {
@@ -39,10 +39,9 @@ export const fetchBoards = () => async (dispatch) => {
 			payload: boards
 		});
 	} catch (error) {
-		console.log(error);
 		const errors = error.response.data;
 		if (errors) {
-			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+			errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
 		}
 		dispatch({
 			type: FETCH_BOARDS_FAIL,
@@ -76,7 +75,7 @@ export const addBoard = (title, history) => async (dispatch) => {
 	} catch (error) {
 		const { errors } = error.response.data;
 		if (errors) {
-			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+			errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
 		}
 		dispatch({
 			type: ADD_BOARD_FAIL,
@@ -95,7 +94,7 @@ export const eidtBoardTitleAction = (title, id) => async (dispatch) => {
 	} catch (error) {
 		const { errors } = error.response.data;
 		if (errors) {
-			errors.forEach((error) => dispatch(error.msg, 'danger'));
+			errors.forEach((err) => dispatch(err.msg, 'danger'));
 		}
 		dispatch({
 			type: UPDATE_BOARD_FAIL
@@ -112,7 +111,7 @@ export const removeBoardAction = (boardId, history) => async (dispatch) => {
 	} catch (error) {
 		const { errors } = error.response.data;
 		if (errors) {
-			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+			errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
 		}
 		dispatch({ type: REMOVE_BOARD_FAIL, paylaod: error });
 	}
@@ -132,7 +131,7 @@ export const addTopicAction = (title, id) => async (dispatch) => {
 	} catch (error) {
 		const { errors } = error.response.data;
 		if (errors) {
-			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+			errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
 		}
 		dispatch({ type: ADD_TOPIC_FAIL, payload: error });
 	}
@@ -149,7 +148,7 @@ export const updateTopicAction = (title, id) => async (dispatch) => {
 	} catch (error) {
 		const { errors } = error.response.data;
 		if (errors) {
-			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+			errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
 		}
 		dispatch({
 			type: UPDATE_TOPIC_FAIL
@@ -168,7 +167,7 @@ export const removeTopicAction = (topicId) => async (dispatch) => {
 	} catch (error) {
 		const { errors } = error.response.data;
 		if (errors) {
-			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+			errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
 		}
 		dispatch({
 			type: REMOVE_TOPIC_FAIL,
@@ -204,7 +203,7 @@ export const updateListItemAction = (payload, type) => async (dispatch) => {
 	} catch (error) {
 		const { errors } = error.response.data;
 		if (errors) {
-			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+			errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
 		}
 		dispatch({ type: UPDATE_LIST_FAIL, payload: error });
 	}

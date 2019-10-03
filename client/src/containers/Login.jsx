@@ -1,24 +1,22 @@
-import React, { Component } from 'react';
-import Login from '../components/Auth/Login';
+import React from 'react';
 import { connect } from 'react-redux';
-import { login } from '../store/actions/auth';
-import { compose } from 'recompose';
 import { reduxForm } from 'redux-form';
+import { compose } from 'recompose';
+import Login from '../components/Auth/Login';
+import { login } from '../store/actions/auth';
 
-class LoginContainer extends Component {
+const LoginContainer = ({ login, form, ...props }) => {
 
-  submitHandler = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault()
-    const { login, form } = this.props
     login(form.values)
   }
 
-  render() {
-    return <Login {...this.props}
-      handleSubmit={this.submitHandler}
-    />
-  }
+  return <Login {...props}
+    handleSubmit={submitHandler}
+  />
 }
+
 
 const mapStateToProps = state => {
   return {

@@ -16,7 +16,7 @@ const initialState = {
 	message: ''
 };
 
-const auth = function(state = initialState, action) {
+const reducer = (state = initialState, action) => {
 	const { payload, type } = action;
 	switch (type) {
 
@@ -39,4 +39,4 @@ const auth = function(state = initialState, action) {
 	}
 };
 
-export default auth;
+export default reducer;

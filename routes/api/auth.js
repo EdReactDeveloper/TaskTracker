@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
@@ -10,7 +11,7 @@ router.post(
 		check('email', 'you should type a valid email address').isEmail(),
 		check('password', 'you should make a password of min 6 chars').isLength({ min: 6 })
 	],
-	async (req, res, next) => {
+	async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			return res.status(400).json({ errors: errors.array() });
@@ -35,7 +36,7 @@ router.post(
 		} catch (error) {
 			res.status(400).json(error);
 		}
-		res.json(req.body);
+		return res.json(req.body);
 	}
 );
 
@@ -45,7 +46,7 @@ router.post(
 		check('email', 'enter a valid email').isEmail(),
 		check('password', 'enter a valid password of min 6 chars').isLength({ min: 6 })
 	],
-	async (req, res, next) => {
+	async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			return res.status(400).json({ errors: errors.array() });
@@ -53,7 +54,7 @@ router.post(
 
 		const { email, password } = req.body;
 		try {
-			let user = await User.findOne({ email });
+			const user = await User.findOne({ email });
 			if (!user) {
 				return res.status(404).json({ errors: [ { msg: 'wrong email' } ] });
 			}
@@ -73,8 +74,8 @@ router.post(
 	}
 );
 
-router.post('/logout', (req, res, next) => {
-	req.session.destroy((err) => {
+router.post('/logout', (req, res,) => {
+	req.session.destroy(() => {
 		return res.redirect('/');
 	});
 });

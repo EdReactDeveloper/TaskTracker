@@ -8,8 +8,10 @@ const instance = axios.create({
 })
 
 
-export const auth = async (type, payload) => {
+const auth = async (type, payload) => {
 	const body = JSON.stringify(payload);
 	const result = await instance.post(`${baseURL}${type}`, body);
 	return result.data;
 };
+
+export default auth

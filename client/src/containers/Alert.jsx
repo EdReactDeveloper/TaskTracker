@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
-import Alert from '../components/Alert';
+import React from 'react';
 import { connect } from 'react-redux';
+import Alert from '../components/Alert';
 
-class AlertContainer extends Component {
-  render() {
-    return <Alert {...this.props} />
-  }
-}
+const AlertContainer = (props) => <Alert {...props} />
 
 const mapStateToProps = state => ({
   alerts: state.alerts

@@ -34,7 +34,7 @@ const initialState = {
 	topic: null
 };
 
-const board = function(state = initialState, action) {
+const reducer = (state = initialState, action) => {
 	const { payload, type } = action;
 
 	switch (type) {
@@ -45,8 +45,8 @@ const board = function(state = initialState, action) {
 		// BOARD
 
 		case GET_BOARD: {
-			let boards = [ ...state.boards ];
-			let board = findItem(boards, payload);
+			const boards = [ ...state.boards ];
+			const board = findItem(boards, payload);
 			if (!board) {
 				return { ...state, boards, board: null, topic: null, laoding: false };
 			}
@@ -67,7 +67,7 @@ const board = function(state = initialState, action) {
 
 		case UPDATE_BOARD_SUCCESS: {
 			const boards = [ ...state.boards ];
-			let board = findItem(boards, payload._id);
+			const board = findItem(boards, payload._id);
 			board.title = payload.title;
 			return { ...state, board, boards };
 		}
@@ -100,7 +100,7 @@ const board = function(state = initialState, action) {
 
 		case ADD_TOPIC_SUCCESS: {
 			const boards = [ ...state.boards ];
-			let board = findItem(boards, payload.boardId);
+			const board = findItem(boards, payload.boardId);
 			board.topics = [ payload, ...board.topics ];
 			return {
 				...state,
@@ -111,8 +111,8 @@ const board = function(state = initialState, action) {
 
 		case UPDATE_TOPIC_SUCCESS: {
 			const boards = [ ...state.boards ];
-			let board = findItem(boards, state.board._id);
-			let topic = findItem(board.topics, payload._id);
+			const board = findItem(boards, state.board._id);
+			const topic = findItem(board.topics, payload._id);
 			topic.title = payload.title;
 			return {
 				...state,
@@ -124,7 +124,7 @@ const board = function(state = initialState, action) {
 
 		case REMOVE_TOPIC_SUCCESS: {
 			const boards = [ ...state.boards ];
-			let board = findItem(boards, state.board._id);
+			const board = findItem(boards, state.board._id);
 			board.topics = findAndRemoveItem(board.topics, payload);
 			return {
 				...state,
@@ -140,7 +140,7 @@ const board = function(state = initialState, action) {
 		case UPDATE_LIST_SUCCESS: {
 			const boards = [ ...state.boards ];
 			const board = findItem(boards, state.board._id);
-			let topic = findItem(board.topics, payload._id);
+			const topic = findItem(board.topics, payload._id);
 			topic.list = payload.list;
 			return {
 				...state,
@@ -167,7 +167,7 @@ const board = function(state = initialState, action) {
 				message: payload
 			};
 
-		//LOGOUT
+		// LOGOUT
 		case LOGOUT_SUCCESS:
 			return { ...state, loading: false, boards: null, board: null, topic: null, message: null };
 
@@ -176,4 +176,4 @@ const board = function(state = initialState, action) {
 	}
 };
 
-export default board;
+export default reducer;
