@@ -2,7 +2,7 @@ import { MODAL, EDIT } from '../actions/types';
 
 const initialState = {
 	modalType: '',
-	isOpen: '',
+	isOpen: false,
 	id: null,
 	edit: false,
 	editMode: false

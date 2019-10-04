@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import dropdownHandler from '../../store/actions/dropdown';
 import DropDown from '../../components/DropMenu'
 import { renderBoardSMenu, renderBoardMenu, renderTopicMenu } from './menuData';
@@ -26,14 +27,14 @@ class DropDownContainer extends Component {
   }
 
   onClickHandler() {
-    const {isOpen, dropdownHandler} = this.props
+    const { isOpen, dropdownHandler } = this.props
     dropdownHandler(!isOpen)
   }
 
   onClickOutsideHandler(event) {
-    const {isOpen, dropdownHandler} = this.props
+    const { isOpen, dropdownHandler } = this.props
     if (isOpen && !this.toggleContainer.current.contains(event.target)) {
-    dropdownHandler(false)
+      dropdownHandler(false)
     }
   }
 
@@ -50,6 +51,50 @@ class DropDownContainer extends Component {
       toggleContainer={this.toggleContainer}
     />
   }
+}
+
+DropDownContainer.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  topic: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    boardId: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    list: PropTypes.arrayOf(
+      PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        topicId: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        done: PropTypes.bool.isRequired,
+      })
+    )
+  }),
+  board: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+    topics: PropTypes.arrayOf(
+      PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        boardId: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        list: PropTypes.arrayOf(
+          PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            topicId: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            description: PropTypes.string,
+            done: PropTypes.bool.isRequired,
+          })
+        )
+      })
+    ).isRequired
+  }),
+}
+
+DropDownContainer.defaultProps={
+  board: {},
+  topic: {}
 }
 
 const mapStateToProps = state => {
