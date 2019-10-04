@@ -17,5 +17,5 @@ APPLICATION:
 the app can be used to store lists of your daily tasks or lists of what you are learning.
 for example, if you are learning React: 
 -add board called 'React'
-  -add topic called 'Lifecylces'
-    -add a list of lifecycles with the description and tick those that you have learned/done
+-add topic called 'Lifecylces'
+-add a list of lifecycles with the description and tick those that you have learned/done
