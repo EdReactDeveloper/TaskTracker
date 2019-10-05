@@ -3,7 +3,7 @@
   grid-template-columns: 1fr 3rem;
   align-items: center;
   margin-bottom: 1rem;
-  padding-left: 4rem;
+  padding: 0 4rem;
   @media only screen and (max-width: 600px) {
     padding-left: 0;
   }
