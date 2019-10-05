@@ -38,7 +38,7 @@ const Button = ({ type,
       <button type="button" className={style.info_btn}>
         i
     </button>
-      <p className={style.info_block}>{item.description}</p>
+      <div className={style.info_block}>{item.description}</div>
     </div>
 
     case 'editAll': return <button

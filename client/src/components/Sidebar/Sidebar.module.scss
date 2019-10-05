@@ -4,6 +4,10 @@
   grid-row: 1/-1;
   grid-column: 1/2;
   background: rgb(51,51,51);
+  @media only screen and (max-width: 600px) {
+    max-height: 30vh; 
+    overflow-y: scroll;
+  }
 }
 
 .noBoard{

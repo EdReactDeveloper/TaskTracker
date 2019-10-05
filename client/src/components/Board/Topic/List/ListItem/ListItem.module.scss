@@ -1,10 +1,12 @@
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr 4rem;
+  grid-template-columns: 1fr 3rem;
   align-items: center;
   margin-bottom: 1rem;
   padding-left: 4rem;
-
+  @media only screen and (max-width: 600px) {
+    padding-left: 0;
+  }
   &:hover button{
     opacity: 1; 
   }
@@ -12,15 +14,17 @@
 
 .container {
   display: flex;
-  grid-column: 1/2;
-  grid-row: 1/2;
   align-items: center;
   position: relative;
   padding-left: 3.5rem;
+  margin-bottom: 1rem;
   font-size: 2.2rem;
+  grid-column: 1/2;
+  grid-row: 1/2;
   &:hover > button{
     opacity: 1;
   }
+
 }
 
 /* Hide the browser's default checkbox */
@@ -99,5 +103,11 @@
 }
 
 .title{
-  position: relative
+  position: relative;
+  font-size: 2rem;
+  max-width: 60vw;
+  overflow: hidden;
+  @media only screen and (max-width: 600px) {
+    max-width: 70vw;
+  }
 }
