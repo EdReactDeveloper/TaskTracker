@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import {bool, arrayOf, func, string} from 'prop-types';
 import List from '../../components/Board/Topic/List';
 import { updateListItemAction } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
@@ -16,9 +16,10 @@ const mapStateToProps = state => {
 }
 
 ListContainer.propTypes={
-  edit: PropTypes.bool.isRequired, 
-  editMode: PropTypes.bool.isRequired,
-  inProgress: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  edit: bool.isRequired, 
+  editMode: bool.isRequired,
+  inProgress: arrayOf(string.isRequired).isRequired,
+  updateListItemAction: func.isRequired
 }
 
 export default connect(mapStateToProps,

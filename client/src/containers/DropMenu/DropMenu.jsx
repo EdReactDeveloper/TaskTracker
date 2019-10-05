@@ -2,12 +2,13 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { func, bool } from 'prop-types';
 import dropdownHandler from '../../store/actions/dropdown';
 import DropDown from '../../components/DropMenu'
 import { renderBoardSMenu, renderBoardMenu, renderTopicMenu } from './menuData';
 import { removeBoardAction, removeTopicAction } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
+import { topicTypes, boardTypes } from '../PropTypes';
 
 class DropDownContainer extends Component {
 
@@ -54,47 +55,18 @@ class DropDownContainer extends Component {
 }
 
 DropDownContainer.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  topic: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    boardId: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    list: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        topicId: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        description: PropTypes.string,
-        done: PropTypes.bool.isRequired,
-      })
-    )
-  }),
-  board: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    userId: PropTypes.string.isRequired,
-    topics: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        boardId: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        list: PropTypes.arrayOf(
-          PropTypes.shape({
-            _id: PropTypes.string.isRequired,
-            topicId: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
-            description: PropTypes.string,
-            done: PropTypes.bool.isRequired,
-          })
-        )
-      })
-    ).isRequired
-  }),
+  isOpen: bool.isRequired,
+  topic: topicTypes,
+  board: boardTypes,
+  dropdownHandler: func.isRequired,
+  removeBoardAction: func.isRequired,
+  removeTopicAction: func.isRequired,
+  modalHandler: func.isRequired,
 }
 
-DropDownContainer.defaultProps={
-  board: {},
-  topic: {}
+DropDownContainer.defaultProps = {
+  board: null,
+  topic: null
 }
 
 const mapStateToProps = state => {

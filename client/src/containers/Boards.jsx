@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import {func, bool} from 'prop-types';
+import {boardsTypes, topicTypes} from './PropTypes'; 
 import Boards from '../components/Boards';
-import { fetchBoards, addBoard, getTopic, getBoard } from '../store/actions/board';
 import Modal from '../components/Modal';
-import { modalHandler } from '../store/actions/modal';
 import Form from './ModalForm';
+import { fetchBoards, addBoard, getTopic, getBoard } from '../store/actions/board';
+import { modalHandler } from '../store/actions/modal';
 
 class BoardsContainer extends Component {
 
@@ -27,55 +28,20 @@ class BoardsContainer extends Component {
 }
 
 BoardsContainer.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  fetchBoards: PropTypes.func.isRequired,
-  modalHandler: PropTypes.func.isRequired,
-  getBoard: PropTypes.func.isRequired,
-  getTopic: PropTypes.func.isRequired,
-  addBoard: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  boards: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      userId: PropTypes.string.isRequired,
-      topics: PropTypes.arrayOf(
-        PropTypes.shape({
-          _id: PropTypes.string.isRequired,
-          boardId: PropTypes.string.isRequired,
-          title: PropTypes.string.isRequired,
-          list: PropTypes.arrayOf(
-            PropTypes.shape({
-              _id: PropTypes.string.isRequired,
-              topicId: PropTypes.string.isRequired,
-              title: PropTypes.string.isRequired,
-              description: PropTypes.string,
-              done: PropTypes.bool.isRequired,
-            })
-          )
-        })
-      ).isRequired
-    }).isRequired,
-  ),
-  topic: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    boardId: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    list: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        topicId: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        description: PropTypes.string,
-        done: PropTypes.bool.isRequired,
-      })
-    )
-  })
+  loading: bool.isRequired,
+  fetchBoards: func.isRequired,
+  modalHandler: func.isRequired,
+  getBoard: func.isRequired,
+  getTopic: func.isRequired,
+  addBoard: func.isRequired,
+  isOpen: bool.isRequired,
+  boards: boardsTypes,
+  topic: topicTypes
 }
 
 BoardsContainer.defaultProps={
   boards: [],
-  topic: {}
+  topic: null
 }
 
 const mapStateToProps = state => {

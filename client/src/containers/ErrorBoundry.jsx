@@ -21,7 +21,7 @@ class ErrorBoundary extends Component {
     const { hasError, error, errorInfo } = this.state
     const { children } = this.props
     
-    if (hasError) {
+    if (hasError || error) {
       return <div>
         <h2>Something went wrong.</h2>
         <details style={{ whiteSpace: 'pre-wrap' }}>

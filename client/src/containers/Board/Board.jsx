@@ -5,6 +5,8 @@ import Topic from './Topic';
 import { getBoard, fetchBoards, clearBoard } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 import Loader from '../../components/misc/Loader/Lines';
+import { boardTypes, boardsTypes } from '../PropTypes';
+
 
 class BoardContainer extends Component {
 
@@ -35,54 +37,17 @@ const mapStateToProps = state => {
 
 BoardContainer.propTypes = {
   loading: PropTypes.bool.isRequired,
-  boards: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      userId: PropTypes.string.isRequired,
-      topics: PropTypes.arrayOf(
-        PropTypes.shape({
-          _id: PropTypes.string.isRequired,
-          boardId: PropTypes.string.isRequired,
-          title: PropTypes.string.isRequired,
-          list: PropTypes.arrayOf(
-            PropTypes.shape({
-              _id: PropTypes.string.isRequired,
-              topicId: PropTypes.string.isRequired,
-              title: PropTypes.string.isRequired,
-              description: PropTypes.string,
-              done: PropTypes.bool.isRequired,
-            })
-          )
-        })
-      ).isRequired
-    }).isRequired,
-  ).isRequired,
-  board: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    userId: PropTypes.string.isRequired,
-    topics: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        boardId: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        list: PropTypes.arrayOf(
-          PropTypes.shape({
-            _id: PropTypes.string.isRequired,
-            topicId: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
-            description: PropTypes.string,
-            done: PropTypes.bool.isRequired,
-          })
-        )
-      })
-    ).isRequired
-  }),
+  boards: boardsTypes,
+  board: boardTypes,
+  getBoard: PropTypes.func.isRequired,
+  fetchBoards: PropTypes.func.isRequired,
+  modalHandler:PropTypes.func.isRequired,
+  clearBoard: PropTypes.func.isRequired,
 }
 
 BoardContainer.defaultProps = {
-  board: {}
+  board: {},
+  boards: []
 }
 
 export default connect(mapStateToProps, { getBoard, fetchBoards, modalHandler, clearBoard })(BoardContainer);

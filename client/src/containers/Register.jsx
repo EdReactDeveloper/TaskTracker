@@ -2,11 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
+import { func } from 'prop-types';
 import { register } from '../store/actions/auth';
 import Register from '../components/Auth/Register';
 import setAlert from '../store/actions/alerts';
+import { formTypes } from './PropTypes';
 
-const RegisterContainer = ({form, history, register, setAlert, ...props}) => {
+const RegisterContainer = ({ form, history, register, setAlert, ...props }) => {
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -18,9 +20,20 @@ const RegisterContainer = ({form, history, register, setAlert, ...props}) => {
     }
   }
 
-    return <Register onSubmit={submitHandler} {...props}
-    />
+  return <Register onSubmit={submitHandler} {...props}
+  />
 }
+
+RegisterContainer.propTypes = {
+  setAlert: func.isRequired,
+  register: func.isRequired,
+  form: formTypes
+}
+
+RegisterContainer.defaultProps = {
+  form: null
+}
+
 
 const mapStateToProps = state => {
   return {

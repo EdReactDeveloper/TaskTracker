@@ -1,9 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bool, func } from 'prop-types'; 
 import Nav from '../components/Toolbar'
 import { modalHandler, editHandler } from '../store/actions/modal';
+import {boardTypes, boardsTypes} from './PropTypes'; 
 
-const NavContainer = ({loading, ...props}) => <>{!loading && <Nav {...props} /> }</>
+const ToolbarContainer = ({loading, ...props}) => <>{!loading && <Nav {...props} /> }</>
+
+ToolbarContainer.propTypes = {
+  board: boardTypes,
+  boards: boardsTypes, 
+  editMode: bool.isRequired,
+  loading: bool.isRequired,
+  modalHandler: func.isRequired, 
+  editHandler: func.isRequired,
+}
+
+ToolbarContainer.defaultProps = {
+  board: null,
+  boards: []
+}
 
 const mapStateToProps = state => {
   return {
@@ -15,4 +31,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { modalHandler, editHandler })(NavContainer);
+export default connect(mapStateToProps, { modalHandler, editHandler })(ToolbarContainer);
