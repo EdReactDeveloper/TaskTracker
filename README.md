@@ -6,10 +6,6 @@ to start the project on localhost run: npm run dev
 TECHNOLOGIES
 UI(React, css3(grid, flexbox)), BusinessLogic(Redux/thunk), backend(Mongodb), server(express.js)
 
-TODO: 
-1. add Proptypes
-2. add responsiveness 
-
 DESCRIPTION: 
 the app is designed to be used as an online notebook where a user adds boards to store different topics with his memoes
 
