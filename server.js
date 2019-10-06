@@ -45,10 +45,6 @@ app.use((req, res, next) => {
 
 connectDB();
 
-app.use(express.json({ extended: false })); // allows to get request inside the body
-
-app.get('/', (req, res) => res.send('api is running'));
-
 app.use(express.json({ extended: false }));
 app.use('/api/user', require('./routes/api/user'));
 app.use('/api/auth', require('./routes/api/auth'));
