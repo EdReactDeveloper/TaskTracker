@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Header from '../components/HeaderFooter/header';
+import Header from '../components/HeaderFooter/Header';
 import { logout } from '../store/actions/auth';
 
 const HeaderContainer = (props) => <Header {...props} />
