@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './Header.module.scss';
 import app from '../../../App.module.scss';
-import Auth from './Auth1';
+import Auth from './Auth';
 
 const Header = (props) => {
 
