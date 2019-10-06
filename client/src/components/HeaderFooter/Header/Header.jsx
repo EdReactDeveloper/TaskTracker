@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import app from '../../../App.module.scss';
-import Auth from './auth';
+import Auth from './Auth1';
 import style from './Header.module.scss';
 
 const Header = (props) => {
