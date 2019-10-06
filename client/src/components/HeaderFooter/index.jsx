@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../../containers/Header';
-import Footer from './Footer';
+import Footer from './footer';
 
 const Navigation = ({ children }) => {
   return (
