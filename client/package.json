@@ -1,9 +1,6 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "engines": {
-    "node": "11.13.0"
-  },
   "private": true,
   "dependencies": {
     "axios": "^0.19.0",
@@ -26,9 +23,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "lint": "eslint",
-    "eject": "react-scripts eject",
-    "postinstall": "npm run build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
