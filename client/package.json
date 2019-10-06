@@ -26,7 +26,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
