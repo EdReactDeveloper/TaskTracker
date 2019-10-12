@@ -15,9 +15,9 @@ const List = (props) => {
 
   return (
     <div className={style.wrapper}>
-      {renderList}
       {inProgress.some(id=> id === 'addListItem') &&  
       <div className={style.loading}><Loader className={style.loader} />adding new item</div>}
+      {renderList}
     </div>
   );
 };

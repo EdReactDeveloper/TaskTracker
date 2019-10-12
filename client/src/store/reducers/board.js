@@ -95,6 +95,7 @@ const reducer = (state = initialState, action) => {
 			const boards = [ ...state.boards ];
 			const board = findItem(boards, state.board._id);
 			const topic = findItem(board.topics, payload);
+			topic.list = topic.list.reverse()
 			return { ...state, boards, topic };
 		}
 
@@ -141,7 +142,7 @@ const reducer = (state = initialState, action) => {
 			const boards = [ ...state.boards ];
 			const board = findItem(boards, state.board._id);
 			const topic = findItem(board.topics, payload._id);
-			topic.list = payload.list;
+			topic.list = payload.list.reverse();
 			return {
 				...state,
 				boards,
