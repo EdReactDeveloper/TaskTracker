@@ -5,10 +5,10 @@ export function renderTopicMenu(removeTopicAction, modalHandler, topicId) {
 	];
 }
 
-export function renderBoardMenu(removeBoardAction, modalHandler, boardId, history) {
+export function renderBoardMenu(removeBoardAction, modalHandler, board, history) {
 	return [
 		{ name: 'add topic', icon: 'addItem', onClick: () => modalHandler('boardModal') },
-		{ name: 'delete this BOARD', icon: 'delete', onClick: () => removeBoardAction(boardId, history) }
+		{ name: 'delete this BOARD', icon: 'delete', onClick: () => removeBoardAction(board, history) }
 	];
 }
 

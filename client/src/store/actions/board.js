@@ -102,18 +102,23 @@ export const eidtBoardTitleAction = (title, id) => async (dispatch) => {
 	}
 };
 
-export const removeBoardAction = (boardId, history) => async (dispatch) => {
-	try {
-		const id = await removeBoard(boardId);
-		dispatch({ type: REMOVE_BOARD_SUCCESS, payload: id });
-		history.push('/boards');
-		dispatch(setAlert('board has been removed', 'success'));
-	} catch (error) {
-		const { errors } = error.response.data;
-		if (errors) {
-			errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
+export const removeBoardAction = (board, history) => async (dispatch) => {
+	const allow = prompt('enter the board name');
+	if (allow === board.title) {
+		try {
+			const id = await removeBoard(board._id);
+			dispatch({ type: REMOVE_BOARD_SUCCESS, payload: id });
+			history.push('/boards');
+			dispatch(setAlert('board has been removed', 'success'));
+		} catch (error) {
+			const { errors } = error.response.data;
+			if (errors) {
+				errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
+			}
+			dispatch({ type: REMOVE_BOARD_FAIL, paylaod: error });
 		}
-		dispatch({ type: REMOVE_BOARD_FAIL, paylaod: error });
+	} else {
+		alert('wrong name');
 	}
 };
 

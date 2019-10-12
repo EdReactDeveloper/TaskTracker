@@ -42,7 +42,7 @@ class DropDownContainer extends Component {
   render() {
     const { modalHandler, removeBoardAction, removeTopicAction, topic, history, board } = this.props
     const boardsItems = renderBoardSMenu(modalHandler)
-    const boardItems = board && renderBoardMenu(removeBoardAction, modalHandler, board._id, history)
+    const boardItems = board && renderBoardMenu(removeBoardAction, modalHandler, board, history)
     const topicItems = topic && renderTopicMenu(removeTopicAction, modalHandler, topic._id)
     return <DropDown {...this.props}
       boardItems={boardItems}
