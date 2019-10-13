@@ -10,23 +10,21 @@ const CheckTitle = (props) => {
     item.done = !item.done
   }
   return <>
-    <label htmlFor="checkbox" className={style.checkTitle}>
+    {inProgress.some(id => id === item._id) ? <Loader /> :
+      <label htmlFor="checkbox" className={style.checkTitle}>
+        <input
+          id="checkbox"
+          name="checkbox"
+          type="checkbox"
+          checked={item.done}
+          onChange={() => checkHandler}
+          className={style.checkbox}
+        />
+        <button type="button" name="checkbox" aria-label="checkbox" className={style.checkmark}
+          onClick={() => updateListItemAction({ topicId: item.topicId, itemId: item._id }, 'check')} />
 
-      {inProgress.some(id => id === item._id) ? <Loader /> :
-        <>
-          <input
-            id="checkbox"
-            name="checkbox"
-            type="checkbox"
-            checked={item.done}
-            onChange={() => checkHandler}
-            className={style.checkbox}
-          />
-          <button type="button" name="checkbox" aria-label="checkbox" className={style.checkmark} 
-            onClick={() => updateListItemAction({ topicId: item.topicId, itemId: item._id }, 'check')} />
-        </>
-      }
-    </label>
+      </label>
+    }
 
     <div className={style.title}> {formatTitle(item.title)}</div>
     {item.description && <Button type='info' payload={{ item }} />}
