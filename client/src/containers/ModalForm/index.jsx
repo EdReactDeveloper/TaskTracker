@@ -17,7 +17,14 @@ class Form extends Component {
   componentDidMount() {
     const initialValues = this.initializeFields()
     const {dispatch} = this.props
+    const body = document.querySelector('body')
+    body.style.overflow = 'hidden'
     dispatch(initialize('modal', initialValues))
+  }
+  
+  componentWillUnmount(){
+    const body = document.querySelector('body')
+    body.style.overflow = 'auto'
   }
 
   initializeFields = () => {
@@ -30,6 +37,7 @@ class Form extends Component {
     }
     return initialValues
   }
+
 
   submitHandler = e => {
     e.preventDefault()
