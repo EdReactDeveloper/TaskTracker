@@ -96,7 +96,7 @@ const reducer = (state = initialState, action) => {
 			const board = findItem(boards, state.board._id);
 			const topic = findItem(board.topics, payload);
 			// topic.list = topic.list.reverse()
-			return { ...state, boards, topic };
+			return { ...state, boards, board, topic };
 		}
 
 		case ADD_TOPIC_SUCCESS: {
@@ -115,6 +115,7 @@ const reducer = (state = initialState, action) => {
 			const board = findItem(boards, state.board._id);
 			const topic = findItem(board.topics, payload._id);
 			topic.title = payload.title;
+			
 			return {
 				...state,
 				boards,
@@ -142,7 +143,7 @@ const reducer = (state = initialState, action) => {
 			const boards = [ ...state.boards ];
 			const board = findItem(boards, state.board._id);
 			const topic = findItem(board.topics, payload._id);
-			// topic.list = payload.list.reverse();
+			topic.list = payload.list.reverse();
 			return {
 				...state,
 				boards,

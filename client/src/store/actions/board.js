@@ -33,6 +33,9 @@ export const fetchBoards = () => async (dispatch) => {
 		for (let board of boards) {
 			const topics = await getTopics(board._id);
 			board.topics = [ ...topics ];
+			for(let i = 0; i < board.topics.length; i++){
+				board.topics[i].list = board.topics[i].list.reverse()
+			}
 		}
 		dispatch({
 			type: FETCH_BOARDS_SUCCESS,
