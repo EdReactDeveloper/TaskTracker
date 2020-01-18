@@ -73,3 +73,9 @@ export const REMOVE_ALERT = 'REMOVE_ALERT'
 // REST
 
 export const IN_PROGRESS = 'IN_PROGRESS';
+
+
+// SEARCH 
+export const GET_QUERY_SUCCESS = 'GET_QUERY_SUCCESS';
+export const GET_QUERY_LOADING = 'GET_QUERY_LOADING';
+export const GET_QUERY_FAIL = 'GET_QUERY_FAIL';

@@ -19,6 +19,7 @@
       "controlComponents": ["CustomInput"],
       "depth": 3
     }],
+    "no-console": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "no-shadow": "off"
   },

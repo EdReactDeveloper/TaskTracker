@@ -48,7 +48,7 @@ const reducer = (state = initialState, action) => {
 			const boards = [ ...state.boards ];
 			const board = findItem(boards, payload);
 			if (!board) {
-				return { ...state, boards, board: null, topic: null, laoding: false };
+				return { ...state, boards, board: null, topic: null, laoding: false  };
 			}
 			return { ...state, boards, board, topic: null };
 		}
@@ -92,10 +92,10 @@ const reducer = (state = initialState, action) => {
 		// TOPIC
 
 		case FETCH_TOPIC_SUCCESS: {
+			const {topicId, boardId} = payload
 			const boards = [ ...state.boards ];
-			const board = findItem(boards, state.board._id);
-			const topic = findItem(board.topics, payload);
-			// topic.list = topic.list.reverse()
+			const board = findItem(boards, boardId);
+			const topic = findItem(board.topics, topicId);
 			return { ...state, boards, board, topic };
 		}
 

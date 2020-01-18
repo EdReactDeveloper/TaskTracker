@@ -1,0 +1,22 @@
+.wrapper{
+  padding: 2rem;
+}
+
+.header{
+  text-transform: uppercase;
+  padding-bottom: 2rem;
+
+  & span{
+    color: red;
+  }
+}
+
+.flex{
+  display: flex;
+  align-items: flex-start;
+}
+
+.loader{
+  font-size: 11px;
+  margin: 8rem auto;
+}

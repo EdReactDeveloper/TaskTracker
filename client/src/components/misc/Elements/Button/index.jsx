@@ -8,12 +8,12 @@ import { updateListItemAction } from '../../../../store/actions/board';
 
 
 const Button = ({ type,
-  payload='',
+  payload = '',
   modalHandler,
   updateListItemAction,
   editMode,
   editHandler, onClick, ...props }) => {
-   const {item, modalType} = payload  
+  const { item, modalType } = payload
   switch (type) {
 
     case 'edit':
@@ -63,6 +63,17 @@ const Button = ({ type,
         className={style.add}
       >{props.children}</button>
 
+    case 'navigation':
+      return <button
+        type='button'
+        className={style.navigation}
+        onClick={onClick}>
+        {props.children}
+      </button>
+    case 'search': 
+    return <button type="submit" className={style.search}>
+      {props.children}
+    </button>
     default: return <button type="button">no type specified</button>
   }
 

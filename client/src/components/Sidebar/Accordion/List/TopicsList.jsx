@@ -1,8 +1,9 @@
 import React from 'react';
+import {Link} from 'react-router-dom'; 
 import style from '../Accordion.module.scss'
 import Counter from './Counter';
 
-const Topics = ({ getTopic, itemBoard, board, topic }) => {
+const Topics = ({ itemBoard, board, topic }) => {
   const elementHeight = 3.5
   const units = 'em'
   return (
@@ -14,10 +15,10 @@ const Topics = ({ getTopic, itemBoard, board, topic }) => {
           className={`${style.smenuItem} ${(topic && itemTopic._id === topic._id) ? style.topic_background : ''}`}
           key={itemTopic._id}
           >
-          <button type="button" className={style.smenuItemIitle} onClick={() => getTopic(itemTopic._id)}>
+          <Link to={`/board/${itemBoard._id}/${itemTopic._id}`} className={style.smenuItemIitle}>
             {itemTopic.title}
             {itemTopic.list.length > 0 && <Counter list={itemTopic.list} />}
-          </button>
+          </Link>
         </li>
       ))}
     </ul>

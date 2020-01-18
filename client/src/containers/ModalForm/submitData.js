@@ -18,7 +18,7 @@ const submitData = ({
 
 	switch (modalType) {
 		case 'topicModal':
-			edit
+			edit 
 				? updateListItemAction({ itemId: id, topicId: topic._id, itemTitle, itemDescription }, 'edit')
 				: addListItemAction(topic._id, title, description);
 

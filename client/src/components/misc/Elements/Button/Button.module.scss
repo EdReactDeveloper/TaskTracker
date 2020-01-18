@@ -32,6 +32,30 @@
   }
 }
 
+.navigation{
+  padding: .5rem 1rem; 
+  border: 2px solid #00a8ff;
+  border-radius: 8px 0 0 8px;
+  background: #fff;
+  color: #00a8ff;
+  cursor: pointer;
+  outline: none;
+  margin-right: 2rem;
+}
+
+.search{
+  border-radius: 0 8px 8px 0;
+  background: #fff;
+  border: 2px solid #00a8ff;
+  color: #00a8ff;
+  margin-left: .5rem;
+  padding: .5rem;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+
+}
+
 .yellow {
   background: #fbc531;
   border: 1px solid #e1b12c;

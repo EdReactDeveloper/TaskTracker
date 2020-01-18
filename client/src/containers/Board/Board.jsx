@@ -6,7 +6,7 @@ import { getBoard, fetchBoards, clearBoard } from '../../store/actions/board';
 import { modalHandler } from '../../store/actions/modal';
 import Loader from '../../components/misc/Loader/Lines';
 import { boardTypes, boardsTypes } from '../PropTypes';
-
+import NotFound from '../../components/404';
 
 class BoardContainer extends Component {
 
@@ -23,7 +23,13 @@ class BoardContainer extends Component {
 
   render() {
     const { board, loading } = this.props
-    return (board && !loading) ? <Topic {...this.props} /> : <Loader />
+    if(board && !loading){
+      return <Topic {...this.props} />
+    }
+    if(!board && !loading){
+      return <NotFound {...this.props} />
+    }
+    return  <Loader />
   }
 }
 

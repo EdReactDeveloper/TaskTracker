@@ -5,8 +5,9 @@ import {boardsTypes, topicTypes} from './PropTypes';
 import Boards from '../components/Boards';
 import Modal from '../components/Modal';
 import Form from './ModalForm';
-import { fetchBoards, addBoard, getTopic, getBoard } from '../store/actions/board';
+import { fetchBoards, addBoard, getBoard } from '../store/actions/board';
 import { modalHandler } from '../store/actions/modal';
+
 
 class BoardsContainer extends Component {
 
@@ -14,7 +15,7 @@ class BoardsContainer extends Component {
     const { fetchBoards } = this.props
     fetchBoards()
   }
-
+  
   render() {
     const { modalHandler, isOpen, history, match } = this.props
     return <>
@@ -32,7 +33,6 @@ BoardsContainer.propTypes = {
   fetchBoards: func.isRequired,
   modalHandler: func.isRequired,
   getBoard: func.isRequired,
-  getTopic: func.isRequired,
   addBoard: func.isRequired,
   isOpen: bool.isRequired,
   boards: boardsTypes,
@@ -57,7 +57,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   fetchBoards,
   getBoard,
-  getTopic,
   addBoard,
   modalHandler
 })(BoardsContainer);

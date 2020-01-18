@@ -4,6 +4,7 @@ import style from './Topic.module.scss';
 import Button from '../../misc/Elements/Button';
 
 const Topic = ({ topic, modalHandler, editMode }) => {
+  
   return (
     <>
       <div className={style.header}>

@@ -6,11 +6,9 @@ import getUserAction from './store/actions/user';
 import style from './App.module.scss'; 
 
 const App =()=> {
-
 	useEffect(() => {
 		store.dispatch(getUserAction())
 	}, [])
-
 	return (
 		<div className={style.app}> 
 			<Provider store={store}>

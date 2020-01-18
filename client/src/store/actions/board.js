@@ -127,8 +127,8 @@ export const removeBoardAction = (board, history) => async (dispatch) => {
 
 // TOPICS
 
-export const getTopic = (topicId) => async (dispatch) => {
-	dispatch({ type: FETCH_TOPIC_SUCCESS, payload: topicId });
+export const getTopic = (payload) => async (dispatch) => {
+	dispatch({ type: FETCH_TOPIC_SUCCESS, payload });
 };
 
 export const addTopicAction = (title, id) => async (dispatch) => {

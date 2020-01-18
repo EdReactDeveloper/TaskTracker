@@ -9,6 +9,7 @@ import modal from './reducers/modal';
 import dropdown from './reducers/dropdown';
 import inProgress from './reducers/inprogress';
 import alerts from './reducers/alert'; 
+import search from './reducers/search'; 
 
 const reducers = combineReducers({
 	auth,
@@ -17,6 +18,7 @@ const reducers = combineReducers({
 	modal,
 	dropdown,
 	inProgress,
+	search,
 	form: formReducer
 });
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
