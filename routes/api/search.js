@@ -8,9 +8,9 @@ router.get(`/`, async (req, res) => {
 		const input = req.query.query;
 		const topics = await Topic.find();
 		const result = [];
+		const regex = new RegExp(input)
 		for (let topic of topics) {
-			if (
-				topic.title.toLowerCase().split(' ').indexOf(input.toLowerCase()) > -1) {
+			if (regex.test(topic.title.toLowerCase())){
 				result.push(topic);
 			}
 			search(topic, input, result);
@@ -22,11 +22,12 @@ router.get(`/`, async (req, res) => {
 });
 
 function search(object, input, result) {
+	const regexp = new RegExp(input)
 	if ((object.list && object.list.length < 1) || typeof object.list === 'undefined') {
 		return;
 	}
 	object.list.forEach((item) => {
-		if (item.title === input) {
+		if (regexp.test(item.title)) {
 			result.push(item);
 		}
 
