@@ -10,7 +10,7 @@ const ToolbarContainer = ({loading, ...props}) => <>{!loading && <Nav {...props}
 ToolbarContainer.propTypes = {
   board: boardTypes,
   boards: boardsTypes, 
-  editMode: bool.isRequired,
+  editMode: bool,
   loading: bool.isRequired,
   modalHandler: func.isRequired, 
   editHandler: func.isRequired,
@@ -18,7 +18,8 @@ ToolbarContainer.propTypes = {
 
 ToolbarContainer.defaultProps = {
   board: null,
-  boards: []
+  boards: [],
+  editMode: false
 }
 
 const mapStateToProps = state => {

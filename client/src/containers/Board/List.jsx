@@ -9,17 +9,19 @@ const ListContainer = (props) => <List {...props} />
 
 const mapStateToProps = state => {
   return {
-    edit: state.modal.edit,
     editMode: state.modal.editMode,
     inProgress: state.inProgress.inProgress
   }
 }
 
 ListContainer.propTypes={
-  edit: bool.isRequired, 
-  editMode: bool.isRequired,
+  editMode: bool,
   inProgress: arrayOf(string.isRequired).isRequired,
   updateListItemAction: func.isRequired
+}
+
+ListContainer.defaultProps={
+  editMode: false
 }
 
 export default connect(mapStateToProps,

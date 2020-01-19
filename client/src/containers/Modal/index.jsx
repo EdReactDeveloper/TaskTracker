@@ -12,7 +12,6 @@ class ModalContainer extends Component {
   }
   
   render() {
-    console.log(this.props)
     this.root = document.createElement('div')
     document.body.appendChild(this.root)
     return ReactDOM.createPortal( <Modal {...this.props}>
