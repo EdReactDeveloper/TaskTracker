@@ -13,7 +13,8 @@ import Toolbar from '../containers/Toolbar';
 import Alert from '../containers/Alert';
 import ErrorBoundry from '../containers/ErrorBoundry';
 import SearchPage from '../containers/SearchPage';
-import Topic from '../containers/Board/Topic'; 
+import Topic from '../containers/Board/Topic';
+import Modal from '../containers/Modal';
 
 const BoardsContainer = ({ boards }) => {
   return (
@@ -21,7 +22,7 @@ const BoardsContainer = ({ boards }) => {
       <PrivateRoute path="/" component={Toolbar} />
       <PrivateRoute path="/" component={Boards} />
       <PrivateRoute path="/search" component={SearchPage} />
-      {boards && <PrivateRoute exact path="/board/:id" component={Board} /> }
+      {boards && <PrivateRoute exact path="/board/:id" component={Board} />}
       {boards && <PrivateRoute exact path="/board/:id/:topicId" component={Topic} />}
     </div>
   )
@@ -34,6 +35,7 @@ const Routes = ({ loading, boards }) => {
       {!loading && (
         <HeaderFooter>
           <Alert />
+          <Modal />
           <ErrorBoundry>
             <div className={style.wrapper}>
               <Switch>

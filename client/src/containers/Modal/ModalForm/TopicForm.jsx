@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import style from '../Forms.module.scss'
-import Edit from './Edit';
-import Move from './Move';
-import Add from './Add';
-import { FORM_TYPE } from '../../../misc/configs';
-import {addListItemAction, updateListItemAction} from '../../../../store/actions/board'; 
-import { modalHandler } from '../../../../store/actions/modal'; 
+import Move from '../../../components/Modal/Froms/TopicForm/Move';
+import Form from '../../../components/Modal/Froms/TopicForm/Form';
+import { FORM_TYPE } from '../../../components/misc/configs';
+import {addListItemAction, updateListItemAction} from '../../../store/actions/board'; 
+import { modalHandler } from '../../../store/actions/modal'; 
 
 class TopicForm extends Component {
   constructor(props) {
@@ -46,6 +44,7 @@ class TopicForm extends Component {
     e.preventDefault()
     const {modalForm: {formType, itemId}, topic, addListItemAction, updateListItemAction, modalHandler} = this.props
     const {title, description} = this.state
+    if(title.length > 0){
     switch (formType) {
       case FORM_TYPE.add: addListItemAction(topic._id, title, description);break;
       case FORM_TYPE.edit: updateListItemAction({ itemId, topicId: topic._id, title, description }, 'edit');break;
@@ -53,26 +52,22 @@ class TopicForm extends Component {
     }
     modalHandler()
   }
+  }
+
+  
+  renderForm = () => {
+    const { modalForm: { formType } } = this.props
+    if (formType === FORM_TYPE.add || formType === FORM_TYPE.edit) {
+      return <Form {...this.state} onChange={this.onChangeHandler} handleSubmit={this.handleSubmit} />
+    }
+    if(formType === FORM_TYPE.move){
+      return <Move />
+    }
+    return null
+  }
 
   render() {
-
-    const { modalForm: {formType}} = this.props
-    let form = null
-    switch (formType) {
-      case FORM_TYPE.add: form = <Add onChange={this.onChangeHandler} {...this.state} />; break;
-      case FORM_TYPE.edit: form = <Edit onChange={this.onChangeHandler} {...this.state} />; break;
-      case FORM_TYPE.move: form = <Move />; break;
-      default: form = <Add />; break;
-    }
-    return (
-      <form className={style.form} onSubmit={this.handleSubmit}>
-        {form}
-        <button
-          type="submit"
-          className={style.submit}
-        >submit</button>
-      </form>
-    );
+    return this.renderForm()
   }
 };
 
