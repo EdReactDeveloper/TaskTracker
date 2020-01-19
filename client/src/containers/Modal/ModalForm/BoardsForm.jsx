@@ -8,7 +8,8 @@ class BoardsForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: ''
+      title: '',
+      msg: ''
     }
   }
 
@@ -21,23 +22,23 @@ class BoardsForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const { modalForm: { formType, itemId }, eidtBoardTitleAction, addBoard, modalHandler, history } = this.props
+    const { modalForm: { formType, itemId }, eidtBoardTitleAction, addBoard, modalHandler, history, boards } = this.props
     const { title } = this.state
-    if(title.length > 0){
-    switch (formType) {
-      case FORM_TYPE.add: addBoard(title, history); break;
-      case FORM_TYPE.edit: eidtBoardTitleAction(title, itemId); break;
-      default: break;
+    const repeating = boards.filter(item => item.title === title) > 0
+    if (!repeating) {
+      switch (formType) {
+        case FORM_TYPE.add: addBoard(title, history); break;
+        case FORM_TYPE.edit: eidtBoardTitleAction(title, itemId); break;
+        default: break;
+      }
+      modalHandler()
+    } else {
+      this.setState({ msg: 'this title already exists' })
     }
-    modalHandler()
-  }
+
   }
 
-  onChangeHandler = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+  onChangeHandler = (e) => this.setState({ [e.target.name]: e.target.value, msg: '' })
 
   renderForm = () => {
     const { modalForm: { formType } } = this.props
@@ -56,6 +57,7 @@ const mapStateToProps = state => {
   return {
     modalForm: state.modal.form,
     board: state.board.board,
+    boards: state.board.boards
   }
 }
 

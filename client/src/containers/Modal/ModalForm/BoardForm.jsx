@@ -1,59 +1,62 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import Form from '../../../components/Modal/Froms/BoardForm/Form'; 
-import {FORM_TYPE} from '../../../components/misc/configs'; 
-import {updateTopicAction, addTopicAction} from '../../../store/actions/board';
+import { connect } from 'react-redux';
+import Form from '../../../components/Modal/Froms/BoardForm/Form';
+import { FORM_TYPE } from '../../../components/misc/configs';
+import { updateTopicAction, addTopicAction } from '../../../store/actions/board';
 
 class BoardForm extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    this.state={
-      title: ''
+    this.state = {
+      title: '',
+      msg: ''
     }
   }
 
-  componentDidMount(){
-    const {topic, modalForm:{itemId}} = this.props
-    if(itemId){
-      this.setState({title: topic.title})
+  componentDidMount() {
+    const { topic, modalForm: { itemId } } = this.props
+    if (itemId) {
+      this.setState({ title: topic.title })
     }
   }
 
-  handleSubmit=e=>{
+  handleSubmit = e => {
     e.preventDefault()
-    const {modalForm: {formType, parentId, itemId}, updateTopicAction, addTopicAction, modalHandler} = this.props
-    const {title} = this.state
-    if(title.length > 0){
+    const { modalForm: { formType, parentId, itemId }, updateTopicAction, addTopicAction, modalHandler, board } = this.props
+    const { title } = this.state
+    const repeating = board.topics.filter(item => item.title === title).length > 0
+    if (!repeating) {
       switch (formType) {
-        case FORM_TYPE.add: addTopicAction(title, parentId);break;
-        case FORM_TYPE.edit: updateTopicAction(title, itemId);break;
+        case FORM_TYPE.add: addTopicAction(title, parentId); break;
+        case FORM_TYPE.edit: updateTopicAction(title, itemId); break;
         default: break;
       }
       modalHandler()
+    } else {
+      this.setState({ msg: 'this title already exists' })
     }
   }
 
   renderForm = () => {
     const { modalForm: { formType } } = this.props
     if (formType === FORM_TYPE.add || formType === FORM_TYPE.edit) {
-      return <Form {...this.state} onChange={this.onChangeHandler} handleSubmit={this.handleSubmit}/>
+      return <Form {...this.state} onChange={this.onChangeHandler} handleSubmit={this.handleSubmit} />
     }
     return null
   }
 
-  onChangeHandler = e => {
-     this.setState({[e.target.name]: e.target.value})
-  }
+  onChangeHandler = e => this.setState({ [e.target.name]: e.target.value, msg: '' })
 
-  render(){
+  render() {
     return this.renderForm()
-}
+  }
 };
 
 const mapStateToProps = state => {
   return {
     modalForm: state.modal.form,
+    board: state.board.board
   }
 }
 
-export default connect(mapStateToProps, {updateTopicAction, addTopicAction})(BoardForm);
+export default connect(mapStateToProps, { updateTopicAction, addTopicAction })(BoardForm);

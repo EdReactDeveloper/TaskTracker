@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import Move from '../../../components/Modal/Froms/TopicForm/Move';
 import Form from '../../../components/Modal/Froms/TopicForm/Form';
 import { FORM_TYPE } from '../../../components/misc/configs';
-import {addListItemAction, updateListItemAction} from '../../../store/actions/board'; 
-import { modalHandler } from '../../../store/actions/modal'; 
+import { addListItemAction, updateListItemAction } from '../../../store/actions/board';
+import { modalHandler } from '../../../store/actions/modal';
 
 class TopicForm extends Component {
   constructor(props) {
@@ -12,20 +12,21 @@ class TopicForm extends Component {
     this.state = {
       title: '',
       description: '',
+      msg: ''
     }
   }
 
-  componentDidMount(){
-    const {modalForm: {itemId}} = this.props
-    if(itemId){
+  componentDidMount() {
+    const { modalForm: { itemId } } = this.props
+    if (itemId) {
       this.initializeFields(itemId)
     }
   }
 
   initializeFields = (id) => {
-      const item = this.fetchItem(id)
-      const {title, description} = item
-      this.setState({title, description})
+    const item = this.fetchItem(id)
+    const { title, description } = item
+    this.setState({ title, description })
   }
 
   fetchItem = id => {
@@ -34,33 +35,33 @@ class TopicForm extends Component {
     return topic.list[index]
   }
 
-  onChangeHandler=(e)=>{
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+  onChangeHandler = (e) => this.setState({ [e.target.name]: e.target.value, msg: '' })
 
-  handleSubmit = (e) =>{
+
+  handleSubmit = (e) => {
     e.preventDefault()
-    const {modalForm: {formType, itemId}, topic, addListItemAction, updateListItemAction, modalHandler} = this.props
-    const {title, description} = this.state
-    if(title.length > 0){
-    switch (formType) {
-      case FORM_TYPE.add: addListItemAction(topic._id, title, description);break;
-      case FORM_TYPE.edit: updateListItemAction({ itemId, topicId: topic._id, title, description }, 'edit');break;
-      default: updateListItemAction({ itemId, topicId: topic._id, title, description }, 'edit');break;
+    const { modalForm: { formType, itemId }, topic, addListItemAction, updateListItemAction, modalHandler } = this.props
+    const { title, description } = this.state
+    const repeating = topic.list.filter(item => item.title === title).length > 0
+    if (!repeating) {
+      switch (formType) {
+        case FORM_TYPE.add: addListItemAction(topic._id, title, description); break;
+        case FORM_TYPE.edit: updateListItemAction({ itemId, topicId: topic._id, title, description }, 'edit'); break;
+        default: updateListItemAction({ itemId, topicId: topic._id, title, description }, 'edit'); break;
+      }
+      modalHandler()
+    } else {
+      this.setState({ msg: 'this title already exists' })
     }
-    modalHandler()
-  }
   }
 
-  
+
   renderForm = () => {
     const { modalForm: { formType } } = this.props
     if (formType === FORM_TYPE.add || formType === FORM_TYPE.edit) {
       return <Form {...this.state} onChange={this.onChangeHandler} handleSubmit={this.handleSubmit} />
     }
-    if(formType === FORM_TYPE.move){
+    if (formType === FORM_TYPE.move) {
       return <Move />
     }
     return null
@@ -78,4 +79,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {addListItemAction, updateListItemAction, modalHandler})(TopicForm);
+export default connect(mapStateToProps, { addListItemAction, updateListItemAction, modalHandler })(TopicForm);

@@ -1,7 +1,7 @@
 import React from 'react';
 import style from '../Forms.module.scss';
 
-const Form = ({ title, onChange, handleSubmit}) => {
+const Form = ({ title, onChange, handleSubmit, msg}) => {
   return <form className = { style.form } onSubmit = { handleSubmit } >
     <label htmlFor="title" className={style.heading}>
       topic tiltle
@@ -12,8 +12,9 @@ const Form = ({ title, onChange, handleSubmit}) => {
         value={title}
         name="title"
       />
+      <div className={style.danger}>{msg}</div>
     </label>
-    <button className={style.submit} type="submit">add topic</button>
+    <button className={style.submit} disabled={title.length<1} type="submit">add topic</button>
     </form >
   
 };
