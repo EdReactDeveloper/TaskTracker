@@ -1,27 +1,16 @@
 import React from 'react';
-import { Field } from 'redux-form';
 import style from '../Forms.module.scss';
-import Input from '../../../misc/Elements/Input';
 
-const Create = () => {
+const Create = ({ onChange, title, description }) => {
   return (
     <>
-      <label htmlFor="title" className={style.heading}>
+      <label htmlFor="itemTitle" className={style.heading}>
         title
-        <Field
-          type="text"
-          component={Input}
-          className={style.input}
-          name='title'
-        />
+        <input type="text" name='title' value={title} onChange={(e) => onChange(e)} className={style.input} />
       </label>
-      <label htmlFor="description" className={style.heading}>
+      <label htmlFor="itemDescription" className={style.heading}>
         description
-        <Field
-          component='textarea'
-          className={style.textarea}
-          name='description'
-        />
+        <textarea type="text" value={description} onChange={(e) => onChange(e)} className={style.textarea} name="description" />
       </label>
     </>
   );

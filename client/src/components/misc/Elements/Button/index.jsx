@@ -5,7 +5,7 @@ import Icon from '../../icon/Icon';
 import { Item } from '../../icon/Selection';
 import { modalHandler, editHandler } from '../../../../store/actions/modal';
 import { updateListItemAction } from '../../../../store/actions/board';
-
+import {FORM_TYPE} from '../../configs'; 
 
 const Button = ({ type,
   payload = '',
@@ -13,17 +13,33 @@ const Button = ({ type,
   updateListItemAction,
   editMode,
   editHandler, onClick, ...props }) => {
-  const { item, modalType } = payload
+  const { item, formPage, itemId, parentId } = payload
   switch (type) {
 
     case 'edit':
       return <button
         type="button"
         className={style.edit}
-        onClick={() => modalHandler(modalType, item._id)}
+        onClick={() => modalHandler({ formType: FORM_TYPE.edit, formPage, itemId })}
       >
         <Icon d={Item.edit} className={style.icon} />
       </button>;
+
+    case 'move':
+      return <button
+        type="button"
+        className={style.edit}
+        onClick={() => modalHandler({ formType: FORM_TYPE.move, formPage, itemId, parentId })}
+      >
+        {props.children}
+      </button>
+
+    case 'add':
+      return <button
+        type='button'
+        onClick={() => modalHandler({ formType: FORM_TYPE.add, formPage })}
+        className={style.add}
+      >{props.children}</button>
 
     case 'delete':
       return <button
@@ -56,13 +72,6 @@ const Button = ({ type,
         <div className={style.dropMenu_content} />
       </button>
 
-    case 'add':
-      return <button
-        type='button'
-        onClick={() => modalHandler(modalType)}
-        className={style.add}
-      >{props.children}</button>
-
     case 'navigation':
       return <button
         type='button'
@@ -70,10 +79,10 @@ const Button = ({ type,
         onClick={onClick}>
         {props.children}
       </button>
-    case 'search': 
-    return <button type="submit" className={style.search}>
-      {props.children}
-    </button>
+    case 'search':
+      return <button type="submit" className={style.search}>
+        {props.children}
+      </button>
     default: return <button type="button">no type specified</button>
   }
 

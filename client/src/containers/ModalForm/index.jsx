@@ -16,10 +16,11 @@ class Form extends Component {
 
   componentDidMount() {
     const initialValues = this.initializeFields()
-    const {dispatch} = this.props
+    const { dispatch } = this.props
     const body = document.querySelector('body')
     body.style.overflow = 'hidden'
     dispatch(initialize('modal', initialValues))
+   
   }
   
   componentWillUnmount(){
@@ -28,12 +29,12 @@ class Form extends Component {
   }
 
   initializeFields = () => {
-    const { initialValues, board, topic, id, modalType } = this.props
+    const { initialValues, board, topic, itemId, formPage } = this.props
     initialValues.boardTitle = board && board.title
     initialValues.topicTitle = topic && topic.title
-    if (modalType === 'topicModal' && id) {
-      initialValues.itemTitle = this.fetchItem(id).title
-      initialValues.itemDescription = this.fetchItem(id).description
+    if (formPage === 'topic' && itemId) {
+      initialValues.itemTitle = this.fetchItem(itemId).title
+      initialValues.itemDescription = this.fetchItem(itemId).description
     }
     return initialValues
   }
@@ -44,21 +45,15 @@ class Form extends Component {
     submitData({ ...this.props })
   }
 
-  fetchItem = id => {
-    const { topic } = this.props
-    const index = topic.list.findIndex(item => item._id === id)
-    return topic.list[index]
-  }
-
   render() {
-    const { modalType, id } = this.props
+    const { modalForm: {formPage} } = this.props
 
-    switch (modalType) {
-      case 'topicModal':
-        return <TopicForm {...this.props} item={this.fetchItem(id)} handleSubmit={this.submitHandler} />
-      case 'boardModal':
+    switch (formPage) {
+      case 'TOPIC':
+        return <TopicForm {...this.props} handleSubmit={this.submitHandler} />
+      case 'BOARD':
         return <BoardForm {...this.props} handleSubmit={this.submitHandler} />
-      case 'boardsModal':
+      case 'BOARDS':
         return <BoardsForm {...this.props} handleSubmit={this.submitHandler} />
       default: return 'what is this?'
     }
@@ -67,11 +62,11 @@ class Form extends Component {
 
 const mapStateToProps = state => {
   return {
-    modalType: state.modal.modalType,
     board: state.board.board,
     topic: state.board.topic,
     edit: state.modal.edit,
     id: state.modal.id,
+    modalForm: state.modal.form,
     form: state.form.modal,
     initialValues: {}
   }
@@ -83,6 +78,6 @@ export default compose(
   connect(mapStateToProps,
     {
       addBoard, addTopicAction, addListItemAction, modalHandler,
-      eidtBoardTitleAction, updateTopicAction, updateListItemAction
+      eidtBoardTitleAction, updateTopicAction, updateListItemAction,
     })
 )(Form);

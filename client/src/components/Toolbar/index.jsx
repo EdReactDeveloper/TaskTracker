@@ -3,11 +3,11 @@ import style from './Toolbar.module.scss';
 import DropMenu from '../../containers/DropMenu/DropMenu';
 import Button from '../misc/Elements/Button';
 import NoBoard from './NoBoard'
+import {FORM_PAGE} from '../misc/configs'; 
 
 const Toolbar = ({ 
   history, 
   board, 
-  modalHandler, 
   editHandler, 
   editMode, 
   boards, 
@@ -18,12 +18,12 @@ const Toolbar = ({
         <>
           <h4>{board.title}
             {editMode &&
-              <Button type='edit' payload={{ modalHandler, modalType: 'boardsModal', item: board }} />
+              <Button type='edit' payload={{ formPage: FORM_PAGE.boards, itemId: board._id }} />
             }
           </h4>
           <Button type='editAll' payload={{ editHandler, editMode }} />
         </>
-        : <NoBoard boards={boards} modalHandler={modalHandler} loading={loading} board={board}/>
+        : <NoBoard boards={boards} loading={loading} board={board}/>
       }
       <DropMenu history={history} />
     </div>

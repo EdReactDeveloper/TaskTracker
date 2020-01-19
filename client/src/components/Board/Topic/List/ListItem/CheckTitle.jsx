@@ -3,9 +3,11 @@ import style from './ListItem.module.scss';
 import Button from '../../../../misc/Elements/Button';
 import Loader from '../../../../misc/Loader/Circle';
 import formatTitle from '../../../../misc/utilFuncs';
+import {FORM_PAGE} from '../../../../misc/configs'; 
 
 const CheckTitle = (props) => {
   const { item, updateListItemAction, editMode, inProgress } = props
+  const formPage = FORM_PAGE.topic
   const checkHandler = () => {
     item.done = !item.done
   }
@@ -28,7 +30,10 @@ const CheckTitle = (props) => {
 
     <div className={style.title}> {formatTitle(item.title)}</div>
     {item.description && <Button type='info' payload={{ item }} />}
-    {editMode && <Button type='edit' payload={{ item, modalType: 'topicModal' }} />}
+    {editMode && <>
+    <Button type='edit' payload={{ formPage, itemId: item._id }} />
+    <Button type='move' payload={{formPage, itemId: item._id, parentId: item.topicId}}> move</Button>
+    </>}
   </>
 };
 

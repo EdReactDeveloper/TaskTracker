@@ -1,10 +1,10 @@
 import {MODAL, EDIT} from './types';
 
-export const modalHandler = (modalType, id) => dispatch =>{
+export const modalHandler = (payload) => dispatch =>{
+
   dispatch({
     type: MODAL,
-    payload: modalType,
-    id
+    payload
   })
 }
 

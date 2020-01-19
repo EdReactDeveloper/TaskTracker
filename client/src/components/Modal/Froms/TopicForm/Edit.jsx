@@ -1,36 +1,19 @@
-import React, { Component } from 'react';
-import { Field } from 'redux-form';
+import React from 'react';
 import style from '../Forms.module.scss';
-import Input from '../../../misc/Elements/Input';
 
-class Edit extends Component {
-  constructor(props){
-    super(props)
-    this.state={
-      
-    }
-    this.input = React.createRef()
-  }
-
-  componentDidMount(){
-    console.log(this.input.current.props._reduxForm)
-    this.input.current.props._reduxForm.focus()
-  }
-
-  render() {
-    return (
-      <>
-        <label htmlFor="itemTitle" className={style.heading}>
-          title
-        <Field ref={this.input} type="text" component={Input} name='itemTitle' className={style.input} />
-        </label>
-        <label htmlFor="itemDescription" className={style.heading}>
-          description
-        <Field component="textarea" className={style.textarea} name="itemDescription" />
-        </label>
-      </>
-    );
-  }
+const Edit = ({ onChange, title, description }) => {
+  return (
+    <>
+      <label htmlFor="itemTitle" className={style.heading}>
+        title
+        <input type="text" name='title' value={title} onChange={(e) => onChange(e)} className={style.input} />
+      </label>
+      <label htmlFor="itemDescription" className={style.heading}>
+        description
+        <textarea type="text" value={description} onChange={(e) => onChange(e)} className={style.textarea} name="description" />
+      </label>
+    </>
+  );
 };
 
 export default Edit;

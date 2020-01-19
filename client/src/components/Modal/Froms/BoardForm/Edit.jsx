@@ -1,14 +1,13 @@
 import React from 'react';
-import { Field } from 'redux-form';
 import style from '../Forms.module.scss';
-import Input from '../../../misc/Elements/Input';
 
-const Edit = () => {
-  return <Field
-    component={Input}
+const Edit = ({title, onChange}) => {
+  return <input
     type="text"
     className={style.input}
-    name="topicTitle"
+    onChange={(e)=> onChange(e)}
+    value={title}
+    name="title"
   />
 };
 

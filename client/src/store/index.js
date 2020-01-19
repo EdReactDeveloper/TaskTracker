@@ -8,8 +8,8 @@ import board from './reducers/board';
 import modal from './reducers/modal';
 import dropdown from './reducers/dropdown';
 import inProgress from './reducers/inprogress';
-import alerts from './reducers/alert'; 
-import search from './reducers/search'; 
+import alerts from './reducers/alert';
+import search from './reducers/search';
 
 const reducers = combineReducers({
 	auth,
