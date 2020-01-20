@@ -49,3 +49,25 @@
 .danger {
   color: red;
 }
+
+.move{
+  &_list{
+    max-height: 15rem;
+    min-height: 5rem;
+    overflow: auto;
+  }
+
+  &_item{
+    border: none;
+    outline: none;
+    background: #fff;
+    display: block;
+    padding: .5rem;
+    cursor: pointer;
+  }
+
+  &_select{
+    background: #2980b9;
+    color: #fff;
+  }
+}

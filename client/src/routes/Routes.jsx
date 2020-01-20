@@ -35,7 +35,7 @@ const Routes = ({ loading, boards }) => {
       {!loading && (
         <HeaderFooter>
           <Alert />
-          <Modal />
+          <Route path="/" component={Modal} />
           <ErrorBoundry>
             <div className={style.wrapper}>
               <Switch>

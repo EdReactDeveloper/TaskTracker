@@ -42,6 +42,7 @@ class BoardsForm extends Component {
 
   renderForm = () => {
     const { modalForm: { formType } } = this.props
+    console.log(this.props)
     if (formType === FORM_TYPE.add || formType === FORM_TYPE.edit) {
       return <Form {...this.state} onChange={this.onChangeHandler} handleSubmit={this.handleSubmit} />
     }

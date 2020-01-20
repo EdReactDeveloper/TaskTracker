@@ -22,7 +22,8 @@ import {
 	UPDATE_BOARD_FAIL,
 	UPDATE_TOPIC_SUCCESS,
 	UPDATE_TOPIC_FAIL,
-	LOGOUT_SUCCESS
+	LOGOUT_SUCCESS,
+	MOVE_LISTITEM_SUCCESS
 } from '../actions/types';
 import { findItem, findAndRemoveItem } from './utils';
 
@@ -122,6 +123,25 @@ const reducer = (state = initialState, action) => {
 				board,
 				topic: payload
 			};
+		}
+
+		case MOVE_LISTITEM_SUCCESS: {
+			const {topicFromUpdated, topicToUpdated} = payload
+			const boards = [ ...state.boards ];
+
+			const boardFrom = findItem(boards, topicFromUpdated.boardId);
+			const topicFrom = findItem(boardFrom.topics, topicFromUpdated._id);
+			topicFrom.list = topicFromUpdated.list
+
+			const boardTo = findItem(boards, topicToUpdated.boardId);
+			const topicTo = findItem(boardTo.topics, topicToUpdated._id);
+			topicTo.list = topicToUpdated.list
+			return {
+				...state, 
+				boards, 
+				board: boardFrom, 
+				topic: topicFrom,
+			}
 		}
 
 		case REMOVE_TOPIC_SUCCESS: {

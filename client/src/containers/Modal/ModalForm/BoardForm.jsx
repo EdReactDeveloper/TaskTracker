@@ -22,12 +22,12 @@ class BoardForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const { modalForm: { formType, parentId, itemId }, updateTopicAction, addTopicAction, modalHandler, board } = this.props
+    const { modalForm: { formType, parentId, itemId }, updateTopicAction, addTopicAction, modalHandler, board, history } = this.props
     const { title } = this.state
     const repeating = board.topics.filter(item => item.title === title).length > 0
     if (!repeating) {
       switch (formType) {
-        case FORM_TYPE.add: addTopicAction(title, parentId); break;
+        case FORM_TYPE.add: addTopicAction(title, parentId, history); break;
         case FORM_TYPE.edit: updateTopicAction(title, itemId); break;
         default: break;
       }

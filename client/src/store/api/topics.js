@@ -36,3 +36,9 @@ export const updateListItem = async(payload, type)=> {
 	const result = await instance.post(`${baseURL}/list/${type}/${payload.topicId}`, body({payload}))
 	return result.data
 }
+
+export const moveListItem = async(payload, type)=> {
+	const result = await instance.post(`${baseURL}/list/${type}`, body({payload}))
+	return result.data
+}
+

@@ -15,7 +15,7 @@ class ModalContainer extends Component {
     this.root = document.createElement('div')
     document.body.appendChild(this.root)
     return ReactDOM.createPortal( <Modal {...this.props}>
-      <Form />
+      <Form {...this.props}/>
     </Modal> , this.root
     );
   }

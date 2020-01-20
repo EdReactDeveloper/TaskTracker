@@ -32,6 +32,15 @@ Topic.methods.addItem = function(title, description) {
 	return this.save();
 };
 
+Topic.methods.moveItem = function(item) {
+	const list = [ ...this.list ];
+	const {done, description, title} = item
+	list.push({ topicId: this._id, done, description, title });
+
+	this.list = list;
+	return this.save();
+};
+
 Topic.methods.checkListItem = function(listItemId) {
 	const list = [ ...this.list ];
 	const index = list.findIndex((item) => item._id.toString() === listItemId.toString());
