@@ -116,7 +116,7 @@ const reducer = (state = initialState, action) => {
 			const board = findItem(boards, state.board._id);
 			const topic = findItem(board.topics, payload._id);
 			topic.title = payload.title;
-			
+			topic.list = payload.list.reverse();
 			return {
 				...state,
 				boards,

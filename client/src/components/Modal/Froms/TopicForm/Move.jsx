@@ -1,7 +1,7 @@
 import React from 'react';
 import style from '../Forms.module.scss';
 
-const Move = ({ handleSubmit, boards, selectItem, moveToId }) => {
+const Move = ({ handleSubmit, boards, topic, selectItem, moveToId }) => {
 
   return (
     <>
@@ -10,14 +10,18 @@ const Move = ({ handleSubmit, boards, selectItem, moveToId }) => {
           {boards.map(item => (
             <li key={item._id}>
               <h4>{item.title}</h4>
-              {item.topics.map(item => (
-                <button
-                  type="button"
-                  key={item._id}
-                  className={`${style.move_item} ${moveToId === item._id ? style.move_select : ''}` }
-                  onClick={() => selectItem(item._id)}
-                >{item.title}</button>
-              ))}
+              {item.topics.map(item => {
+                if (item._id !== topic._id) {
+                  return <button
+                    type="button"
+                    key={item._id}
+                    className={`${style.move_item} ${moveToId === item._id ? style.move_select : ''}`}
+                    onClick={() => selectItem(item._id)}
+                  >{item.title}</button>
+                }
+                return null
+              }
+              )}
             </li>
           ))}
         </ul>

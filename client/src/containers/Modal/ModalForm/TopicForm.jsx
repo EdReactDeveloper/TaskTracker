@@ -89,12 +89,12 @@ class TopicForm extends Component {
 
 
   renderForm = () => {
-    const { modalForm: { formType }, boards } = this.props
+    const { modalForm: { formType } } = this.props
     if (formType === FORM_TYPE.add || formType === FORM_TYPE.edit) {
       return <Form {...this.state} onChange={this.onChangeHandler} handleSubmit={this.handleSubmit} />
     }
     if (formType === FORM_TYPE.move) {
-      return <Move boards={boards} selectItem={this.selectItemHandler} handleSubmit={this.handleMoveSubmit} {...this.state} />
+      return <Move {...this.props} selectItem={this.selectItemHandler} handleSubmit={this.handleMoveSubmit} {...this.state} />
     }
     return null
   }
