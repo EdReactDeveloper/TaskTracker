@@ -3,12 +3,12 @@ import style from './Topic.module.scss';
 import Topic from './Topic'; 
 import NoTopic from './NoTopic';
 
-const TopicWrapper = ({ topic, board, modalHandler, editMode }) => {
+const TopicWrapper = ({ topic, board, editMode }) => {
   return <div className={style.wrapper}>
     {topic ? 
-    <Topic topic={topic} modalHandler={modalHandler} editMode={editMode}/> 
+    <Topic topic={topic} editMode={editMode}/> 
     : 
-    <NoTopic board={board} item={topic}/>
+    <NoTopic board={board} item={topic} />
   }
   </div>
   

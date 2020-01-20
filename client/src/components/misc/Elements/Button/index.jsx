@@ -37,7 +37,7 @@ const Button = ({ type,
     case 'add':
       return <button
         type='button'
-        onClick={() => modalHandler({ formType: FORM_TYPE.add, formPage })}
+        onClick={() => modalHandler({ formType: FORM_TYPE.add, formPage, parentId })}
         className={style.add}
       >{props.children}</button>
 
