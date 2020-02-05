@@ -15,7 +15,7 @@ router.get(`/`, async (req, res) => {
 			}
 			search(topic, input, result);
 		}
-		res.json(result);
+		res.json({result, input});
 	} catch (error) {
 		res.status(404).json({ errors: [ { msg: error } ] });
 	}

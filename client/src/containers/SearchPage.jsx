@@ -20,6 +20,7 @@ const SearchPageContainer = (props) => {
 const mapStateToProps = state => {
   return {
     items: state.search.data,
+    decodedQuery: state.search.decodedQuery,
     isLoading: state.search.loading,
     boards: state.board.boards
   }

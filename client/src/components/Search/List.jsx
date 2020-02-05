@@ -3,13 +3,13 @@ import Item from './Item'
 import style from './search.module.scss'; 
 import Button from '../misc/Elements/Button'; 
 
-const SearchList = ({ items, isLoading, location, history, findTopic }) => {
-  const search = location.search.split('?query=')
+const SearchList = ({ items, decodedQuery, isLoading, history, findTopic }) => {
+
   return (
     <div className={style.wrapper}> 
     <div className={style.flex}>
     <Button type="navigation" onClick={()=>history.goBack()}>go back</Button>
-      <h3 className={style.header}>search results for <span>{search}</span></h3>
+      <h3 className={style.header}>search results for <span>{decodedQuery}</span></h3>
     </div>
       {!isLoading ?
         <ul>

@@ -5,7 +5,7 @@ import Icon from '../../icon/Icon';
 import { Item } from '../../icon/Selection';
 import { modalHandler, editHandler } from '../../../../store/actions/modal';
 import { updateListItemAction } from '../../../../store/actions/board';
-import {FORM_TYPE} from '../../configs'; 
+import { FORM_TYPE } from '../../configs';
 
 const Button = ({ type,
   payload = '',

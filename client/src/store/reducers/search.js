@@ -2,7 +2,8 @@ import { GET_QUERY_SUCCESS, GET_QUERY_FAIL, GET_QUERY_LOADING } from '../actions
 
 const initialState = {
 	data: [],
-	loading: true
+	loading: true, 
+	decodedQuery: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,7 +14,7 @@ const reducer = (state = initialState, action) => {
       return { ...state, loading: true };
       
 		case GET_QUERY_SUCCESS:
-			return { ...state, data: payload, loading: false };
+			return { ...state, data: payload.result, decodedQuery: payload.input, loading: false };
 
 		case GET_QUERY_FAIL:
 			return {
