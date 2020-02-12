@@ -5,6 +5,7 @@ import Form from '../../../components/Modal/Froms/TopicForm/Form';
 import { FORM_TYPE } from '../../../components/misc/configs';
 import { addListItemAction, updateListItemAction, moveListItemAction } from '../../../store/actions/board';
 import { modalHandler } from '../../../store/actions/modal';
+import {titleNoRepeat} from '../../../components/misc/utilFuncs'; 
 
 class TopicForm extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class TopicForm extends Component {
       title: '',
       description: '',
       msg: '',
-      moveToId: null
+      moveToId: null,
+      id: null
     }
   }
 
@@ -26,8 +28,8 @@ class TopicForm extends Component {
 
   initializeFields = (id) => {
     const item = this.fetchItem(id)
-    const { title, description } = item
-    this.setState({ title, description })
+    const { title, description, _id } = item
+    this.setState({ title, description, id: _id })
   }
 
   fetchItem = id => {
@@ -36,26 +38,15 @@ class TopicForm extends Component {
     return topic.list[index]
   }
 
-
   onChangeHandler = (e) => this.setState({ [e.target.name]: e.target.value, msg: '' })
-
-  
-  titleNoRepeat = () => {
-    const { topic } = this.props
-    const { title } = this.state
-    if (title.length > 0) {
-      return topic.list.filter(item => item.title === title).length < 1
-    }
-    return true
-  }
 
 
   handleSubmit = (e) => {
     e.preventDefault()
 
     const { modalForm: { formType, itemId }, topic, addListItemAction, updateListItemAction, modalHandler } = this.props
-    const { title, description } = this.state
-    const noRepeat = this.titleNoRepeat()
+    const { title, description, id } = this.state
+    const noRepeat = titleNoRepeat(topic.list, title, id)
 
     if (noRepeat) {
 

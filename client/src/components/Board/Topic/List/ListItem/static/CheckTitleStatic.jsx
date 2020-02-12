@@ -1,7 +1,7 @@
 import React from 'react';
 import style from '../ListItem.module.scss';
 import Button from '../../../../../misc/Elements/Button';
-import formatTitle from '../../../../../misc/utilFuncs';
+import {formatTitle} from '../../../../../misc/utilFuncs';
 
 const CheckTitle = (props) => {
   const { item } = props

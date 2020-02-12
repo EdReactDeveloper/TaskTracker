@@ -2,7 +2,7 @@ import React from 'react';
 import style from './ListItem.module.scss';
 import Button from '../../../../misc/Elements/Button';
 import Loader from '../../../../misc/Loader/Circle';
-import formatTitle from '../../../../misc/utilFuncs';
+import {formatTitle} from '../../../../misc/utilFuncs';
 import {FORM_PAGE} from '../../../../misc/configs'; 
 
 const CheckTitle = (props) => {

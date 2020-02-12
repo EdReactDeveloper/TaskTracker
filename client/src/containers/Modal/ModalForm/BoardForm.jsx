@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Form from '../../../components/Modal/Froms/BoardForm/Form';
 import { FORM_TYPE } from '../../../components/misc/configs';
 import { updateTopicAction, addTopicAction } from '../../../store/actions/board';
+import { titleNoRepeat } from '../../../components/misc/utilFuncs';
 
 class BoardForm extends Component {
   constructor(props) {
@@ -16,16 +17,16 @@ class BoardForm extends Component {
   componentDidMount() {
     const { topic, modalForm: { itemId } } = this.props
     if (itemId) {
-      this.setState({ title: topic.title })
+      this.setState({ title: topic.title, id: itemId })
     }
   }
 
   handleSubmit = e => {
     e.preventDefault()
     const { modalForm: { formType, parentId, itemId }, updateTopicAction, addTopicAction, modalHandler, board, history } = this.props
-    const { title } = this.state
-    const repeating = board.topics.filter(item => item.title === title).length > 0
-    if (!repeating) {
+    const { title, id } = this.state
+    const noRepeat = titleNoRepeat(board.topics, title, id)
+    if (noRepeat) {
       switch (formType) {
         case FORM_TYPE.add: addTopicAction(title, parentId, history); break;
         case FORM_TYPE.edit: updateTopicAction(title, itemId); break;
