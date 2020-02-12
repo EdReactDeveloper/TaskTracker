@@ -1,9 +1,9 @@
 import {FORM_PAGE, FORM_TYPE} from '../../components/misc/configs'; 
 
-export function renderTopicMenu(removeTopicAction, modalHandler, topicId) {
+export function renderTopicMenu(removeTopicAction, modalHandler, topic) {
 	return [
-		{ name: 'add item', icon: 'addItem', onClick: () => modalHandler({formPage: FORM_PAGE.topic, formType: FORM_TYPE.add, parentId: topicId}) },
-		{ name: 'delete this TOPIC', icon: 'delete', onClick: () => removeTopicAction(topicId) }
+		{ name: 'add item', icon: 'addItem', onClick: () => modalHandler({formPage: FORM_PAGE.topic, formType: FORM_TYPE.add, parentId: topic._id}) },
+		{ name: 'delete this TOPIC', icon: 'delete', onClick: () => removeTopicAction(topic) }
 	];
 }
 

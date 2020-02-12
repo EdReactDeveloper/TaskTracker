@@ -167,23 +167,27 @@ export const updateTopicAction = (title, id) => async (dispatch) => {
 	}
 };
 
-export const removeTopicAction = (topicId) => async (dispatch) => {
-	try {
-		await removeTopic(topicId);
-		dispatch({
-			type: REMOVE_TOPIC_SUCCESS,
-			payload: topicId
-		});
-		dispatch(setAlert('topic has been removed', 'success'));
-	} catch (error) {
-		const { errors } = error.response.data;
-		if (errors) {
-			errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
+// remove topic
+export const removeTopicAction = (topic) => async (dispatch) => {
+	const allow = prompt('enter the board name');
+	if (allow.toLocaleLowerCase() === topic.title.toLocaleLowerCase()) {
+		try {
+			await removeTopic(topic._id);
+			dispatch({
+				type: REMOVE_TOPIC_SUCCESS,
+				payload: topic._id
+			});
+			dispatch(setAlert('topic has been removed', 'success'));
+		} catch (error) {
+			const { errors } = error.response.data;
+			if (errors) {
+				errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
+			}
+			dispatch({
+				type: REMOVE_TOPIC_FAIL,
+				payload: error
+			});
 		}
-		dispatch({
-			type: REMOVE_TOPIC_FAIL,
-			payload: error
-		});
 	}
 };
 
