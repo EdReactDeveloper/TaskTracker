@@ -15,7 +15,8 @@ class TopicForm extends Component {
       description: '',
       msg: '',
       moveToId: null,
-      id: null
+      id: null,
+      inputRef: React.createRef()
     }
   }
 
@@ -24,6 +25,7 @@ class TopicForm extends Component {
     if (itemId) {
       this.initializeFields(itemId)
     }
+    this.state.inputRef.current.focus()
   }
 
   initializeFields = (id) => {

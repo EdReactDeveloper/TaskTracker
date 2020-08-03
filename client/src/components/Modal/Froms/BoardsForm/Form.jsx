@@ -1,7 +1,7 @@
 import React from 'react';
 import style from '../Forms.module.scss';
 
-const Form = ({ title, onChange, handleSubmit, msg }) => {
+const Form = ({ title, onChange, handleSubmit, msg, inputRef }) => {
   return <form className={style.form} onSubmit={handleSubmit}>
     <label className={style.heading}>
       board name
@@ -10,6 +10,7 @@ const Form = ({ title, onChange, handleSubmit, msg }) => {
         onChange={(e) => onChange(e)}
         type="text"
         name='title'
+        ref={inputRef}
         className={style.input}
       />
       <div className={style.danger}>{msg}</div>

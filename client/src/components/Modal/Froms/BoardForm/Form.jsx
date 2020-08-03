@@ -1,7 +1,7 @@
 import React from 'react';
 import style from '../Forms.module.scss';
 
-const Form = ({ title, onChange, handleSubmit, msg}) => {
+const Form = ({ title, onChange, handleSubmit, msg, inputRef}) => {
   return <form className = { style.form } onSubmit = { handleSubmit } >
     <label htmlFor="title" className={style.heading}>
       topic tiltle
@@ -11,6 +11,7 @@ const Form = ({ title, onChange, handleSubmit, msg}) => {
         onChange={(e) => onChange(e)}
         value={title}
         name="title"
+        ref={inputRef}
       />
       <div className={style.danger}>{msg}</div>
     </label>

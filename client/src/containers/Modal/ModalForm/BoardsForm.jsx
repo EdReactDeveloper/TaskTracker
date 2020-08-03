@@ -9,7 +9,8 @@ class BoardsForm extends Component {
     super(props)
     this.state = {
       title: '',
-      msg: ''
+      msg: '',
+      inputRef: React.createRef()
     }
   }
 
@@ -18,6 +19,7 @@ class BoardsForm extends Component {
     if (itemId && board) {
       this.setState({ title: board.title })
     }
+    this.state.inputRef.current.focus()
   }
 
   handleSubmit = (e) => {

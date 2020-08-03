@@ -60,3 +60,10 @@ body {
     margin: 0;
   }
 }
+
+input{
+  &:focus{
+    border: 2px solid cornflowerblue;
+    box-sizing: border-box;
+  }
+}

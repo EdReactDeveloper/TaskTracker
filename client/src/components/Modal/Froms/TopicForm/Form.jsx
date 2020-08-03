@@ -1,11 +1,11 @@
 import React from 'react';
 import style from '../Forms.module.scss';
 
-const Form = ({ onChange, title, description, handleSubmit, msg }) => {
+const Form = ({ onChange, title, description, handleSubmit, msg, inputRef }) => {
   return <form className={style.form} onSubmit={handleSubmit}>
     <label htmlFor="itemTitle" className={style.heading}>
       title
-        <input type="text" name='title' value={title} onChange={(e) => onChange(e)} className={style.input} />
+        <input type="text" name='title' value={title} ref={inputRef} onChange={(e) => onChange(e)} className={style.input} />
       <div className={style.danger}>{msg}</div>
     </label>
     <label htmlFor="itemDescription" className={style.heading}>
